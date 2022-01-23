@@ -1,0 +1,270 @@
+main > .themeArea {
+  background: url("/imgsrc/member-back.jpg") no-repeat;
+}
+
+.processNlogo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.processNlogo .logoline {
+  margin: 5% 0;
+}
+
+.processNlogo .process1 ul {
+  display: flex;
+}
+
+.processNlogo .process1 ul li {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-right: 63px;
+  font-size: 15px;
+  color: #57577a;
+  font-weight: 500;
+}
+
+.processNlogo .process1 ul li img {
+  margin-bottom: 1.5rem;
+}
+
+.processNlogo .process1 ul li.second::before,
+.processNlogo .process1 ul li.third::before,
+.processNlogo .process1 ul li.forth::before {
+  height: 1px;
+  width: 55%;
+  content: "";
+  position: relative;
+  top: 35%;
+  right: 55%;
+  background: #3271c6;
+}
+
+.terms .sectionTitle {
+  display: block;
+  color: #231f20;
+  font-size: 30px;
+  border-bottom: 2px solid #e6e6e6;
+  width: 100%;
+  padding-bottom: 1%;
+  text-align: left;
+}
+
+.terms .termBox {
+  margin: 2% 0;
+}
+
+.termTitle {
+  color: #57577a;
+  font-size: 24px;
+  display: block;
+  margin-bottom: 1%;
+}
+
+.terms .clauses {
+  width: 100%;
+  padding: 2%;
+  background: #fcfcfc;
+  border: 1px solid #c7c7c7;
+}
+
+.terms .clauses > span {
+  display: block;
+  margin: 1% 0;
+}
+
+.agreementCheck {
+  font-size: 17px;
+  color: #555;
+  margin: 1.5%;
+}
+
+.agreementCheck > input {
+  margin-left: 2rem;
+}
+
+.allYesBox {
+  width: 100%;
+  padding: 2rem 0;
+  background: #fff;
+  border: 1px solid #c7c7c7;
+  text-align: center;
+}
+
+.allYesBox > input {
+  margin-left: 2rem;
+}
+
+.processBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.getFileBox > a {
+  padding: 1rem 4rem;
+  border: 1px solid #333;
+}
+
+.beforeOrAfter {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.beforeOrAfter > button {
+  padding: 1rem 2rem;
+  border: 1px solid #333;
+  background: #fff;
+}
+
+.beforeOrAfter > button.before > img,
+.getFileBox > button > img {
+  margin-right: 0.5rem;
+}
+
+.beforeOrAfter > button.after > img {
+  margin-left: 0.5rem;
+}
+
+.mobileOrIpin {
+  display: flex;
+  justify-content: center;
+}
+
+.mobileOrIpin > a {
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px #4b4949;
+  display: inline-block;
+  margin: 3% 1% 3% 1%;
+}
+
+.mobileOrIpin > a img {
+  vertical-align: middle;
+}
+
+.legalNotice {
+  margin-top: 4%;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  color: #555;
+  font-size: 17px;
+}
+
+.dataLine {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.dataName,
+.dataValue {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 1rem 0 1rem 1rem;
+  height: 4rem;
+}
+
+.tableTop {
+  border-top: 1px solid #ed1839;
+}
+
+.dataName {
+  width: 20%;
+  background: #f5f5f5;
+  border-right: 1px solid #d9d9d9;
+}
+
+.dataValue {
+  width: 80%;
+}
+
+.dataValue input,
+.selectInput {
+  margin-right: 1rem;
+}
+
+.columns {
+  display: inline-block;
+  justify-content: space-between;
+}
+
+.columns > *,
+.dataLine input,
+.selectInput {
+  height: 2rem;
+}
+
+.ninetywidth {
+  width: 95%;
+}
+
+.selectInput {
+  width: 10%;
+  background-color: unset;
+}
+
+.labelDiv {
+  display: flex;
+  align-items: center;
+}
+
+.outerList {
+  margin-left: 1rem;
+  width: 80%;
+}
+
+.outerList > li {
+  list-style: disc;
+  color: #484848;
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 0.5rem;
+}
+
+.outerList .innerList {
+  font-size: 15px;
+  color: #555;
+}
+
+.feeSelect {
+  width: 20%;
+  background-color: unset;
+}
+
+.quinze {
+  font-size: 15px;
+}
+
+.buttons {
+  margin-top: 4%;
+  display: flex;
+  justify-content: center;
+}
+
+.buttons button {
+  margin: 0 1rem;
+  display: inline-block;
+  background-color: unset;
+  width: 15%;
+  height: 3rem;
+}
+
+.smsverify {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+  width: 30%;
+}
+
+.smsverify span {
+  display: flex;
+  justify-content: space-between;
+}

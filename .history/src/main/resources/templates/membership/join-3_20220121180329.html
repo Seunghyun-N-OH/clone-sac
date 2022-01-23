@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <th:block th:insert="/fragments/global::head-links"/>
+    <link rel="stylesheet" href="/styles/pages/members/join-1.css" />
+    <title>Document</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+
+
+
+    window.onload = function(){
+        document.getElementById("findPostal").addEventListener("click", function(){
+            // opens new window when cliking "주소 찾기" using Kakao API
+            new daum.Postcode({
+                oncomplete: function(data) { // returns Object 'data' that includes all info. of the selected address
+                    // pick & get specific info. from 'data', and put them in proper element for each
+                    document.getElementById("postal").value=data.zonecode; // zip code 
+                    document.getElementById("address1").value = data.address + " (" + data.buildingName + ")";
+                    // address + ( building name )
+                    document.getElementById("address2").focus();
+                    // focus to input box which visitors should type in by themselves
+                }
+            }).open();
+        });
+    }
+
+    function birthCheck(){
+        if(!document.getElementById("center-yes").checked &&!document.getElementById("center-no").checked){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    </script>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <section class="themeArea">
+          <h4>&nbsp;</h4>
+          <h3>회원서비스</h3>
+        </section>
+        <section class="navigator">
+          <div class="navsizebox">
+            <div class="navigate">
+              <a class="navHome" href="/"
+                ><img src="/imgsrc/assets/cwac-menu_icon01.png" alt=""
+              /></a>
+              <a class="navSelect" href="#">회원서비스</a>
+              <a class="navSelect" href="#">회원가입 정보입력</a>
+            </div>
+            <div class="actions">
+              <a class="printicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon03.png" alt=""
+              /></a>
+              <a class="shareicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon04.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </section>
+        <section class="pageContents">
+          <div class="pageTitle">
+            <p>회원가입 정보입력</p>
+          </div>
+          <div class="maincontents">
+              <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+            <div class="processNlogo">
+                <div class="logoline">
+                    <img src="/imgsrc/assets/join/member_ogo.gif" alt="">
+                </div>
+                <div class="process1">
+                    <ul>
+                        <li class="first"><img src="/imgsrc/assets/join/member_bg1.png" alt="">회원약관동의</li>
+                        <li class="second"><img src="/imgsrc/assets/join/member_bg2.png" alt="">인증</li>
+                        <li class="third"><img src="/imgsrc/assets/join/member_bg3on.png" alt="">정보입력</li>
+                        <li class="forth"><img src="/imgsrc/assets/join/member_bg4.png" alt="">가입완료</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+            <div class="terms">
+                <span class="sectionTitle">정보입력</span>
+                <div class="termBox">
+                    <span class="termTitle">회원 상세 정보 입력(*는 필수 입력 정보)</span>
+                    <form th:action="@{/member/signup/step4}" method="post">
+                        <div class="dataLine tableTop">
+                            <span class="dataName">성명<span class="red-font">*</span></span>
+                            <span class="dataValue" >[[${name}]]</span>
+                            <input type="text" name="name" th:value="${name}" hidden>
+                        </div>
+                        <div class="dataLine">
+                            <span class="dataName">생년월일<span class="red-font">*</span></span>
+                            <span class="dataValue" >
+                                <input type="hidden" name="birthDate" th:value="${birthday}">
+                                [[${birthday}]]
+                                <input type="radio" name="calendar" id="solar" value="s">
+                                <label for="solar">양력</label>
+                                <input type="radio" name="calendar" id="lunar" value="l">
+                                <label for="lunar">음력</label>
+                            </span>
+                        </div>
+                        <div class="dataLine">
+                            <span class="dataName">성별<span class="red-font">*</span></span>
+                            <span class="dataValue">
+                                <input style="margin-left : 0" type="radio" name="gender" id="male" value="m">
+                                <label for="male">남자</label>
+                                <input type="radio" name="gender" id="female" value="f">
+                                <label for="female">여자</label>
+                            </span>
+                        </div>
+                        <div class="dataLine">
+                            <span class="dataName">아이디<span class="red-font">*</span></span>
+                            <span class="dataValue">
+                                <input class="idinput" type="text" name="userId" id="useridInput">
+                                <button type="button"><img src="/imgsrc/assets/join/yes_btn.gif" alt="">중복 확인</button>
+                                8~16자리를 입력해야 합니다.
+                            </span>
+                        </div>
+                        <div class="dataLine">
+                            <div class="dataName"><span>비밀번호<span class="red-font">*</span></span></div>
+                            <span class="dataValue">
+                                <input class="pwinput" type="password" name="userPw" id="userpwInput">
+                                8~16자리를 입력해야 합니다.
+                            </span>
+                        </div>
+                        <div class="dataLine">
+                            <span class="dataName">비밀번호 확인<span class="red-font">*</span></span>
+                            <span class="dataValue">
+                                <input class="pwinput" type="password" id="userpwInput-doublecheck">
+                            </span>
+                        </div>
+                        <div class="dataLine">
+                            <div style="height : 9rem" class="dataName"><span>주소<span class="red-font">*</span></span></div>
+                            <div class="dataValue columns" style="height: 9rem;">
+                                <div>
+                                    <input type="text" name="addressPostal" id="postal" readonly>
+                                    <button id="findPostal" type="button"><img src="/imgsrc/assets/join/postal-no-btn.gif" alt="">주소 검색</button>
+                                </div>
+                                <input class="ninetywidth" style="display : block;margin-top : 0.5rem; margin-bottom:0.5rem" type="text" name="address_1" id="address1" readonly>
+                                <input class="ninetywidth" style="display : block" type="text" name="address_2" id="address2">
+                            </div>
+                        </div>
+                        <div class="dataLine">
+                            <span class="dataName">연락처(휴대폰 번호)<span class="red-font">*</span></span>
+                            <span class="dataValue">
+                                <select class="selectInput" name="phone1" id="phone1">
+                                    <option value="010">010</option>
+                                    <option value="011">011</option>
+                                    <option value="012">012</option>
+                                </select>
+                                <input type="number" name="phone2" id="phone2">
+                                <input type="number" name="phone3" id="phone3">
+                            </span>
+                        </div>
+                        <div class="dataLine">
+                            <span class="dataName">이메일<span class="red-font">*</span></span>
+                            <span class="dataValue">
+                                <input style="width: 40%;" type="email" name="email" id="email">
+                            </span>
+                        </div>
+                        <div class="dataLine">
+                            <span class="dataName">이메일 수신여부</span>
+                            <span class="dataValue">
+                                <input type="radio" name="marketing_email" id="mail-yes" value="y">
+                                <label for="mail-yes">예</label>
+                                <input type="radio" name="marketing_email" id="mail-no" value="n">
+                                <label for="mail-no">아니오</label>
+                            </span>
+                        </div>
+                        <div class="dataLine" style="margin-bottom : 2%">
+                            <span style="height : 17rem"  class="dataName">SMS 수신여부</span>
+                            <span style="height : 17rem" class="dataValue columns">
+                                <div class="labelDiv">
+                                    <input type="radio" name="marketing_sms" id="sms-yes" value="y">
+                                    <label for="sms-yes">예</label>
+                                    <input type="radio" name="marketing_sms" id="sms-no" value="n">
+                                    <label for="sms-no">아니오</label>
+                                </div>
+                                <ul class="outerList">
+                                    <li>
+                                        개인정보보호법 제22조 제3항에 따라 <마케팅 활용에 관한 동의>를 받고자 합니다.
+                                        <ul class="innerList">
+                                            <li>1. 수집목적 : 예술의전당 기획공연, 이벤트, 할인안내 동의 다양한 정보 제공</li>
+                                            <li>2. 보유기간 : 개인정보 보유기간 만료시까지, 동의 유지기간 동안.</li>
+                                            <li>3. 이용항목 : 휴대폰 번호, 이메일 주소 (동의사항에 한함)</li>
+                                            <li>4. 동의거부시 불이익 : 고객은 동의를 거부할 권리가 있으며, 동의하지 않으실 경우 수집목적에 따른 이벤트 할인안내 등의 정보를 제공받을 수 없습니다.</li>
+                                        </ul>
+                                    </li>
+                                    <li>유료멤버십 골드, 블루, 그린회원에 가입하실 때 SMS 수신 동의시 주요공연의 티켓오픈일자와 할인정보를 보내드립니다.<br>회원정보, 예매, 결제정보 및 서비스 중 정책 관련 내용은 수신동의 여부와 관계없이 발송됩니다.</li>
+                                </ul>
+                            </span>
+                        </div>
+
+                        <span class="sectionTitle" style="border: none">회원등급 가입</span>
+                        <div class="dataLine tableTop">
+                            <div style="height : 6.5rem" class="dataName"><span>무료회원</span></div>
+                            <div class="dataValue columns" style="height: 6.5rem;">
+                                <select  class="feeSelect" style="display : block;margin-bottom:0.5rem" name="fee" id="fee">
+                                    <option selected>==== 회비선택 ====</option>
+                                    <option value="free">무료</option>
+                                </select>
+                                <input style="display : block ; width : 20%" type="text" id="fee-detail" disabled>
+                            </div>
+                        </div>
+                        <p style="margin-top : 0.5rem;" class="red-font quinze">* 유료회원(골드/블루) 가입 시 회원카드와 회원물품은 입력하신 주소지로 자동배송 됩니다. (1~2주 이내)<br>* 유니온페이 제휴회원 가입은 예술의전당 고객센터(02-580-1300)에서만 가능합니다.</p>
+                        <input type="text" name="centerTerm" th:value="${center}" hidden>
+                        <input type="text" name="personalTerm" th:value="${personal}" hidden>
+                        <input type="text" name="marketingTerm" th:value="${marketing}" hidden>
+                        <input  type="text" name="memberType" th:value="${memberType}" hidden>
+                        <div class="buttons">
+                            <button class="red-border red-font" type="submit">가입하기</button>
+                            <button type="button">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </th:block>
+  </body>
+</html>

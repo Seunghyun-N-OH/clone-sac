@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <th:block th:insert="/fragments/global::head-links"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <div class="pageContents" style="display:flex;justify-content: center; font-size : 20px;text-align: center;align-items: center;">
+          <div style="margin-right : 10%">
+            <a href="/sitemap" class="red-border red-font">SITEMAP</a>
+          </div>
+          <pre style="width : 30%;text-align: left;">
+            <div sec:authorize="isAuthenticated()" style="display:flex; flex-direction : column ; justify-content: center;align-items: flex-start;">
+              <span>로그인정보(Spring Security : User type Object) :: TEST ONLY</span>
+              <span sec:authentication="principal"></span>
+            </div>
+
+            <h3>작업중</h3>
+              <strong>- 페이지</strong>
+                <span class="red-font">회원서비스 - 회원가입완료페이지</span>
+              <strong>- 기능</strong>
+                <span class="red-font">회원가입 - 정규화&유효성체크</span>
+
+                <hr>
+
+            <h3>예정작업</h3>
+              <strong>- 페이지</strong>
+                  <span class="red-font">회원가입 step4(완료페이지)</span>
+              <strong>- 기능</strong>
+                  <span class="red-font">기업회원가입</span>
+                  <span class="red-font">유료회원가입-결제api적용</span>
+                  <span class="red-font">SNS계정 로그인</span>
+  
+                  <hr>
+
+            <h3>완료</h3>
+              <strong>- 페이지</strong>
+                   회원서비스
+                    - 회원가입
+                        -step1 ~ 3
+                    - 로그인
+                    - 아이디찾기
+                    - 패스워드 찾기
+                    - 유료회원 혜택안내
+                        -혜택누리기
+                        -제휴매장
+              <strong>- 기능</strong>
+                  Spring Security 적용
+                    - csrf() disable처리
+                  회원가입 [무료회원 / 일반, 싹틔우미, 노블회원]
+                    - [임시] 인증번호 문자발송 + 일치여부확인
+                    - 주소검색 다음api적용
+                  로그인&로그아웃
+                    - [임시] 메인페이지에 로그인된 회원의 멤버타입 표시
+          </pre>
+        </div>
+      </main>
+    </th:block>
+  </body>
+</html>

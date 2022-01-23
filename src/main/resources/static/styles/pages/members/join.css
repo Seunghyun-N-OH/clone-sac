@@ -1,0 +1,426 @@
+main > .themeArea {
+  background: url("/imgsrc/member-back.jpg") no-repeat;
+}
+
+.pageContents * {
+  color: #555;
+}
+
+.welcomejoin {
+  width: 100%;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 5%;
+  background: url("/imgsrc/assets/join/title_box26.gif") no-repeat left 30px
+    center;
+  background-size: 200px;
+}
+
+.welcomejoin > .textbox {
+  width: 100%;
+  height: 100%;
+  padding: 5% 250px 5% 250px;
+}
+
+.joinFreetier h3,
+.joinPaidtier h3 {
+  padding-top: 10px;
+  font-size: 24px;
+  color: #333;
+  font-weight: 500;
+  padding-bottom: 2%;
+}
+
+.joinFreetier h3::after,
+.joinPaidtier h3::after {
+  content: "";
+  display: inline-block;
+  height: 7px;
+  width: 40px;
+  background: #ed1839;
+  top: -25px;
+  left: -95px;
+  position: relative;
+}
+
+.joinFreetier {
+  margin-bottom: 5%;
+}
+
+.joinFreetier .tierSelect {
+  display: flex;
+  justify-content: space-between;
+}
+
+.joinFreetier .tierSelect > div {
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  background: #f7f7f7;
+  border-radius: 25px;
+  align-items: center;
+  padding: 0 0 2% 0;
+  text-align: center;
+}
+
+.joinFreetier .tierSelect img {
+  width: 50%;
+  margin-bottom: 15%;
+}
+
+.joinFreetier .tierSelect .tierName {
+  padding: 2% 10% 2% 10%;
+  font-size: 18px;
+  margin-bottom: 3%;
+}
+
+.joinFreetier .tierSelect .ageIns {
+  font-size: 22px;
+  color: #503e3e;
+  font-weight: bolder;
+  margin-bottom: 10%;
+}
+
+.over25 .tierName,
+.joinFreetier .tierSelect .over25 button.detail {
+  background-color: #ed1839;
+  color: #fff;
+  border: 1px solid #ed1839;
+}
+
+.under25 .tierName,
+.joinFreetier .tierSelect .under25 button.detail {
+  background-color: #4e8f3c;
+  color: #fff;
+  border: 1px solid #4e8f3c;
+}
+
+.over70 .tierName,
+.joinFreetier .tierSelect .over70 button.detail {
+  background-color: #685a2a;
+  color: #fff;
+  border: 1px solid #685a2a;
+}
+
+.joinFreetier .tierSelect button {
+  width: 60%;
+  border-radius: 25px;
+  line-height: 2.5rem;
+  margin-bottom: 2%;
+  background-color: unset;
+}
+
+button.join {
+  cursor: pointer;
+}
+
+.joinFreetier .tierSelect .over25 button.join {
+  color: #ed1839;
+  border: 1px solid #ed1839;
+}
+
+.joinFreetier .tierSelect .under25 button.join {
+  color: #4e8f3c;
+  border: 1px solid #4e8f3c;
+}
+
+.joinFreetier .tierSelect .over70 button.join {
+  color: #685a2a;
+  border: 1px solid #685a2a;
+}
+
+.joinPaidtier .tierSelect {
+  display: flex;
+  justify-content: space-between;
+}
+
+.joinPaidtier .tierSelect > div {
+  width: 24%;
+  display: flex;
+  flex-direction: column;
+  background: #f7f7f7;
+  border-radius: 25px;
+  align-items: center;
+  padding: 0 0 2% 0;
+  text-align: center;
+}
+
+.joinPaidtier .tierSelect .tierName {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 3%;
+  padding: 2% 10% 2% 10%;
+}
+
+.corpMember .tierName,
+.joinPaidtier .tierSelect .corpMember button.detail {
+  background-color: #2c2c2c;
+  color: #fff;
+  border: 1px solid #2c2c2c;
+}
+
+.goldMember .tierName,
+.joinPaidtier .tierSelect .goldMember button.detail {
+  background-color: #dc9b00;
+  color: #fff;
+  border: 1px solid #dc9b00;
+}
+
+.blueMember .tierName,
+.joinPaidtier .tierSelect .blueMember button.detail {
+  background-color: #003d9d;
+  color: #fff;
+  border: 1px solid #003d9d;
+}
+
+.greenMember .tierName,
+.joinPaidtier .tierSelect .greenMember button.detail {
+  background-color: #00883e;
+  color: #fff;
+  border: 1px solid #00883e;
+}
+
+.blueMember .union {
+  color: red;
+  flex-wrap: wrap;
+  font-size: 14px;
+  padding: 2.5% 2.5% 10% 2.5%;
+  display: block;
+  width: 100%;
+}
+
+.joinPaidtier .tierSelect img {
+  margin: 5% 0;
+}
+
+.joinPaidtier .tierSelect .describ .ageIns {
+  padding: 0 2.5%;
+  font-size: 20px;
+  color: #503e3e;
+  font-weight: 600;
+  width: 16rem;
+  height: 3.5rem;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  display: block;
+}
+
+.joinPaidtier .tierSelect button {
+  width: 80%;
+  border-radius: 25px;
+  line-height: 2.5rem;
+  margin-bottom: 2%;
+  background-color: unset;
+}
+
+.presentGoldmembership {
+  margin-top: 5%;
+  padding: 5% 0;
+  display: flex;
+  background-color: #dc9b00;
+  justify-content: space-between;
+}
+
+.presentGoldmembership div {
+  width: 50%;
+  padding: 0 4%;
+}
+
+.presentGoldmembership > .left span,
+.kakaoGift .left span {
+  font-size: 1.75rem;
+  color: #000;
+}
+
+.presentGoldmembership > .left > .leftTitle,
+.kakaoGift .left .leftTitle {
+  font-size: 1rem;
+  color: #000;
+}
+
+.presentGoldmembership > .left span::after,
+.kakaoGift > .left > div > .texts span::after {
+  margin-top: 3%;
+  content: "";
+  left: 0;
+  top: 0;
+  display: block;
+  width: 114px;
+  height: 1px;
+  background: #41414c;
+}
+.presentGoldmembership > .left > ul {
+  margin-top: 10%;
+}
+
+.presentGoldmembership > .left > ul > li {
+  color: #010101;
+  font-size: 16px;
+  margin: 3% 0;
+}
+
+.presentGoldmembership > .right * {
+  color: #000;
+}
+
+.presentGoldmembership > .right > img {
+  width: 95%;
+}
+
+.presentGoldmembership > .right .methodInst {
+  display: flex;
+  width: 100%;
+  padding-left: 0;
+}
+
+.presentGoldmembership > .right .mark {
+  width: 7%;
+}
+
+.presentGoldmembership > .right .sectionText {
+  width: 95%;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 1%;
+}
+
+.presentGoldmembership > .right .sectionTitle {
+  font-size: 20px;
+  margin-top: 5%;
+  margin-bottom: 1%;
+}
+
+.kakaoGift {
+  padding: 3% 0 0 0;
+  display: flex;
+  background-color: #ffd014;
+  justify-content: space-between;
+  margin: 5% 0 5% 0;
+}
+
+.kakaoGift > .left {
+  z-index: 10;
+  margin: 5% 0 0 5%;
+}
+
+.kakaoGift > .left > div {
+  display: flex;
+  margin-bottom: 10%;
+}
+
+.kakaoGift > .left > div > .texts {
+  padding-top: 1rem;
+}
+
+.kakaoGift > .left > div > .texts span {
+  font-size: 40px;
+}
+
+.kakaoGift > .left > div > div > img {
+  height: 5rem;
+  width: auto;
+  margin-left: 1rem;
+}
+
+.kakaoGift > .left ul {
+  margin-top: 10%;
+}
+
+.kakaoGift > .left ul li {
+  display: flex;
+  font-size: 20px;
+}
+.kakaoGift > .left ul li > p {
+  font-weight: 600;
+}
+
+.kakaoGift .left .leftTitle {
+  font-size: 20px;
+}
+
+.kakaoGift .backImage {
+  width: 30%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.kakaoGift .backImage img {
+  z-index: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.unionBenefit > div {
+  display: flex;
+}
+
+.unionBenefit .logo {
+  width: 20%;
+}
+
+.unionBenefit .benefits {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.unionBenefit .benefits .microTitle {
+  font-size: 18px;
+  color: #878787;
+}
+
+.unionBenefit .benefits .largeTitle {
+  color: #222;
+  font-size: 35px;
+}
+
+.unionBenefit .benefits .benefitDetails {
+  margin: 2% 0 1% 0;
+  color: #222;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.unionBenefit .benefits .benefitDetails::before {
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  margin-right: 1rem;
+  background: #000;
+  content: "";
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.unionBenefit .benefits li {
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  padding: 3% 0;
+}
+
+.unionBenefit .benefits li img {
+  margin-right: 2.5%;
+  height: 100%;
+}
+
+.unionBenefit .benefits li .texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.unionBenefit .benefits li .texts .detailTitle {
+  font-size: 24px;
+  color: #231f20;
+  margin-bottom: 3%;
+  padding-right: 5%;
+}
+
+.unionBenefit .benefits li .texts .detailText {
+  font-size: 17px;
+  color: #231f20;
+}
+
+.unionBenefit .benefits li .texts .detailText > ul > li {
+  border: none;
+  padding: 1% 0;
+}

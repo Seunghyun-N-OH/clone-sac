@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <th:block th:insert="/fragments/global::head-links"/>
+    <link rel="stylesheet" href="/styles/pages/members/premium.css" />
+    <script type="text/javascript">
+      $(function () {
+              $("#free-park-btn").click(function () {
+                buttonPreset($(this));
+                document.getElementById("free-park").classList.remove("hidden");
+              });
+
+              $("#rehearsal-btn").click(function () {
+                buttonPreset($(this));
+                document.getElementById("rehearsal").classList.remove("hidden");
+              });
+
+              $("#tour-btn").click(function () {
+                buttonPreset($(this));
+                document.getElementById("tour").classList.remove("hidden");
+              });
+
+              $("#events-btn").click(function () {
+                buttonPreset($(this));
+                document.getElementById("events").classList.remove("hidden");
+              });
+
+              $("#booking-btn").click(function () {
+                buttonPreset($(this));
+                document.getElementById("booking").classList.remove("hidden");
+              });
+
+              $("#specialoffers-btn").click(function () {
+                buttonPreset($(this));
+                document.getElementById("specialoffers").classList.remove("hidden");
+              });
+
+              function buttonPreset(v){
+                $(".vingt").addClass("theme-non");
+                $(".vingt").removeClass("theme-selected");
+                $(v).removeClass("theme-non");
+                $(v).addClass("theme-selected");
+                $(".theme-detail").addClass("hidden");
+              }
+            });
+    </script>
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <section class="themeArea">
+          <h4>&nbsp;</h4>
+          <h3>회원서비스</h3>
+        </section>
+        <section class="navigator">
+          <div class="navsizebox">
+            <div class="navigate">
+              <a class="navHome" href="/"
+                ><img src="/imgsrc/assets/cwac-menu_icon01.png" alt=""
+              /></a>
+              <a class="navSelect" href="#">회원서비스</a>
+              <a class="navSelect" href="#">유료회원 혜택안내</a>
+              <a class="navSelect" href="#">프리미엄 서비스</a>
+            </div>
+            <div class="actions">
+              <a class="printicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon03.png" alt=""
+              /></a>
+              <a class="shareicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon04.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </section>
+        <section class="pageContents">
+          <div class="pageTitle">
+            <p>프리미엄서비스</p>
+          </div>
+          <div class="maincontents">
+            <div class="welcomePremium">
+              <div class="textbox">
+                <p class="welcometitle">
+                  예술의전당 법인·골드·블루·그린회원에게 드리는 특별한 혜택을
+                  즐겨 보세요!
+                </p>
+                <p class="welcomeparagraph">
+                  프리미엄 서비스는 문화, 식사, 쇼핑 등 다양한 분야에서 특별한
+                  혜택을 누릴 수 있도록 유료회원님들께만 제공해 드리는 차별화된
+                  서비스입니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="benefitsNaffiliates">
+              <a href="/member/premium/benefits" class="half inflex current">혜택누리기</a>
+              <a href="/member/premium/affiliates" class="half inflex nonclicked">제휴매장</a>
+            </div>
+
+            <div class="startingText">
+              <span class="title"> 매월 새로운 혜택들이 가득!! </span>
+              <span class="subscript">
+                예술의전당에서는 회원님들에게 매월 새로운 혜택을 드리고
+                있습니다.
+              </span>
+              <span class="subscript">
+                지금 이달의 혜택을 확인해 보시기 바랍니다.
+              </span>
+              <a href="#" class="showbenefitofthismonth"> 이달의 혜택 보기 </a>
+            </div>
+
+            <div class="chooseTheme">
+              <button id="free-park-btn" type="button" href="#" class="vingt theme-selected">
+                무료주차권·프로그램북 교환권
+              </button>
+              <button type="button" href="#" id="rehearsal-btn" class="vingt theme-non"> 무대 리허설 관람 </button>
+              <button type="button" href="#" id="tour-btn" class="vingt theme-non"> 싹(SAC) 투어 </button>
+              <button type="button" href="#" id="events-btn"  class="vingt theme-non"> 회원 이벤트 </button>
+              <button type="button" href="#" id="booking-btn" class="vingt theme-non"> 회원선예매 </button>
+              <button type="button" href="#" id="specialoffers-btn" class="vingt theme-non"> 싹(SAC) 딜 </button>
+            </div>
+            <div id="free-park" class="theme-detail ">
+              <ul>
+                <li>
+                  <span class="listTitle">▴ 12시간 무료주차권 12매 증정</span>
+                  <span class="listText">골드회원에게만 특별히 제공되며 개별 주차권에 명시된 유효기간까지만 사용 가능합니다.</span>
+                </li>
+                <li>
+                  <span class="listTitle">▴ 공연 프로그램북 교환권 12장 증정</span>
+                  <span class="listText">예술의전당 기획공연(공동기획 및 일부 기획공연 제외),<br>국립예술단체(국립발레단, 국립오페라단, 국립합창단, 국립현대무용단, 코리안심포니오케스트라), 기타 프로모션 중인 공연에 한하여 사용 가능합니다.</span>
+                  <span class="listText">단, ‘이 달의 혜택’에 명시된 공연에 한하여 교환권 사용이 가능하며 국립예술단체의 일부 공연도 제외될 수 있습니다.</span>
+                  <span class="listText">교환방법 : 프로그램 판매처에서 쿠폰 1장과 프로그램북 1권 교환</span>
+                </li>
+              </ul>
+              <div style="margin-top : 2%">
+                <img src="/imgsrc/assets/premium/DcList_img1.gif" alt="">
+              </div>
+            </div>
+            <div id="rehearsal" class="theme-detail  hidden">
+              <ul>
+                <li>
+                  <span class="listText">무대에서의 아주 특별한 경험!</span>
+                </li>
+                <li>
+                  <span class="listTitle">무대 리허설 관람</span>
+                  <span class="listText">회원분들에게만 드리는 특별한 경험! 최종 무대 리허설에 초대합니다.<br>긴장감 넘치는 생생한 무대 리허설을 회원 여러분과 함께합니다.</span>
+                </li>
+              </ul>
+              <div style="margin-top : 2%">
+                <img src="/imgsrc/assets/premium/DcList_img2.gif" alt="">
+              </div>
+            </div>
+            <div id="tour" class="theme-detail  hidden">
+              <ul>
+                <li>
+                  <span class="listText">예술의전당 투어프로그램</span>
+                </li>
+                <li>
+                  <span class="listTitle">싹(SAC) 투어</span>
+                  <span class="listText">아무에게나 허락되지 않아 궁금했던 공연예술 무대 뒤로<br>회원 여러분을 안내합니다! 공연장 소개, 에피소드,<br>관람예절 안내 등 흥미진진한 스토리가 있는 SAC Tour!</span>
+                </li>
+                <li>
+                  <ul>
+                    <li class="dot_list">투어코스 : 무대, 객석, 분장실, 귀빈실 외</li>
+                    <li class="dot_list">소요시간 : 1시간 내외</li>
+                    <li class="dot_list">투어요금 : 일반요금의 50% 할인 (골드, 블루, 그린회원) 일반회원은 일반요금 적용</li>
+                  </ul>
+                </li>
+              </ul>
+              <div style="margin-top : 2%">
+                <img src="/imgsrc/assets/premium/DcList_img3.gif" alt="">
+              </div>
+            </div>
+            <div id="events" class="theme-detail  hidden">
+              <ul>
+                <li>
+                  <span class="listTitle">회원 이벤트 <a href="#">이벤트 바로가기</a></span>
+                  <span class="listText">예술의전당 회원에게만 드리는 소중한 경험<br>또 다른 감동을 선사합니다</span>
+                </li>
+              </ul>
+              <div style="margin-top : 2%">
+                <img src="/imgsrc/assets/premium/DcList_img4.gif" alt="">
+              </div>
+            </div>
+            <div id="booking" class="theme-detail  hidden">
+              <ul>
+                <li>
+                  <span class="listText">일반회원보다 빠른 예매</span>
+                </li>
+                <li>
+                  <span class="listTitle">회원선예매 서비스</span>
+                  <span class="listText">기다렸던 공연의 좋은 좌석을 먼저 예매하세요! <br>(티켓 오픈 문자(SMS) 발송 / 일부공연 제외) <br>유료회원 선예매 서비스는 예술의전당 홈페이지, 프론트(서비스플라자), 고객센터(02-580-1300)를 통하여 이용 가능합니다.</span>
+                </li>
+              </ul>
+              <div style="margin-top : 2%">
+                <img src="/imgsrc/assets/premium/DcList_img5.gif" alt="">
+              </div>
+            </div>
+            <div id="specialoffers" class="theme-detail  hidden">
+              <ul>
+                <li>
+                  <span class="listText">하루 단 2시간 놀라운 가격</span>
+                </li>
+                <li>
+                  <span class="listTitle">싹(SAC)딜!</span>
+                  <span class="listText">
+                    하루 단 2시간 놀라운 가격으로 공연 티켓 싸악~쓸이 해가세요!<br>예술의전당 회원분들에 한해 한정수량 티켓을 특별할인가로<br>구매 가능한 스페셜 이벤트를 준비했습니다.
+                  </span>
+                  <span style="margin-top : 3rem" class="listText">판매시간 : 11:00~13:00 / 2시간(참여좌석 매진 시 조기마감 될 수 있습니다.)<br>대상 : 골드, 블루, 그린회원</span>
+                </li>
+                <li>
+                  <div><a href="#" class="abutton">싹(SAC)딜 참여하기</a></div>
+                </li>
+              </ul>
+              <div style="margin-top : 2%">
+                <img src="/imgsrc/assets/premium/DcList_img6.gif" alt="">
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </th:block>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <th:block th:insert="/fragments/global::head-links"/>
+    <link rel="stylesheet" href="/styles/pages/members/membership-finds.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <section class="navigator">
+          <div class="navsizebox">
+            <div class="navigate">
+              <a class="navHome" href="/"
+                ><img src="/imgsrc/assets/cwac-menu_icon01.png" alt=""
+              /></a>
+              <a class="navSelect" href="#">회원서비스</a>
+              <a class="navSelect" href="#">패스워드 찾기</a>
+            </div>
+            <div class="actions">
+              <a class="printicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon03.png" alt=""
+              /></a>
+              <a class="shareicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon04.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </section>
+        <section class="pageContents">
+          <div class="pageTitle">
+            <p>패스워드 찾기</p>
+          </div>
+          <div class="maincontents">
+            <div class="outerBox">
+              <img
+                class="centralLogo"
+                src="/imgsrc/assets/login/login-logo.gif"
+                alt=""
+              />
+              <span class="boxname"
+                >예술의전당 회원 아이디 / 비밀번호 찾기</span
+              >
+              <div class="idOrpw">
+                <a href="/member/find-id" class="half nonclicked">
+                  아이디 찾기
+                </a>
+                <a href="/member/find-pw" class="half current">
+                  비밀번호 찾기
+                </a>
+              </div>
+              <div class="chooseCertificationMethod">
+                <span class="title block">본인인증으로 찾기</span>
+                <span class="detail1 quinze">
+                  * 예술의전당은 개인정보호법을 준수하고, 고객님의 정보를
+                  안전하게 보호하기 위해
+                </span>
+                <span class="detail2 quinze">
+                  주민등록번호를 통한 실명확인을 하지 않고 있습니다.
+                </span>
+                <span class="detail3 block quinze">
+                  관련 법률 개정 정보통신망법 및 동법 시행령, 제 23조의2)
+                </span>
+                <div class="idbox">
+                    <input type="text" name="userid" class="idtofindPw" placeholder="아이디">
+                </div>
+                <div class="methods">
+                  <a href="#" class="portable inflex"> 휴대폰 인증 </a>
+                  <a href="#" class="i-pin inflex">아이핀 인증</a>
+                </div>
+              </div>
+            </div>
+            <div class="benefitOfMembership">
+              <span class="title">유료멤버십 혜택 안내</span>
+              <span class="subscript">
+                유료멤버십 회원께는 무료주차권, 예매입장권 무료우편발송, SAC
+                기획공연 프로그램북 증정 등 다양한 혜택을 드립니다.
+              </span>
+              <a href="#" class="clickfordetail">자세히 알아보기</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </th:block>
+  </body>
+</html>
