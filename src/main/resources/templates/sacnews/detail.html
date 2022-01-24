@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <th:block th:insert="/fragments/global::head-links" />
+    <link rel="stylesheet" href="/styles/pages/sacnews/notice.css" />
+    <script src="/javascript/sacnews/notice.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <section class="themeArea">
+          <h4>&nbsp;</h4>
+          <h3>소식·이용·참여</h3>
+        </section>
+        <section class="navigator">
+          <div class="navsizebox">
+            <div class="navigate">
+              <a class="navHome" href="/"
+                ><img src="/imgsrc/assets/cwac-menu_icon01.png" alt=""
+              /></a>
+              <a class="navSelect" href="#">소식·이용·참여</a>
+              <a class="navSelect" href="#">전당소식</a>
+              <a class="navSelect" href="#">공지사항</a>
+            </div>
+            <div class="actions">
+              <a class="printicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon03.png" alt=""
+              /></a>
+              <a class="shareicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon04.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </section>
+        <section class="pageContents">
+          <div class="pageTitle">
+            <p>공지사항</p>
+          </div>
+          <div class="maincontents">
+            <div class="titlebox">
+              <p class="detailTitle">[[${notice.title}]]</p>
+              <span class="red-font red-border">[[${notice.category}]]</span>
+            </div>
+            <div class="effectiveDateInfo">
+              <p class="edate">[[${notice.effectiveDateB}]]</p>
+              <p>~</p>
+              <p class="edate">[[${notice.effectiveDateE}]]</p>
+            </div>
+            <div class="contents" th:utext="${notice.content}"></div>
+            <!-- notice details above ################################ -->
+            <div class="nextNprevious">
+              <div class="nextOne">
+                <a th:if="${next}" th:href="@{|/sacnews/notice/${next.no}|}">
+                  <span class="upArrow">다음<img src="/imgsrc/assets/nxic.gif" alt=""></span>
+                </a>
+                <p th:unless="${next}">
+                    <span class="upArrow">다음<img src="/imgsrc/assets/nxic.gif" alt=""></span>
+                </p>
+                <a th:if="${next}" th:href="@{|/sacnews/notice/${next.no}|}" class="titleLink">
+                  <span class="nextTitle">[[${next.title}]]</span>
+                </a>
+                <p th:unless="${next}" class="titleLink">
+                    <span class="nextTitle">다음글이 없습니다.</span>
+                </p>
+              </div>
+              <div class="previousOne">
+                <a th:if="${previous}" th:href="@{|/sacnews/notice/${previous.no}|}">
+                  <span class="downArrow">이전<img src="/imgsrc/assets/pric.gif" alt=""></span>
+                </a>
+                <p th:unless="${previous}">
+                    <span class="upArrow">다음<img src="/imgsrc/assets/nxic.gif" alt=""></span>
+                </p>
+                <a class="titleLink" th:if="${previous}" th:href="@{|/sacnews/notice/${previous.no}|}">
+                  <span class="preTitle">[[${previous.title}]]</span>
+                </a>
+                <p th:unless="${previous}" class="titleLink">
+                    <span class="nextTitle">이전글이 없습니다.</span>
+                </p>
+              </div>
+            </div>
+            <div class="toList">
+              <button
+                onclick="location.href='/sacnews/notice'"
+                class="leaveDetailPage red-font red-border"
+              >
+                목록보기
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </th:block>
+  </body>
+</html>

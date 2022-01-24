@@ -19,13 +19,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/styles/**", "/imgsrc/**");
+        web.ignoring().antMatchers("/styles/**", "/imgsrc/**", "/javascript/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/sitemap/**", "/member/**", "/sacnews/**").permitAll()
+                .antMatchers("/", "/sitemap/**", "/member/**", "/sacnews/**", "/uploads/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

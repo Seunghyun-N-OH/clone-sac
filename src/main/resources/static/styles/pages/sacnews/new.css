@@ -1,0 +1,47 @@
+.maincontents * {
+  color: #555;
+}
+
+.maincontents select {
+  background-color: unset;
+}
+
+#newPost .postSetting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1%;
+  border: 2px solid #e6e6e6;
+  border-radius: 5px;
+}
+
+.titleInput {
+  width: 42%;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-right: 2px solid #e6e6e6;
+}
+
+#newPost #categorySelector,
+#newPost #isPublicSelector {
+  text-align: center;
+  padding: 0.5rem 0.5rem;
+  border: none;
+  border-right: 2px solid #e6e6e6;
+  -webkit-appearance: none;
+}
+
+#newPost .postSetting .dateData {
+  padding: 0.5rem 0.5rem;
+  width: 13%;
+  border: none;
+  border-right: 2px solid #e6e6e6;
+}
+
+.dateIns {
+  background-color: #f5f5f5;
+  padding: 0.5rem 1rem;
+  font-size: 14px;
+  border: none;
+  border-right: 2px solid #e6e6e6;
+}

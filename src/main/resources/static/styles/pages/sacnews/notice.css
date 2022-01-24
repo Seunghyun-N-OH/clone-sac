@@ -10,7 +10,7 @@ main > .themeArea {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 6%;
+  margin: 6% 0 3% 0;
 }
 
 .noticeCategories > button {
@@ -42,8 +42,16 @@ main > .themeArea {
 
 .categorySelect > select {
   width: 60%;
-  background: unset;
+  background: #fff url("/imgsrc/assets/cwac-menu_icon02.png") no-repeat 94%
+    center;
   padding: 0.5rem 1rem;
+  border: 1px solid #dcdcdc;
+  color: #999999;
+  -webkit-appearance: none;
+}
+
+.categorySelect > select option {
+  font-size: 15px;
 }
 
 .categorySelect > div {
@@ -58,8 +66,168 @@ main > .themeArea {
 .searchLine > input {
   width: 100%;
   padding: 0.5rem 1rem;
+  border: 1px solid #dcdcdc;
+  color: #999999;
 }
 
 .searchLine > button {
   width: 20%;
+}
+
+.dataRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.dataRow > .publishedMonth,
+.dataRow > .categoryName,
+.dataRow > .dateBeginning,
+.dataRow > .dateEnding {
+  width: 10%;
+  padding: 1rem 0.5rem;
+}
+
+.dataRow > .title {
+  width: 60%;
+  padding: 1rem 0.5rem;
+}
+
+.dataRow > .title > a {
+  display: inline-block;
+  width: 100%;
+  padding-left: 1rem;
+  text-align: left;
+}
+
+.importantNotice {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  width: 90%;
+  margin-left: 8%;
+  margin-bottom: 3%;
+}
+
+.importantNotice .mostImportant {
+  display: flex;
+  border: 4px solid #e5e5e5;
+}
+
+.searchLine .getResult {
+  background-color: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchLine .getResult img {
+  margin-right: 1rem;
+}
+
+.categorySelect .category,
+.categorySelect #categorySelector,
+.categorySelect .adminControl button,
+.searchLine > input#keyword,
+.searchLine > button.getResult {
+  padding: 1rem 1rem;
+  margin: 0 0.25rem;
+}
+
+.titlebox {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-bottom: 3%;
+  border-bottom: 1px solid #535353;
+}
+
+.titlebox .detailTitle {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 1%;
+}
+
+.titlebox span {
+  display: inline-block;
+  align-self: center;
+  padding: 0.5rem 1rem;
+}
+
+.effectiveDateInfo {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1%;
+  padding-right: 1%;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.contents {
+  margin-bottom: 3%;
+}
+
+.toList {
+  text-align: center;
+}
+
+.leaveDetailPage {
+  background: unset;
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+.nextNprevious {
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  margin-bottom: 3%;
+}
+
+.nextNprevious .nextOne {
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.nextOne,
+.previousOne {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #666;
+}
+
+.nextOne a span,
+.nextOne p span,
+.previousOne a span,
+.previousOne p span {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.nextOne a span img,
+.nextOne p span img,
+.previousOne a span img,
+.previousOne p span img {
+  margin-left: 1rem;
+}
+
+.nextOne a,
+.nextOne p,
+.previousOne a,
+.previousOne p {
+  margin-right: 2rem;
+}
+
+.nextTitle,
+.preTitle {
+  padding: 0 0.5rem;
+}
+
+.titleLink {
+  width: 80%;
+  text-align: left;
 }

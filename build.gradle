@@ -35,6 +35,9 @@ dependencies {
 
 // sms verification [coolsms]
 	implementation 'net.nurigo:javaSDK:2.2'
+
+//	JSONObject
+	implementation 'com.google.code.gson:gson'
 }
 
 test {

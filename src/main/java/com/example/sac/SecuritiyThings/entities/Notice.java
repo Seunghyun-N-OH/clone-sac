@@ -40,12 +40,16 @@ public class Notice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long no;
 
+    @Column(nullable = false)
+    private String category;
+    // category [안내/회원/대관/아카데미/모집/발표]
+
     @ManyToOne
     @JoinColumn(name = "admin_id")
     private Membership drafter; // for management purpose, id of the publisher(admin)
 
     @Column(nullable = false)
-    private char isPublic; // determines the post to be open to public or not ( y / n )
+    private char important; // determines the post to be open to public or not ( y / n )
 
     @ColumnDefault("0")
     private int views; // for management purpose
@@ -69,8 +73,9 @@ public class Notice {
     public NoticeD toDto() {
         return NoticeD.builder()
                 .no(this.getNo())
+                .category(this.getCategory())
                 .drafter(MembershipD.builder().userId(this.drafter.getUserId()).build())
-                .isPublic(this.getIsPublic())
+                .important(this.getImportant())
                 .views(this.getViews())
                 .title(this.getTitle())
                 .content(this.getContent())

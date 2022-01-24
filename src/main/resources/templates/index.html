@@ -23,17 +23,12 @@
 
             <h3>작업중</h3>
               <strong>- 페이지</strong>
-                <span class="red-font">공지사항</span>
-                <span class="red-font">공지사항 : 게시글페이지</span>
-                <span class="red-font">공지사항 : 게시글 작성페이지 (ADMIN only)</span>
+                <span class="red-font">공지사항 : 비동기방식 적용으로 페이지구조 재정립</span>
               <strong>- 기능</strong>
-                <span class="red-font">공지사항 : 게시글 목록조회(+페이징)</span>
                 <span class="red-font">공지사항 : 게시글 조건조회(카테고리/제목/내용)</span>
-                <span class="red-font">공지사항 : 게시글 작성</span>
                 <span class="red-font">공지사항 : 게시글 수정</span>
-                <span class="red-font">공지사항 : 게시글 조회</span>
                 <span class="red-font">공지사항 : 게시글 삭제</span>
-                <span class="red-font">공지사항 : 게시글 숨김처리</span>
+                <span class="red-font">공지사항 : 게시글 숨김처리 (공지 별 해당기간이 있어 자동처리예정)</span>
 
                 <hr>
 
@@ -47,8 +42,7 @@
                   <span class="red-font">유료회원가입-결제api적용</span>
                   <span class="red-font">SNS계정 회원가입</span>
                   <span class="red-font">SNS계정 로그인</span>
-                  <span class="red-font hidden">Summernote (?)</span>
-                  <span class="red-font hidden">JWT (?)</span>
+                  <span class="red-font">JWT (?)</span>
                   <!-- https://wnwngus.tistory.com/65 -->
   
                   <hr>
@@ -64,6 +58,10 @@
                     - 유료회원 혜택안내
                         -혜택누리기
                         -제휴매장
+                    - 공지사항
+                        -메인페이지 [중요공지, 일반공지 분리]
+                        -공지작성페이지 [summernote-lite 사용]
+                        -공지사항 상세페이지
               <strong>- 기능</strong>
                   Spring Security 적용
                     - csrf() disable처리
@@ -77,6 +75,9 @@
                   로그인&로그아웃
                     - [임시] 메인페이지에 로그인된 회원정보 표시
                     - 로그인 실패 시 alert 추가
+                  공지사항
+                    - 접근에 권한 불필요
+                    - admin role 회원만 작성가능
           </pre>
         </div>
       </main>
