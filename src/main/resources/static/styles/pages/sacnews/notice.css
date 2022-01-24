@@ -1,0 +1,65 @@
+main > .themeArea {
+  background: url("/imgsrc/assets/sacnews/notice_theme.jpg") no-repeat;
+}
+
+.pageContents * {
+  color: #555;
+}
+
+.noticeCategories {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 6%;
+}
+
+.noticeCategories > button {
+  width: 14%;
+  background-color: unset;
+  font-size: 16px;
+  color: #8b8b8b;
+  padding: 1.5rem 0;
+  border: 1px solid #e5e5e5;
+}
+
+.noticeCategories > button.selected {
+  border: 1px solid #222;
+}
+
+.searchLine {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4%;
+  height: 3%;
+}
+
+.categorySelect {
+  display: flex;
+  width: 50%;
+  flex-direction: row-reverse;
+  height: 100%;
+}
+
+.categorySelect > select {
+  width: 60%;
+  background: unset;
+  padding: 0.5rem 1rem;
+}
+
+.categorySelect > div {
+  width: 40%;
+}
+
+.categorySelect > div > button {
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.searchLine > input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.searchLine > button {
+  width: 20%;
+}

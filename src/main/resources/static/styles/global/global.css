@@ -112,16 +112,13 @@ main {
 }
 
 .iconLink {
-  display: flex;
-  flex-direction: column;
   border: none;
   background-color: unset;
   cursor: pointer;
 }
 
 .iconLink img {
-  width: 100%;
-  height: 100%;
+  height: 80%;
 }
 
 .actions,
@@ -379,4 +376,39 @@ main > .themeArea {
 }
 .pageContents * {
   color: #555;
+}
+
+.customRadio,
+.customCheckbox {
+  display: none;
+}
+
+.customRadioLabel {
+  padding-left: 30px;
+  background-repeat: no-repeat;
+  background-image: url("/imgsrc/assets/bg_radio2.png");
+  background-size: 20px;
+  margin: 0 1rem;
+}
+
+.customRadio[type="radio"]:checked + label {
+  background-image: url("/imgsrc/assets/bg_radio2_on.png");
+}
+.customRadio[type="radio"]:disabled + label {
+  background-image: url("/imgsrc/assets/bg_radio2.png");
+}
+
+.customCheckLabel {
+  padding-left: 30px;
+  background-size: 20px;
+  margin: 0 1rem;
+  background-repeat: no-repeat;
+  background-image: url("/imgsrc/assets/bg_radio2.png");
+}
+
+.customCheckbox[type="checkbox"]:checked + label {
+  background-image: url("/imgsrc/assets/bg_radio2_on.png");
+}
+.customCheckbox[type="checkbox"]:disabled + label {
+  background-image: url("/imgsrc/assets/bg_radio2.png");
 }

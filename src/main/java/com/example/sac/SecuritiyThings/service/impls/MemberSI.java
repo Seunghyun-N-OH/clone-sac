@@ -34,7 +34,6 @@ public class MemberSI implements MemberS, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(username); // TODO delete this line after implementation
         Optional<Membership> tempEntity = mr.findById(username);
         if (tempEntity.isPresent()) {// input username is valid
 
@@ -64,8 +63,8 @@ public class MemberSI implements MemberS, UserDetailsService {
 
         // 4 params(to, from, type, text) are mandatory. must be filled
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("to", phoneNumber); // 수신전화번호
-        params.put("from", "01055162461"); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+        params.put("to", phoneNumber); // phone number of the user(visitor) that needs to receive a code
+        params.put("from", "01055162461"); // sender : registration required before using
         params.put("type", "SMS");
         params.put("text", "(본인인증대체)휴대폰인증 테스트 : 인증번호 " + "[" + cerNum + "]");
         params.put("app_version", "test app 1.2"); // application name and version
@@ -111,8 +110,27 @@ public class MemberSI implements MemberS, UserDetailsService {
                 tmpRole.add("ROLE_PAID");
                 tmpRole.add("ROLE_GOLD");
                 break;
+            case "admin":
+                tmpRole.add("ROLE_PAID");
+                tmpRole.add("ROLE_FREE");
+                tmpRole.add("ROLE_JUNIOR");
+                tmpRole.add("ROLE_ADULT");
+                tmpRole.add("ROLE_SENIOR");
+                tmpRole.add("ROLE_GREEN");
+                tmpRole.add("ROLE_BLUE");
+                tmpRole.add("ROLE_GOLD");
         }
         md.setRoles(tmpRole);
         return new MembershipD(mr.save(md.toEntityForJoin()));
+    }
+
+    @Override
+    public boolean checkID(String tempID) {
+        System.out.println(tempID);
+        if (mr.findById(tempID).isPresent()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

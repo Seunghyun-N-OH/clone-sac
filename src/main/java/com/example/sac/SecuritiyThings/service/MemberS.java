@@ -8,4 +8,6 @@ public interface MemberS {
 
     MembershipD joinMember(MembershipD md, String phone);
 
+    boolean checkID(String tempID);
+
 }

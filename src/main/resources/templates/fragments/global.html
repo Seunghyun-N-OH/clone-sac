@@ -10,21 +10,25 @@
       <link rel="stylesheet" href="/styles/global/global.css" />
       <script
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-      />
-      <script type="text/javascript">
-        $(function () {
-          $("#menuBtn").click(function () {
-            $(".toggleMenu").show();
-            $("#menuBtn").hide();
-            $("#menuBtn2").show();
-          });
+      ></script>
+      <script>
+        function showToggleMenu() {
+          $("#menuBtn2").removeClass("hidden");
+          $("#menuBtn").addClass("hidden");
+          $("#toggleMenu").slideDown(200);
+          // document.getElementById("menuBtn2").classList.remove("hidden");
+          // document.getElementById("menuBtn").classList.add("hidden");
+          // document.getElementById("toggleMenu").classList.remove("hidden");
+        }
 
-          $("#menuBtn2").click(function () {
-            $("#menuBtn2").hide();
-            $(".toggleMenu").hide();
-            $("#menuBtn").show();
-          });
-        });
+        function hideToggleMenu() {
+          $("#menuBtn").removeClass("hidden");
+          $("#menuBtn2").addClass("hidden");
+          $("#toggleMenu").slideUp(200);
+          // document.getElementById("menuBtn").classList.remove("hidden");
+          // document.getElementById("menuBtn2").classList.add("hidden");
+          // document.getElementById("toggleMenu").classList.add("hidden");
+        }
       </script>
       <script
         src="https://kit.fontawesome.com/b54dc124b3.js"
@@ -38,17 +42,38 @@
       <header>
         <div class="maxsizecontroller">
           <section class="stillMenu">
-            <div style="width: 40%; position: relative" class="hamburger">
-              <button class="iconLink" id="menuBtn" type="button">
-                <img src="/imgsrc/assets/menu-btn.gif" alt="" />
-              </button>
+            <div
+              style="width: 40%; position: relative; text-align: left"
+              class="hamburger"
+            >
               <button
                 class="iconLink"
+                id="menuBtn"
+                onclick="showToggleMenu()"
+                type="button"
+              >
+                <img src="/imgsrc/assets/menu-btn.gif" alt="" />
+              </button>
+
+              <button
+                class="iconLink hidden"
+                onclick="hideToggleMenu()"
                 id="menuBtn2"
                 type="button"
-                style="display: none"
               >
-                <img src="/imgsrc/assets/close-btn.png" alt="" />
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    width: 10rem;
+                    height: 30px;
+                  "
+                >
+                  <img src="/imgsrc/assets/close-btn.png" alt="" />
+                  <span style="font-size: 1.5rem; margin-left: 0.5rem"
+                    >닫기</span
+                  >
+                </div>
               </button>
             </div>
             <div style="width: 20%" class="toplogo">
@@ -95,7 +120,7 @@
               </div>
             </div>
           </section>
-          <section class="toggleMenu" style="display: none">
+          <section id="toggleMenu" class="hidden toggleMenu">
             <ul>
               <li>
                 <a href="#"><span>공연·전시</span></a>
@@ -173,7 +198,7 @@
                 <a href="#"><span>소식·이용·참여</span></a>
                 <ul class="toggle_micro">
                   <li>
-                    <a href="#">전당소식</a>
+                    <a href="/sacnews/notice">전당소식</a>
                   </li>
                   <li>
                     <a href="#">오시는 길·주차안내</a>
@@ -206,7 +231,6 @@
                 <ul class="toggle_micro">
                   <li>
                     <a href="/member/signup">회원가입</a>
-                    <a href="/member/signup">회원가입</a>
                   </li>
                   <li>
                     <a href="/member/signin">로그인</a>
@@ -215,10 +239,10 @@
                     <a href="/member/find-id">아이디 찾기</a>
                   </li>
                   <li>
-                    <a href="#">패스워드 찾기</a>
+                    <a href="/member/find-pw">패스워드 찾기</a>
                   </li>
                   <li>
-                    <a href="#">유료회원 혜택안내</a>
+                    <a href="/member/premium/benefits">유료회원 혜택안내</a>
                   </li>
                 </ul>
               </li>

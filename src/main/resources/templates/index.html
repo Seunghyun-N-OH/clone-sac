@@ -12,16 +12,28 @@
             <a href="/sitemap" class="red-border red-font">SITEMAP</a>
           </div>
           <pre style="width : 30%;text-align: left;">
-            <div sec:authorize="isAuthenticated()" style="display:flex; flex-direction : column ; justify-content: center;align-items: flex-start;">
-              <span>로그인정보(Spring Security : User type Object) :: TEST ONLY</span>
-              <span sec:authentication="principal"></span>
+            <div sec:authorize="isAuthenticated()" style="display:flex; flex-direction : column ; justify-content: center;align-items: flex-start; position : absolute; left : 100px">
+              <span>로그인정보 :: TEST ONLY</span>
+              <!-- <span sec:authentication="principal"></span> -->
+              <pre>Roles : <span class="red-font" sec:authentication="principal.authorities"></span></pre>
+              <pre>Username : <span class="red-font" sec:authentication="principal.username"></span></pre>
+              <pre>Password : <span class="red-font" sec:authentication="principal.password"></span></pre>
+              <pre>MemberType : <span class="red-font" sec:authentication="principal.memberType"></span></pre>
             </div>
 
             <h3>작업중</h3>
               <strong>- 페이지</strong>
-                <span class="red-font">회원서비스 - 회원가입완료페이지</span>
+                <span class="red-font">공지사항</span>
+                <span class="red-font">공지사항 : 게시글페이지</span>
+                <span class="red-font">공지사항 : 게시글 작성페이지 (ADMIN only)</span>
               <strong>- 기능</strong>
-                <span class="red-font">회원가입 - 정규화&유효성체크</span>
+                <span class="red-font">공지사항 : 게시글 목록조회(+페이징)</span>
+                <span class="red-font">공지사항 : 게시글 조건조회(카테고리/제목/내용)</span>
+                <span class="red-font">공지사항 : 게시글 작성</span>
+                <span class="red-font">공지사항 : 게시글 수정</span>
+                <span class="red-font">공지사항 : 게시글 조회</span>
+                <span class="red-font">공지사항 : 게시글 삭제</span>
+                <span class="red-font">공지사항 : 게시글 숨김처리</span>
 
                 <hr>
 
@@ -29,9 +41,15 @@
               <strong>- 페이지</strong>
                   <span class="red-font">회원가입 step4(완료페이지)</span>
               <strong>- 기능</strong>
+                  <span class="red-font">회원서비스 - 개인정보수정</span>
+                  <span class="red-font">회원서비스 - 회원탈퇴</span>
                   <span class="red-font">기업회원가입</span>
                   <span class="red-font">유료회원가입-결제api적용</span>
+                  <span class="red-font">SNS계정 회원가입</span>
                   <span class="red-font">SNS계정 로그인</span>
+                  <span class="red-font hidden">Summernote (?)</span>
+                  <span class="red-font hidden">JWT (?)</span>
+                  <!-- https://wnwngus.tistory.com/65 -->
   
                   <hr>
 
@@ -39,7 +57,7 @@
               <strong>- 페이지</strong>
                    회원서비스
                     - 회원가입
-                        -step1 ~ 3
+                        -step1 ~ 3 : step4(임시)
                     - 로그인
                     - 아이디찾기
                     - 패스워드 찾기
@@ -49,11 +67,15 @@
               <strong>- 기능</strong>
                   Spring Security 적용
                     - csrf() disable처리
+                    - customfailhandler적용
+                  사이트 header/footer
+                    - 전체메뉴 보이기/숨기기 JS fix (jquery toggle(300ms) 애니메이션 적용)
                   회원가입 [무료회원 / 일반, 싹틔우미, 노블회원]
                     - [임시] 인증번호 문자발송 + 일치여부확인
                     - 주소검색 다음api적용
+                    - 회원가입 시 정규화&유효성 체크
                   로그인&로그아웃
-                    - [임시] 메인페이지에 로그인된 회원의 멤버타입 표시
+                    - [임시] 메인페이지에 로그인된 회원정보 표시
                     - 로그인 실패 시 alert 추가
           </pre>
         </div>

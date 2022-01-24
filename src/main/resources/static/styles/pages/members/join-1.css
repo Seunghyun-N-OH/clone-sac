@@ -268,3 +268,13 @@ main > .themeArea {
   display: flex;
   justify-content: space-between;
 }
+
+.joinBTN {
+  background-color: #141414;
+  color: #fff;
+  padding: 0.4rem 1rem;
+}
+
+.joinBTN img {
+  margin-right: 0.5rem;
+}

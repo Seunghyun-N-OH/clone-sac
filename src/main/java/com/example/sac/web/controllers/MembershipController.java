@@ -110,4 +110,10 @@ public class MembershipController {
     public String toPremiumAffiliates() {
         return "membership/premium-affiliates";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/member/signup/checkidavailability", method = RequestMethod.GET)
+    public boolean isThisIdAvailable(String tempID) {
+        return ms.checkID(tempID);
+    }
 }

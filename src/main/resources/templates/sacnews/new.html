@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <th:block th:insert="/fragments/global::head-links" />
+    <link rel="stylesheet" href="/styles/pages/sacnews/new.css" />
+    <script type="text/javascript"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main sec:authorize="hasRole('ADMIN')">
+        <section class="pageContents">
+          <div class="pageTitle">
+            <p>[ADMIN] 공지사항 작성</p>
+          </div>
+          <div class="maincontents">
+            <form
+              action="/admin/sacnews/notice/post"
+              id="newPost"
+              method="post"
+            >
+              <!-- beginning of new post Form #############################################-->
+
+              <!-- select category and publicity above ####################################-->
+              <!-- Title above ##########################################-->
+              <!-- effective period above ##########################################-->
+              <!-- Content above ##########################################-->
+              <!-- Attachment above ##########################################-->
+              <!-- Administrators' menu here ########################################## -->
+              <!-- end of pege numbers ################################################-->
+              <!-- end of Maincontents ################################################ -->
+            </form>
+          </div>
+        </section>
+      </main>
+    </th:block>
+  </body>
+</html>
