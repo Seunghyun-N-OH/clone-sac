@@ -27,7 +27,8 @@ public class NoticeSI implements NoticeS {
     }
 
     @Override
-    public void loadList(int p, Model m) { // list for main page of notice section (find All notices)
+    public String loadList(Model m) { // list for main page of notice section (find All notices)
+        System.out.println("service::loadList() catch"); // TODO delete after implementation
         List<Notice> importantTmp = nr.findByImportantOrderByNoDesc('y');
         if (!importantTmp.isEmpty()) {
             m.addAttribute("importantList", importantTmp.stream().map(a -> a.toDto()).collect(Collectors.toList()));
@@ -38,6 +39,9 @@ public class NoticeSI implements NoticeS {
             m.addAttribute("noticelist", normalNotice.stream().map(a -> a.toDto()).collect(Collectors.toList()));
             // find&collect not-important notice(s) to List, send the list as 'noticelist'
         }
+
+        System.out.println("service::loadList() executed");
+        return "sacnews/listPart";
     }
 
     @Override

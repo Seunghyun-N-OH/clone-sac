@@ -30,9 +30,13 @@ public class NewsController {
     private final NoticeS ns;
 
     @RequestMapping(value = "/sacnews/notice", method = RequestMethod.GET)
-    public String toNotice(@RequestParam(defaultValue = "1") int p, Model m) {
-        ns.loadList(p, m);
+    public String toNotice() {
         return "sacnews/notice";
+    }
+
+    @RequestMapping(value = "/sacnews/notice/init", method = RequestMethod.GET)
+    public String loadList(Model m) {
+        return ns.loadList(m);
     }
 
     @RequestMapping(value = "/sacnews/notice/{notice}", method = RequestMethod.GET)

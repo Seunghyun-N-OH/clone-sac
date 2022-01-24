@@ -94,6 +94,8 @@ main > .themeArea {
 .dataRow > .title {
   width: 60%;
   padding: 1rem 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .dataRow > .title > a {

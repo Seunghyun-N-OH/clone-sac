@@ -7,7 +7,7 @@
   <head>
     <th:block th:insert="/fragments/global::head-links" />
     <link rel="stylesheet" href="/styles/pages/sacnews/notice.css" />
-    <script src="/javascript/sacnews/notice.js"></script>
+    <script type="text/javascript" src="/javascript/sacnews/notice.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -51,32 +51,10 @@
               <button type="button">모집</button>
               <button type="button">발표</button>
             </div>
-            <!-- beginning of important post list #############################################-->
-            <ul class="importantNotice" th:if="${importantList}">
-              <!-- <li th:each="a : ${noticelist}">[[${a}]]</li> -->
-              <li class="dataRow mostImportant" th:each="b : ${importantList}">
-                <p class="categoryName red-font red-border">[[${b.category}]]</p>
-                <p class="title"><a th:href="@{|/sacnews/notice/${b.no}|}">[[${b.title}]]</a></p>
-                <p class="dateBeginning">[[${b.effectiveDateB}]]</p>
-                <p style="align-self:center">~</p>
-                <p class="dateEnding">[[${b.effectiveDateE}]]</p>
-              </li>
-            </ul>
-
-            <!-- end of important post list #############################################-->
-            <!-- beginning of normal post list #############################################-->
-            <ul th:if="${noticelist}">
-              <!-- <li th:each="a : ${noticelist}">[[${a}]]</li> -->
-              <li class="dataRow" th:each="a : ${noticelist}">
-                <!-- <p class="publishedMonth">[[${a.category}]]</p> -->
-                <p class="categoryName red-font red-border">[[${a.category}]]</p>
-                <p class="title"><a th:href="@{|/sacnews/notice/${a.no}|}">[[${a.title}]]</a></p>
-                <p class="dateBeginning">[[${a.effectiveDateB}]]</p>
-                <p style="align-self:center">~</p>
-                <p class="dateEnding">[[${a.effectiveDateE}]]</p>
-              </li>
-            </ul>
-            <!-- end of post list ###################################################-->
+            
+            <div id="noticeLists">
+              
+            </div>
 
             <!-- beginning of search tools ##########################################-->
             <div class="searchLine">

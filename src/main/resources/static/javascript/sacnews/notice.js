@@ -1,5 +1,5 @@
 $(function() {
-
+    initList();
 });
 
 function getGuideOnly(){
@@ -10,7 +10,18 @@ function getGuideOnly(){
             cat : "guide",
         },
         success : function(r){
-            
+            $("#noticeLists").html(r);
         }
     })
+}
+
+function initList() {
+
+    $.ajax({
+        url : "/sacnews/notice/init",
+        type : "get",
+        success : function(ab){
+            $("#noticeLists").html(ab);
+        }
+    });
 }

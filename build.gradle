@@ -38,6 +38,10 @@ dependencies {
 
 //	JSONObject
 	implementation 'com.google.code.gson:gson'
+
+//	MVC
+	implementation 'org.springframework:spring-webmvc:5.3.15'
+
 }
 
 test {
