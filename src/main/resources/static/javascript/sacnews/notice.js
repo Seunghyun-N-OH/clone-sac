@@ -2,13 +2,10 @@ $(function() {
     initList();
 });
 
-function getGuideOnly(){
+function getTargetedList(a){
     $.ajax({
         type : "GET",
-        url : "/sacnews/notice",
-        data : {
-            cat : "guide",
-        },
+        url : "/sacnews/notice/target/"+a,
         success : function(r){
             $("#noticeLists").html(r);
         }

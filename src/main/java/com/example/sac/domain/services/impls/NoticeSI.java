@@ -27,8 +27,8 @@ public class NoticeSI implements NoticeS {
     }
 
     @Override
-    public String loadList(Model m) { // list for main page of notice section (find All notices)
-        System.out.println("service::loadList() catch"); // TODO delete after implementation
+    public String loadList(Model m, String category) { // list for main page of notice section (find All notices)
+        System.out.println("service : " + category); // TODO delete after implementation
         List<Notice> importantTmp = nr.findByImportantOrderByNoDesc('y');
         if (!importantTmp.isEmpty()) {
             m.addAttribute("importantList", importantTmp.stream().map(a -> a.toDto()).collect(Collectors.toList()));
@@ -65,6 +65,22 @@ public class NoticeSI implements NoticeS {
             // in case the notice has deleted(in the moment between click and loading)
             return "redirect:/sacnews/notice";
         }
+    }
+
+    @Override
+    public String loadTargetedList(Model m, String cat) {
+
+        List<Notice> importantTmp = nr.findByImportantOrderByNoDesc('y');
+        if (!importantTmp.isEmpty()) {
+            m.addAttribute("importantList", importantTmp.stream().map(a -> a.toDto()).collect(Collectors.toList()));
+        } // find&collect important notice(s) to List, send the list as 'importantList'
+
+        if (!nr.findByCategoryOrderByNoDesc(cat).isEmpty()) {
+            List<Notice> raw = nr.findByCategoryOrderByNoDesc(cat);
+            m.addAttribute("noticelist", raw.stream().map(a -> a.toDto()).collect(Collectors.toList()));
+        }
+
+        return "sacnews/listPart";
     }
 
 }

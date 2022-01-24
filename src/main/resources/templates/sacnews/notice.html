@@ -43,13 +43,13 @@
           </div>
           <div class="maincontents">
             <div class="noticeCategories">
-              <button type="button" class="selected">전체</button>
-              <button type="button">안내</button>
-              <button type="button">회원</button>
-              <button type="button">대관</button>
-              <button type="button">아카데미</button>
-              <button type="button">모집</button>
-              <button type="button">발표</button>
+              <button id="findAll" onclick="initList()" type="button" class="selected">전체</button>
+              <button id="guideList" onclick="getTargetedList('안내')" type="button">안내</button>
+              <button id="membershipList" onclick="getTargetedList('회원')" type="button">회원</button>
+              <button id="rentList" onclick="getTargetedList('대관')" type="button">대관</button>
+              <button id="academyList" onclick="getTargetedList('아카데미')" type="button">아카데미</button>
+              <button id="recruitList" onclick="getTargetedList('모집')" type="button">모집</button>
+              <button id="announcementList" onclick="getTargetedList('발표')" type="button">발표</button>
             </div>
             
             <div id="noticeLists">

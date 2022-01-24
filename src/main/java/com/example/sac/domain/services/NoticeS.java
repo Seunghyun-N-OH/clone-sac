@@ -8,8 +8,10 @@ public interface NoticeS {
 
     void postNewNotice(NoticeD data);
 
-    String loadList(Model m);
+    String loadList(Model m, String category);
 
     String noticeDetail(long notice, Model m);
+
+    String loadTargetedList(Model m, String cat);
 
 }

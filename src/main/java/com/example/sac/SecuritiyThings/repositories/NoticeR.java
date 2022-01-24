@@ -10,4 +10,6 @@ public interface NoticeR extends JpaRepository<Notice, Long> {
 
     List<Notice> findByImportantOrderByNoDesc(char important);
 
+    List<Notice> findByCategoryOrderByNoDesc(String cat);
+
 }

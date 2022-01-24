@@ -35,8 +35,13 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/sacnews/notice/init", method = RequestMethod.GET)
-    public String loadList(Model m) {
-        return ns.loadList(m);
+    public String loadList(Model m, @RequestParam(defaultValue = "all") String cat) {
+        return ns.loadList(m, cat);
+    }
+
+    @RequestMapping(value = "/sacnews/notice/target/{cat}", method = RequestMethod.GET)
+    public String getTargetedList(Model m, @PathVariable String cat) {
+        return ns.loadTargetedList(m, cat);
     }
 
     @RequestMapping(value = "/sacnews/notice/{notice}", method = RequestMethod.GET)
@@ -56,16 +61,20 @@ public class NewsController {
     @RequestMapping(value = "/admin/file/notice", method = RequestMethod.POST, produces = "application/json; charset=utf8")
     public String noticeAttachUpload(@RequestParam("file") MultipartFile f) {
         JsonObject jo = new JsonObject();
-        String url = "/uploads/notice/includingIMGs/";
+        // String url = "/uploads/notice/includingIMGs/";
+        String url = "/home/ec2-user/scr/root";
+        String imgPath = "/uploads/img/";
         ClassPathResource cpr = new ClassPathResource("static" + url);
         String type = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."));
         String newFilename = Long.toString(fileNo++) + type;
 
         try {
             File fileRoot = cpr.getFile();
+
             File tDirectory = new File(fileRoot, newFilename);
-            f.transferTo(tDirectory);
-            jo.addProperty("url", url + newFilename);
+            // f.transferTo(tDirectory);
+            f.transferTo(new File(url + imgPath, newFilename));
+            jo.addProperty("url", url + imgPath + newFilename);
             jo.addProperty("responseCode", "success");
             System.out.println("success");
         } catch (IOException e) {
