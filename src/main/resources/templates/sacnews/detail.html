@@ -52,6 +52,7 @@
               <p class="edate">[[${notice.effectiveDateE}]]</p>
             </div>
             <div class="contents" th:utext="${notice.content}"></div>
+            <input type="text" name="noticeNo" id="targetN" th:value="${notice.no}" hidden>
             <!-- notice details above ################################ -->
             <div class="nextNprevious">
               <div class="nextOne">
@@ -90,6 +91,22 @@
               >
                 목록보기
               </button>
+              <!-- Admin Actions ########################################## -->
+              <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/sacnews/notice(no=${notice.no})}">
+                <button class="leaveDetailPage red-font red-border">
+                  게시글 수정
+                </button>
+              </a>
+              <form sec:authorize="hasRole('ADMIN')"  th:action="@{/admin/sacnews/notice}"
+                id="deleteNotice"
+                method="post">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <input type="text" name="no" hidden th:value="${notice.no}"/>
+                <button onclick="doubleCheckNDelete()" type="button" sec:authorize="hasRole('ADMIN')" class="leaveDetailPage red-font red-border">
+                  게시글 삭제
+                </button>
+              </form>
+              <!-- Admin Actions ########################################## -->
             </div>
           </div>
         </section>

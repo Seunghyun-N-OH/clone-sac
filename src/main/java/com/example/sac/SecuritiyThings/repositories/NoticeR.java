@@ -8,8 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NoticeR extends JpaRepository<Notice, Long> {
 
-    List<Notice> findByImportantOrderByNoDesc(char important);
+    List<Notice> findByImportantOrderByEffectiveDateBDesc(char important);
 
-    List<Notice> findByCategoryOrderByNoDesc(String cat);
+    List<Notice> findByCategoryOrderByEffectiveDateBDesc(String cat);
+
+    List<Notice> findByContentContainingOrTitleContainingOrderByEffectiveDateBDesc(String content, String title);
+
+    List<Notice> findByContentContainingOrderByEffectiveDateBDesc(String content);
+
+    List<Notice> findByTitleContainingOrderByEffectiveDateBDesc(String title);
 
 }

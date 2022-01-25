@@ -18,18 +18,23 @@
       <main sec:authorize="hasRole('ADMIN')">
         <section class="pageContents">
           <div class="pageTitle">
-            <p>[ADMIN] 공지사항 작성</p>
+            <p>[ADMIN] 공지사항 수정</p>
           </div>
           <div class="maincontents">
             <form
-              action="/admin/sacnews/notice/post"
+             th:action="@{/admin/sacnews/notice}"
               id="newPost"
               method="post"
             >
+            <input type="hidden" name="_method" value="PUT"/>
+            <input type="text" name="no" th:value="${notice.no}"/>
+            <input type="text" name="publisher" th:value="${notice.drafter.userId}">
+            <input type="text" id="ogCategory" th:value="${notice.category}">
+            <input type="text" id="ogImportant" th:value="${notice.important}">
               <!-- beginning of new post Form #############################################-->
                 <div class="postSetting">
                     <select name="category" id="categorySelector">
-                        <option selected>카테고리 선택</option>
+                        <option value="" selected>변경 시 선택</option>
                         <option value="안내">안내</option>
                         <option value="회원">회원</option>
                         <option value="대관">대관</option>
@@ -38,25 +43,26 @@
                         <option value="발표">발표</option>
                     </select>
                     <select name="important" id="isPublicSelector">
-                        <option selected>중요도</option>
+                        <option value="" selected>변경 시 선택</option>
                         <option value="y">중요</option>
                         <option value="n">일반</option>
                     </select>
               <!-- select category and publicity above ####################################-->
-                    <input type="text" name="title" class="titleInput" id="title" placeholder="공지사항 제목">
+                    <input th:value="${notice.title}" type="text" name="title" class="titleInput" id="title" placeholder="공지사항 제목">
               <!-- Title above ##########################################-->
-                    <span class="dateIns">효력시작일</span><input type="date" name="effectiveDateB" class="dateData" id="startDate">
-                    <span class="dateIns">효력종료일</span><input type="date" name="effectiveDateE" class="dateData" id="startDate" style="border:none">
+                    <span class="dateIns">효력시작일</span><input type="date" name="effectiveDateB" class="dateData" id="startDate" th:value="${notice.effectiveDateB}">
+                    <span class="dateIns">효력종료일</span><input type="date" name="effectiveDateE" class="dateData" id="startDate" th:value="${notice.effectiveDateE}" style="border:none">
               <!-- effective period above ##########################################-->
                 </div>
-                <textarea id="summernote" name="content"></textarea>
+                <textarea id="summernote" name="content" th:text="${notice.content}"></textarea>
               <!-- Content(including image file) above ##########################################-->
                 <div class="submitLine">
                   <input type="file" name="attachment" id="attach">
               <!-- Attachment above ##########################################-->
                   <div class="drafterNbutton">
-                    <span >작성자 : <span name="publisher" sec:authentication="principal.username"></span></span>
-                    <button type="submit">등록</button>
+                    <span class="red-font">[수정 시 작성자명이 변경됩니다.]</span>
+                    <span >작성자 : <span th:text="${notice.drafter.userId}"></span></span>
+                    <button onclick="checkAndSubmit()" type="button">수정</button>
                     <button onclick="location.href='/sacnews/notice'" type="button">취소</button>
                   </div>
               <!-- attachment, drafter, post button above ################################################ -->

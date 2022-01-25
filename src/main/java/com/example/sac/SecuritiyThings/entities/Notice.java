@@ -66,6 +66,7 @@ public class Notice {
     private String attachment; // (when needed) attached file(name)
 
     @CreatedDate
+    @Column(updatable = false)
     private LocalDateTime cTime; // to be used when load the list page with monthly sorted group
     @LastModifiedDate
     private LocalDateTime eTime; // // to be used when load the list page with monthly sorted group

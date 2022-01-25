@@ -22,3 +22,30 @@ function initList() {
         }
     });
 }
+
+function searchNotice(){
+    var target = $("#categorySelector").val();
+    var word = $("#keyword").val();
+
+    if(word.trim() == ""){
+        alert("검색어를 입력해주세요.");
+        return false;
+    }
+
+    $.ajax({
+        type : "GET",
+        url : "/sacnews/notice/search?target="+target+"&key="+word,
+        success : function(a){
+            $("#noticeLists").html(a);
+        }
+    })
+}
+
+
+function doubleCheckNDelete(){
+    var r = confirm("이 공지사항을 삭제하시겠습니까");
+	if(r){
+        $("#deleteNotice").submit();
+	} else {}
+	
+}

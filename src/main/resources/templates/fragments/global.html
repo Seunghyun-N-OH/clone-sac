@@ -66,14 +66,25 @@
             <div style="width: 40%; justify-content: flex-end" class="actions">
               <div class="member">
                 <ul>
+                  <!-- when user not loged in -->
                   <li sec:authorize="isAnonymous()" class="loginBtn">
                     <a href="/member/signin">로그인</a>
                   </li>
                   <li sec:authorize="isAnonymous()" class="joinBtn">
                     <a href="/member/signup">회원가입</a>
                   </li>
-                  <li sec:authorize="isAuthenticated()" class="loginBtn">
+
+                  <!-- when user loged in -->
+                  <li sec:authorize="isAuthenticated()" class="logoutBtn">
                     <a href="/member/logout">로그아웃</a>
+                  </li>
+                  <!-- when user loged in (and user is not an administrator) -->
+                  <li sec:authorize="hasRole('USER')" class="mypageBtn">
+                    <a href="/member/mypage/myTicket">마이페이지</a>
+                  </li>
+                  <!-- when loged in as an administrator -->
+                  <li sec:authorize="hasRole('ADMIN')" class="adminBtn">
+                    <a href="/admin/main">관리자</a>
                   </li>
                 </ul>
               </div>

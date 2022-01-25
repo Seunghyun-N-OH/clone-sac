@@ -1,0 +1,108 @@
+main > .themeArea {
+  background: url("/imgsrc/member-back.jpg") no-repeat;
+}
+
+.maincontents * {
+  color: #555;
+}
+
+.overview {
+  width: 100%;
+  margin: 0 auto;
+  background: #f2f2f2;
+  padding: 40px 40px 80px 40px;
+}
+
+.overview .basicInfo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.overview .basicInfo > div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.blue-coloured {
+  color: #273ac7;
+}
+
+.basicInfo img {
+  width: 20px;
+  height: 20px;
+}
+
+.nameBox .idNname {
+  margin-left: 5%;
+}
+
+.editButtonBox > .flex {
+  display: flex;
+}
+
+.editButtonBox > .types {
+  margin-left: 5%;
+  width: 60%;
+}
+
+.editButtonBox > .types > span {
+  display: flex;
+  align-items: center;
+}
+
+.editButtonBox > .editButton {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  color: #555;
+  height: 2rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  background-color: #fff;
+  border: 1px solid #555;
+}
+
+.editButtonBox > .types > span .principalD {
+  margin-left: 5%;
+}
+
+.overview .basicInfo .renew-membership {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+.renew-membership > .red-button {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  height: 2rem;
+  padding: 0.25rem 1rem;
+}
+
+.divisionBtns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 5% 0;
+}
+
+.divisionBtn {
+  width: 14%;
+}
+
+.divisionBtn > button {
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 15px;
+  color: #8b8b8b;
+  border: 1px solid #e5e5e5;
+  background-color: unset;
+  cursor: pointer;
+}
+
+.divisionBtn > button.selected {
+  color: #555;
+  border: 1px solid #555;
+}

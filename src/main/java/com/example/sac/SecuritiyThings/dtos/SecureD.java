@@ -16,6 +16,7 @@ import lombok.Setter;
 public class SecureD extends User {
     // ID / PW / ROLES : included by inheriting User class
     private String memberType;
+    private String name;
     // required to check faster when redirecting pages
 
     public SecureD(Membership a) {
@@ -23,5 +24,6 @@ public class SecureD extends User {
                 a.getUserPw(),
                 a.getRoles().stream().map(b -> new SimpleGrantedAuthority(b)).collect(Collectors.toSet()));
         this.memberType = a.getMemberType();
+        this.name = a.getName();
     }
 }

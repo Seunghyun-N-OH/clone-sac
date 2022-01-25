@@ -14,4 +14,12 @@ public interface NoticeS {
 
     String loadTargetedList(Model m, String cat);
 
+    String searchNotice(String target, String key, Model m);
+
+    String noticeEdit(long targetNo, Model m);
+
+    void editNotice(NoticeD data);
+
+    void deleteNotice(long no);
+
 }

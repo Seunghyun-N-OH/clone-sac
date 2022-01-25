@@ -7,6 +7,7 @@ import com.example.sac.web.dtos.MembershipD;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -115,5 +116,45 @@ public class MembershipController {
     @RequestMapping(value = "/member/signup/checkidavailability", method = RequestMethod.GET)
     public boolean isThisIdAvailable(String tempID) {
         return ms.checkID(tempID);
+    }
+
+    @RequestMapping(value = "/member/mypage/myTicket", method = RequestMethod.GET)
+    public String toMyticket() {
+        return "membership/info/myTicket";
+    }
+
+    @RequestMapping(value = "/member/mypage/myLecture", method = RequestMethod.GET)
+    public String toMylecture() {
+        return "membership/info/myLecture";
+    }
+
+    @RequestMapping(value = "/member/mypage/myPick", method = RequestMethod.GET)
+    public String toMyPick() {
+        return "membership/info/myPick";
+    }
+
+    @RequestMapping(value = "/member/mypage/myActivity", method = RequestMethod.GET)
+    public String toMyActivity() {
+        return "membership/info/myActivity";
+    }
+
+    @RequestMapping(value = "/member/mypage/myinfoEnter", method = RequestMethod.GET)
+    public String toMyinfoEnter() {
+        return "membership/info/myinfoEnter";
+    }
+
+    @RequestMapping(value = "/member/mypage/myMembership", method = RequestMethod.GET)
+    public String toMyMembership() {
+        return "membership/info/myMembership";
+    }
+
+    @RequestMapping(value = "/member/mypage/myDonation", method = RequestMethod.GET)
+    public String toMyDonation() {
+        return "membership/info/myDonation";
+    }
+
+    @RequestMapping(value = "/member/mypage/myMembershipResign", method = RequestMethod.GET)
+    public String toMyMembershipResign() {
+        return "membership/info/myMembershipResign";
     }
 }

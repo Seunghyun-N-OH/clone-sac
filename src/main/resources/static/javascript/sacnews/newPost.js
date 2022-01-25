@@ -56,3 +56,15 @@ function uploadSummernoteImageFile(file, el) {
 		}
 	});
 }
+
+function checkAndSubmit(){
+	
+	if(!$("#categorySelector > option:selected").val()){
+		$("#categorySelector").val($("#ogCategory").val());
+	}
+	if(!$("#isPublicSelector > option:selected").val()){
+		$("#isPublicSelector").val($("#ogImportant").val());
+	}
+
+	$("#newPost").submit();
+}

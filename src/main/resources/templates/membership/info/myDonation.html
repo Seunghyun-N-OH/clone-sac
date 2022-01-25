@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <th:block th:insert="/fragments/global::head-links"/>
+    <link rel="stylesheet" href="/styles/pages/members/mypage.css"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <th:block th:if="${error}">
+          <input type="text" id="ermsg" th:value="${exception}" hidden>
+        </th:block>
+        <section class="themeArea">
+          <h4>&nbsp;</h4>
+          <h3>회원서비스</h3>
+        </section>
+        <section class="navigator">
+          <div class="navsizebox">
+            <div class="navigate">
+              <a class="navHome" href="/"
+                ><img src="/imgsrc/assets/cwac-menu_icon01.png" alt=""
+              /></a>
+              <a class="navSelect" href="#">마이페이지</a>
+              <a class="navSelect" href="#">후원회</a>
+            </div>
+            <div class="actions">
+              <a class="printicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon03.png" alt=""
+              /></a>
+              <a class="shareicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon04.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </section>
+        <section class="pageContents">
+          <div class="maincontents">
+            <div class="overview" id="overview">
+                <th:block th:insert="/membership/info/myPageGlobal::personalInfoArea"></th:block>
+                <!-- member info area ################################################ -->
+                <!-- Mypage section's common layout part -->
+            </div>
+
+            <!-- subdivision selector ################################################ -->
+            <div class="subdivision">
+                <ul class="flex divisionBtns">
+                    <li class="divisionBtn">
+                        <button onclick="location.href='/member/mypage/myTicket'">티켓예매내역</button>
+                    </li>
+                    <li class="divisionBtn">
+                        <button onclick="location.href='/member/mypage/myLecture'">강좌신청내역</button>
+                    </li>
+                    <li class="divisionBtn">
+                        <button onclick="location.href='/member/mypage/myPick'">마이찜</button>
+                    </li>
+                    <li class="divisionBtn">
+                        <button onclick="location.href='/member/mypage/myActivity'">참여와활동</button>
+                    </li>
+                    <li class="divisionBtn">
+                        <button onclick="location.href='/member/mypage/myinfoEnter'">개인정보관리</button>
+                    </li>
+                    <li class="divisionBtn">
+                        <button onclick="location.href='/member/mypage/myMembership'">나의멤버십</button>
+                    </li>
+                    <li class="divisionBtn">
+                        <button class="selected" onclick="location.href='/member/mypage/myDonation'">후원회</button>
+                    </li>
+                    <li class="divisionBtn">
+                        <button onclick="location.href='/member/mypage/myMembershipResign'">회원탈퇴</button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- mypage > myDonation Area ############################################ -->
+            <div class="contentArea"></div>
+
+            <!-- end of maincontents ############################################### -->
+          </div>
+        </section>
+      </main>
+    </th:block>
+  </body>
+</html>

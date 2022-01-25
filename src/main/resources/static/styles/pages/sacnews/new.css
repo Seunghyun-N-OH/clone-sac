@@ -45,3 +45,9 @@
   border: none;
   border-right: 2px solid #e6e6e6;
 }
+
+.submitLine {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1%;
+}

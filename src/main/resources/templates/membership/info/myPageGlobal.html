@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div th:fragment="personalInfoArea" class="basicInfo">
+      <div class="nameBox">
+        <img
+          src="/imgsrc/assets/mypage/personal-information1.gif"
+          alt=""
+        /><span>로그인 사용자</span>
+
+        <div style="display: flex" class="idNname">
+          <p class="blue-coloured" sec:authentication="principal.name"></p>
+          <p>(</p>
+          <p class="blue-coloured" sec:authentication="principal.username"></p>
+          <p>)</p>
+        </div>
+      </div>
+      <div class="editButtonBox">
+        <a href="#" class="editButton"
+          ><img
+            src="/imgsrc/assets/mypage/user-revise-btn.gif"
+            alt=""
+          />개인정보수정</a
+        >
+        <div class="types">
+          <span class="memberType flex">
+            <img
+              src="/imgsrc/assets/mypage/personal-information2.gif"
+              alt=""
+            />기본가입
+            <p class="principalD" sec:authentication="principal.memberType"></p>
+          </span>
+          <span class="optionalType flex vertical10pc">
+            <img
+              src="/imgsrc/assets/mypage/personal-information3.gif"
+              alt=""
+            />선택가입
+            <!-- <p class="principalD" sec:authentication="principal.memberType"></p> -->
+            <a class="principalD" sec:authorize="hasRole('PAID')"
+              ><p sec:authentication="principal.memberType"></p
+            ></a>
+            <a class="principalD" sec:authorize="!hasRole('PAID')"
+              >미가입<img src="/imgsrc/assets/mypage/new2021_more.png" alt=""
+            /></a>
+          </span>
+        </div>
+      </div>
+      <div class="renew-membership">
+        <a class="red-button" href="#"
+          ><img src="/imgsrc/assets/mypage/join-btn.gif" alt="" />유료맴버십
+          갱신 / 가입</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
