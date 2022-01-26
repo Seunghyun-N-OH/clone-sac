@@ -7,8 +7,8 @@ import java.util.Set;
 
 import com.example.sac.SecuritiyThings.dtos.SecureD;
 import com.example.sac.SecuritiyThings.entities.Membership;
-import com.example.sac.SecuritiyThings.repositories.MembershipR;
 import com.example.sac.SecuritiyThings.service.MemberS;
+import com.example.sac.domain.repositories.MembershipR;
 import com.example.sac.web.dtos.MembershipD;
 
 import org.json.simple.JSONObject;
@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
+// 주석 업데이트 220126
 
 @Service
 public class MemberSI implements MemberS, UserDetailsService {
@@ -55,6 +57,7 @@ public class MemberSI implements MemberS, UserDetailsService {
         // -(if not) throws exception
     }
 
+    // 회원가입 중 인증번호 문자발송을 위한 api [coolSMS]
     public void certifiedPhoneNumber(String phoneNumber, String cerNum) {
 
         String api_key = "NCSY6EP4UOPTSDLW";
@@ -76,13 +79,17 @@ public class MemberSI implements MemberS, UserDetailsService {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
-
     }
 
+    // 회원가입 단계 중 정보입력단계로 넘어가면
     @Override
     public MembershipD joinMember(MembershipD md, String phone) {
+        // 010/1234/5678 세개로 나눠서 입력받아, 컨트롤러에서 합쳐둔걸 dto에 넣고
         md.setPhone(phone);
+        // 그냥 들어있는 비밀번호를 encoding 된 값으로 바꿔주고
         md.setUserPw(pe.encode(md.getUserPw()));
+        // membertype에 따라 그에 맞는 역할들 입력
+        // TODO enum클래스 활용할지 이후 결정
         Set<String> tmpRole = new HashSet<>();
         tmpRole.add("ROLE_USER");
         switch (md.getMemberType()) {
@@ -121,16 +128,17 @@ public class MemberSI implements MemberS, UserDetailsService {
                 tmpRole.add("ROLE_GOLD");
         }
         md.setRoles(tmpRole);
+        // 이제 값이 다 저장된 entity를 save하고, 성공 시 리턴받는 entity를 dto로 바꿔서 가져감
         return new MembershipD(mr.save(md.toEntityForJoin()));
     }
 
+    // 회원가입단계 아이디 중복체크
     @Override
     public boolean checkID(String tempID) {
-        System.out.println(tempID);
-        if (mr.findById(tempID).isPresent()) {
-            return false;
-        } else {
-            return true;
+        if (mr.findById(tempID).isPresent()) {// 지금 쓰고싶어하는 아이디가 이미 있으면
+            return false; // 안돼
+        } else { // 없으면
+            return true; // 돼
         }
     }
 }

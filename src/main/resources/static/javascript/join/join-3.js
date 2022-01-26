@@ -17,6 +17,7 @@ var pwRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])
                 return false;
             }
             if(!checkIdAvailability()){
+                alert(checkIdAvailability());
                 alert("아이디를 다시 확인 후 중복확인을 해주세요");
                 return false;
             }

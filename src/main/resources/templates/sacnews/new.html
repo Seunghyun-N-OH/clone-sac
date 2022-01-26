@@ -22,9 +22,10 @@
           </div>
           <div class="maincontents">
             <form
-              action="/admin/sacnews/notice/post"
+              th:action="@{/admin/sacnews/notice/post}"
               id="newPost"
               method="post"
+              enctype="multipart/form-data"
             >
               <!-- beginning of new post Form #############################################-->
                 <div class="postSetting">
@@ -52,7 +53,7 @@
                 <textarea id="summernote" name="content"></textarea>
               <!-- Content(including image file) above ##########################################-->
                 <div class="submitLine">
-                  <input type="file" name="attachment" id="attach">
+                  <input id="attach" multiple="multiple" type="file" name="attach">
               <!-- Attachment above ##########################################-->
                   <div class="drafterNbutton">
                     <span >작성자 : <span name="publisher" sec:authentication="principal.username"></span></span>

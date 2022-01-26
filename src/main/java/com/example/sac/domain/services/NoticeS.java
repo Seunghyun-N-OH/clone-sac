@@ -1,14 +1,21 @@
 package com.example.sac.domain.services;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
+
 import com.example.sac.web.dtos.NoticeD;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface NoticeS {
 
-    void postNewNotice(NoticeD data);
+    void postNewNotice(NoticeD data, Set<MultipartFile> attach);
 
-    String loadList(Model m, String category);
+    String loadList(Model m);
 
     String noticeDetail(long notice, Model m);
 
@@ -21,5 +28,8 @@ public interface NoticeS {
     void editNotice(NoticeD data);
 
     void deleteNotice(long no);
+
+    void downService(long noticeNumber, long fileNumber, HttpServletResponse response)
+            throws FileNotFoundException, IOException;
 
 }

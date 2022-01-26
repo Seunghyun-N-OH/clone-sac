@@ -2,7 +2,7 @@ package com.example.sac.SecuritiyThings.repositories;
 
 import java.util.List;
 
-import com.example.sac.SecuritiyThings.entities.Notice;
+import com.example.sac.domain.entities.Notice;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

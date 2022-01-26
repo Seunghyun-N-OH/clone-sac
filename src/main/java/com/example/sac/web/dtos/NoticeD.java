@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.example.sac.SecuritiyThings.entities.Membership;
-import com.example.sac.SecuritiyThings.entities.Notice;
+import com.example.sac.domain.entities.Notice;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,7 +29,6 @@ public class NoticeD {
     private LocalDate effectiveDateB;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate effectiveDateE;
-    private String attachment;
     private LocalDateTime cTime;
     private LocalDateTime eTime;
 
@@ -44,7 +43,16 @@ public class NoticeD {
                 .content(this.getContent())
                 .effectiveDateB(this.getEffectiveDateB())
                 .effectiveDateE(this.getEffectiveDateE())
-                .attachment(this.getAttachment())
                 .build();
+    }
+
+    public NoticeLD toListDto() {
+        NoticeLD a = new NoticeLD();
+        a.setNo(this.getNo());
+        a.setCategory(this.getCategory());
+        a.setTitle(this.getTitle());
+        a.setEffectiveDateB(this.getEffectiveDateB());
+        a.setEffectiveDateE(this.getEffectiveDateE());
+        return a;
     }
 }

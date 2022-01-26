@@ -233,3 +233,20 @@ main > .themeArea {
   width: 80%;
   text-align: left;
 }
+
+#attached {
+  margin-bottom: 2%;
+  padding-bottom: 2%;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+#attached ul {
+  display: flex;
+  flex-direction: column;
+}
+
+#attached ul .afile {
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+}

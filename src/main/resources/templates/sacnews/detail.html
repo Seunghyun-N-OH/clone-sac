@@ -7,7 +7,8 @@
   <head>
     <th:block th:insert="/fragments/global::head-links" />
     <link rel="stylesheet" href="/styles/pages/sacnews/notice.css" />
-    <script src="/javascript/sacnews/notice.js"></script>
+    <script src="/javascript/sacnews/detail.js"></script>
+    
     <title>Document</title>
   </head>
   <body>
@@ -50,6 +51,13 @@
               <p class="edate">[[${notice.effectiveDateB}]]</p>
               <p>~</p>
               <p class="edate">[[${notice.effectiveDateE}]]</p>
+            </div>
+            <div id="attached">
+              <ul th:if="${attachedFiles}">
+                <li class="afile" th:each="a : ${attachedFiles}">
+                  <p style="font-weight: bold;">*첨부파일 : </p><a th:href="@{|/sacnews/notice/${notice.no}/attach?fno=${a.fno}|}">[[${a.fileName}]]</a>
+                </li>
+              </ul>
             </div>
             <div class="contents" th:utext="${notice.content}"></div>
             <input type="text" name="noticeNo" id="targetN" th:value="${notice.no}" hidden>

@@ -1,4 +1,4 @@
-package com.example.sac.SecuritiyThings.entities;
+package com.example.sac.domain.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.example.sac.SecuritiyThings.entities.Membership;
 import com.example.sac.web.dtos.MembershipD;
 import com.example.sac.web.dtos.NoticeD;
 
@@ -33,7 +34,6 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 @Getter
-@ToString // TODO delete after implementation
 @Table(name = "notice_board")
 public class Notice {
     @Id
@@ -46,31 +46,30 @@ public class Notice {
 
     @ManyToOne
     @JoinColumn(name = "admin_id")
-    private Membership drafter; // for management purpose, id of the publisher(admin)
+    private Membership drafter; // 관리목적, 작성자 이름은 회원의 id
 
     @Column(nullable = false)
-    private char important; // determines the post to be open to public or not ( y / n )
+    private char important; // 중요공지여부, y또는n
 
     @ColumnDefault("0")
-    private int views; // for management purpose
+    private int views; // 관리목적, 열람 수
     @Column(nullable = false)
     private String title;
     @Column(nullable = false)
-    private String content; // TODO need to find out how can it be shown with visual effects on detail page
+    private String content; // 공지 내용, summernote사용
 
     @Column(nullable = true)
-    private LocalDate effectiveDateB; // (when needed) this event is only applicable for 'Startdate' to Enddate
+    private LocalDate effectiveDateB; // 이 공지가 언제부터 적용되는 공지인지
     @Column(nullable = true)
-    private LocalDate effectiveDateE; // (when needed) this event is only applicable for Startdate to 'Enddate'
-    @Column(nullable = true)
-    private String attachment; // (when needed) attached file(name)
+    private LocalDate effectiveDateE; // 이 공지가 언제까지 적용되는 공지인지
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime cTime; // to be used when load the list page with monthly sorted group
+    private LocalDateTime cTime; // 관리목적, 최초 작성된 시간, save()함수를 사용해 수정될 때 작성시간이 함께 바뀌지 않도록 updatable = false
     @LastModifiedDate
-    private LocalDateTime eTime; // // to be used when load the list page with monthly sorted group
+    private LocalDateTime eTime; // 관리목적, 마지막 수정시간
 
+    // 공지사항 불러와 보여줄 때 dto타입으로 들고가기 위해 변환함수
     public NoticeD toDto() {
         return NoticeD.builder()
                 .no(this.getNo())
@@ -82,7 +81,6 @@ public class Notice {
                 .content(this.getContent())
                 .effectiveDateB(this.getEffectiveDateB())
                 .effectiveDateE(this.getEffectiveDateE())
-                .attachment(this.getAttachment())
                 .cTime(this.getCTime())
                 .eTime(this.getETime())
                 .build();
