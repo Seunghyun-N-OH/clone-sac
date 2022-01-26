@@ -25,7 +25,7 @@ public interface NoticeS {
 
     String noticeEdit(long targetNo, Model m);
 
-    void editNotice(NoticeD data);
+    void editNotice(NoticeD data, Set<MultipartFile> attach);
 
     void deleteNotice(long no);
 

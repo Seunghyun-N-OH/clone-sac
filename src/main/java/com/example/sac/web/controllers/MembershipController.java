@@ -1,5 +1,6 @@
 package com.example.sac.web.controllers;
 
+import java.security.Principal;
 import java.util.Random;
 
 import com.example.sac.SecuritiyThings.service.MemberS;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MembershipController {
@@ -142,6 +144,17 @@ public class MembershipController {
         return "membership/info/myinfoEnter";
     }
 
+    @RequestMapping(value = "/member/mypage/myinfoEdit", method = RequestMethod.POST)
+    public String toMyinfoEdit(String pw, Principal p, Model m, RedirectAttributes ra) {
+        return ms.verifyUser(pw, p, m, ra);
+    }
+
+    @RequestMapping(value = "/member/mypage/myinfoEdit", method = RequestMethod.PUT)
+    public String submitEdit(MembershipD a) {
+        ms.updateMemberInfo(a);
+        return "redirect:/member/logout";
+    }
+
     @RequestMapping(value = "/member/mypage/myMembership", method = RequestMethod.GET)
     public String toMyMembership() {
         return "membership/info/myMembership";
@@ -155,5 +168,11 @@ public class MembershipController {
     @RequestMapping(value = "/member/mypage/myMembershipResign", method = RequestMethod.GET)
     public String toMyMembershipResign() {
         return "membership/info/myMembershipResign";
+    }
+
+    @RequestMapping(value = "/member/mypage/myMembershipResign", method = RequestMethod.DELETE)
+    public String resign(Principal p, String reason, String comment) {
+        ms.kickoutMember(p, reason, comment);
+        return "redirect:/member/logout";
     }
 }

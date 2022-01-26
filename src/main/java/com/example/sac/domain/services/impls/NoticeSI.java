@@ -163,6 +163,10 @@ public class NoticeSI implements NoticeS {
         Optional<Notice> raw = nr.findById(targetNo);
         if (raw.isPresent()) { // 이거도 혹시나 불러오는데 그사이 '다른admin'이 삭제할까봐 체크하고
             m.addAttribute("notice", raw.get().toDto());
+            List<AttachedFile> a = afr.findByNoticeNo(targetNo);
+            if (!a.isEmpty()) {
+                m.addAttribute("attachments", a.stream().map(b -> b.toDto()).collect(Collectors.toList()));
+            }
             // 가져감
             return "sacnews/edit";
         } else {
@@ -172,10 +176,18 @@ public class NoticeSI implements NoticeS {
 
     // 내용 바꿔서 이제 수정할라그러면
     @Override
-    public void editNotice(NoticeD data) {
+    public void editNotice(NoticeD data, Set<MultipartFile> attachedFile) {
         // 바뀐 정보가 포함된 DTO를 entity로 바꿔서 save()함수 사용해 update
         // TODO 파일수정 포함시키기
-        nr.save(data.toEntity());
+        Notice e = nr.save(data.toEntity());
+        for (MultipartFile ab : attachedFile) { // response에서 가져온 attachedFile 을 하나씩 까봐서
+            if (!ab.getOriginalFilename().isEmpty()) { // null상태인지 확인 (첨부파일 없으면 null값인, 길이1 List)
+                AttachedFileD a = UpAndDownFile.uploadFile(ab, e);
+                // null 아니면 그파일 업로드하고, DTO 돌려받음
+                afr.save(a.toEntity());
+                // 돌려받은거 entity로 바꿔서, attachment 테이블에 save
+            }
+        }
     }
 
     // 공지 삭제하려그러면

@@ -465,3 +465,14 @@ main > .themeArea {
 .customCheckbox[type="checkbox"]:disabled + label {
   background-image: url("/imgsrc/assets/bg_radio2.png");
 }
+
+h3.sectiontitle::after {
+  content: "";
+  display: inline-block;
+  height: 7px;
+  width: 40px;
+  background: #ed1839;
+  top: -25px;
+  left: -95px;
+  position: relative;
+}

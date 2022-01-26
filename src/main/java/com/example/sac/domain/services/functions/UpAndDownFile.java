@@ -15,7 +15,6 @@ import com.example.sac.domain.entities.Notice;
 import com.example.sac.web.dtos.AttachedFileD;
 import com.google.gson.JsonObject;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.multipart.MultipartFile;
 
 // 주석 업데이트 220126
@@ -23,10 +22,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UpAndDownFile {
 
-    // 로컬에서 작동할 path
-    private static final String p = "/uploads/notice/includingIMGs/";
-    private static final ClassPathResource cpr = new ClassPathResource("static" + p);
-    private static final String localRoot = "E:/test/sac/bin/main/static";
+    // TODO 로컬에서 작동할 path
+    // private static final String p = "/uploads/notice/includingIMGs/";
+    // private static final ClassPathResource cpr = new ClassPathResource("static" +
+    // p);
+    // private static final String localRoot = "E:/test/sac/bin/main/static";
+
+    // TODO ec2에서 작동할 path
+    private static final String p = "/uploads/imgs/upload/";
+    private static final String localRoot = "/home/ec2-user/src/root";
 
     // 업로드된 파일이 저장 될 때, 중복으로 인한 문제가 생기지 않도록 앞에 붙여줄 번호
     private static long fileNo = 10L;
@@ -36,9 +40,10 @@ public class UpAndDownFile {
     public static AttachedFileD uploadFile(MultipartFile a, Notice data) {
         AttachedFileD c;
         try {
-            File dest_dir = cpr.getFile();
             String newFileName = Long.toString(fileNo + fileNo_sub) + a.getOriginalFilename();
-            a.transferTo(new File(dest_dir, newFileName));
+            // File dest_dir = cpr.getFile(); // TODO local
+            // a.transferTo(new File(dest_dir, newFileName)); // TODO local
+            a.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
             c = (AttachedFileD.builder().fileName(newFileName)
                     .fno(fileNo++)
                     .filePath(p)
@@ -102,14 +107,15 @@ public class UpAndDownFile {
     public static String uploadFile_summernote(MultipartFile a) {
         // 제이슨오브젝트 빈 객체 하나 만들어서
         JsonObject jo = new JsonObject();
-        ClassPathResource cpr = new ClassPathResource("static" + p);
+        // ClassPathResource cpr = new ClassPathResource("static" + p); // TODO local
         String newFilename = Long.toString(fileNo++ + fileNo_sub) + a.getOriginalFilename();
 
         try {
-            File fileRoot = cpr.getFile();
-            File tDirectory = new File(fileRoot, newFilename);
-            a.transferTo(tDirectory);
+            // File fileRoot = cpr.getFile(); // TODO local
+            // File tDirectory = new File(fileRoot, newFilename); // TODO local
+            // a.transferTo(tDirectory); // TODO local
             // 파일 옮기고
+            a.transferTo(new File(localRoot + p, newFilename)); // TODO ec2
             jo.addProperty("url", p + newFilename);
             // 옮긴경로+파일명 값 을 url이라는 이름으로 제이슨오브젝트에 넣고
             jo.addProperty("responseCode", "success");

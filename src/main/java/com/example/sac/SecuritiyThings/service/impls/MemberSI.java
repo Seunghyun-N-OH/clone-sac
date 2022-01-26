@@ -1,5 +1,6 @@
 package com.example.sac.SecuritiyThings.service.impls;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
@@ -17,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -140,5 +143,85 @@ public class MemberSI implements MemberS, UserDetailsService {
         } else { // 없으면
             return true; // 돼
         }
+    }
+
+    // 개인정보 수정페이지 진입 시 비밀번호 재확인
+    @Override
+    public String verifyUser(String pw, Principal p, Model m, RedirectAttributes ra) {
+        // 들어온 비밀번호랑, principal의 userId로 DB에서 찾아온 계정의 userPw를 비교
+        if (pe.matches(pw, new MembershipD(mr.findById(p.getName()).get()).getUserPw())) {
+            // 일치하면 계정정보를 통으로 dto에 담아 모델에 넣어 리턴
+            m.addAttribute("data", new MembershipD(mr.findById(p.getName()).get()));
+            return "membership/info/myinfoEdit";
+        }
+        // 일치하지 않으면 다시 이전페이지인 myinfoEnter로 리디렉트하며 에러메시지 전달
+        ra.addFlashAttribute("error", "비밀번호가 일치하지 않습니다.");
+        return "redirect:/member/mypage/myinfoEnter";
+    }
+
+    // 바꾸고싶은거 바꾼다음 수정버튼 누름
+    @Override
+    public void updateMemberInfo(MembershipD a) {
+        // 바뀐 정보를 update하기위해 담을 entity 선언
+        Membership b;
+
+        // 비밀번호 바꿨는지 안바꿨는지 확인후
+        // 비밀번호 바꿨으면 dto에 담겨왔고, 아니면 비어있음
+        if (a.getUserPw().isEmpty()) {
+            // 안바꿨으면 지금 바꾸려는 유저id로 DB조회해서 나온 결과의 pw를 넣어서 entity build
+            b = Membership.builder()
+                    .memberType(a.getMemberType())
+                    .roles(a.getRoles())
+                    .userId(a.getUserId())
+                    .userPw(mr.findById(a.getUserId()).get().getUserPw())
+                    .name(a.getName())
+                    .birthDate(a.getBirthDate())
+                    .calendar(a.getCalendar())
+                    .gender(a.getGender())
+                    .addressPostal(a.getAddressPostal())
+                    .address_1(a.getAddress_1())
+                    .address_2(a.getAddress_2())
+                    .phone(a.getPhone())
+                    .email(a.getEmail())
+                    .marketing_email(a.getMarketing_email())
+                    .marketing_sms(a.getMarketing_sms())
+                    .centerTerm(a.getCenterTerm())
+                    .personalTerm(a.getPersonalTerm())
+                    .marketingTerm(a.getMarketingTerm())
+                    .build();
+        } else {
+            // 바꿨으면 기존비밀번호를 확인할 필요는 없으니 바로 entity build
+            b = Membership.builder()
+                    .memberType(a.getMemberType())
+                    .roles(a.getRoles())
+                    .userId(a.getUserId())
+                    .userPw(pe.encode(a.getUserPw()))
+                    .name(a.getName())
+                    .birthDate(a.getBirthDate())
+                    .calendar(a.getCalendar())
+                    .gender(a.getGender())
+                    .addressPostal(a.getAddressPostal())
+                    .address_1(a.getAddress_1())
+                    .address_2(a.getAddress_2())
+                    .phone(a.getPhone())
+                    .email(a.getEmail())
+                    .marketing_email(a.getMarketing_email())
+                    .marketing_sms(a.getMarketing_sms())
+                    .centerTerm(a.getCenterTerm())
+                    .personalTerm(a.getPersonalTerm())
+                    .marketingTerm(a.getMarketingTerm())
+                    .build();
+        }
+        // 비밀번호를 바꾸었는지 여부와 관계없이 이제 초기화된 entity를 save함수로 update
+        mr.save(b);
+    }
+
+    // 회원이 탈퇴요청, 사유(옵션선택)와 코멘트(직접작성)을 함께 넘겨받음
+    @Override
+    public void kickoutMember(Principal p, String reason, String comment) {
+        // TODO 사유/코멘트 따로 저장할 entity가 필요할것같다
+        // 사유/코멘트 처리했다 치고...
+        System.out.println(p.getName());
+        mr.deleteById(p.getName());
     }
 }

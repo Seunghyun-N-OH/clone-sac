@@ -73,7 +73,15 @@
             </div>
 
             <!-- mypage > myMembershipResign Area ############################################ -->
-            <div class="contentArea"></div>
+            <div class="contentArea"> <!--TODO 이거 이쁘게 css 해라....-->
+              <form action="/member/mypage/myMembershipResign" method="post">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <input type="text" name="reason">
+                <input type="text" name="comment">
+                <button type="submit">내보내줘</button>
+                <!-- TODO 이거그래도 회원탈퇴인데 한번더 비번확인정도는 해야할듯 -->
+              </form>
+            </div>
 
             <!-- end of maincontents ############################################### -->
           </div>

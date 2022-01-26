@@ -11,21 +11,21 @@
           <div style="margin-right : 10%">
             <a href="/sitemap" class="red-border red-font">SITEMAP</a>
           </div>
+          <div sec:authorize="isAuthenticated()" style="display:flex; flex-direction : column ; justify-content: center;align-items: flex-start; position : absolute; left : 100px; top : 120px;">
+            <span>로그인정보 :: TEST ONLY</span><!-- <span sec:authentication="principal"></span> -->
+            <pre>Roles : <span class="red-font" sec:authentication="principal.authorities"></span></pre>
+            <pre>Username : <span class="red-font" sec:authentication="principal.username"></span></pre>
+            <pre>Password : <span class="red-font" sec:authentication="principal.password"></span></pre>
+            <pre>MemberType : <span class="red-font" sec:authentication="principal.memberType"></span></pre>
+          </div>
           <pre style="width : 30%;text-align: left;">
-            <div sec:authorize="isAuthenticated()" style="display:flex; flex-direction : column ; justify-content: center;align-items: flex-start; position : absolute; left : 100px">
-              <span>로그인정보 :: TEST ONLY</span>
-              <!-- <span sec:authentication="principal"></span> -->
-              <pre>Roles : <span class="red-font" sec:authentication="principal.authorities"></span></pre>
-              <pre>Username : <span class="red-font" sec:authentication="principal.username"></span></pre>
-              <pre>Password : <span class="red-font" sec:authentication="principal.password"></span></pre>
-              <pre>MemberType : <span class="red-font" sec:authentication="principal.memberType"></span></pre>
-            </div>
 
             <h3>작업중</h3>
               <strong>- 페이지</strong>
-                
+                <span class="red-font">회원서비스 : 탈퇴페이지</span>
               <strong>- 기능</strong>
-                <span class="red-font">공지사항 : 수정작업 시 첨부파일처리 추가</span>
+                <span class="red-font">회원서비스 : 탈퇴 시 코멘트 기록기능</span>
+                <span class="red-font">공지사항 : 수정작업 시 기존 첨부파일 삭제기능</span>
                 <span class="red-font">공연·전시 : 테이블 구조 결정 / 생성 / 등록</span>
 
                 <hr>
@@ -34,17 +34,14 @@
               <strong>- 페이지</strong>
                   <span class="red-font">회원가입 step4(완료페이지)</span>
               <strong>- 기능</strong>
-                  <span class="red-font">공지사항 : 게시글 작성(ec2환경에 맞는 path 적용)</span>
+                  <span class="red-font">URL 규칙 정리/적용 (범주별, 기능별 등)</span>
                   <span class="red-font">공지사항 : 게시글 숨김처리 (공지 별 해당기간이 있어 자동처리예정)</span>
                   <span class="red-font">공연·전시 : 일정표현 방식 결정 / 구현 [ex.달력]</span>
-                  <span class="red-font">회원서비스 - 개인정보수정</span>
-                  <span class="red-font">회원서비스 - 회원탈퇴</span>
                   <span class="red-font">기업회원가입</span>
                   <span class="red-font">유료회원가입-결제api적용</span>
                   <span class="red-font">SNS계정 회원가입</span>
                   <span class="red-font">SNS계정 로그인</span>
-                  <span class="red-font">JWT (?)</span>
-                  <!-- https://wnwngus.tistory.com/65 -->
+                  <span class="red-font">JWT (?)</span> <!-- https://wnwngus.tistory.com/65 -->
   
                   <hr>
 
@@ -66,27 +63,31 @@
                         -공지작성페이지 [summernote-lite 사용]
                         -공지사항 상세페이지
               <strong>- 기능</strong>
-                  Spring Cloud Config 적용
-                  <!-- https://madplay.github.io/post/introduction-to-spring-cloud-config -->
-                  Spring Security 적용
+                  Spring Cloud Config 적용 <!-- https://madplay.github.io/post/introduction-to-spring-cloud-config -->
+                  Spring Security 적용 <!-- https://codevang.tistory.com/273?category=857253 -->
                     - csrf() disable처리
                     - customfailhandler적용
                   사이트 header/footer
                     - 전체메뉴 보이기/숨기기 JS fix (jquery toggle(300ms) 애니메이션 적용)
-                  회원가입 [무료회원 / 일반, 싹틔우미, 노블회원]
-                    - [임시] 인증번호 문자발송 + 일치여부확인
-                    - 주소검색 다음api적용
-                    - 회원가입 시 정규화&유효성 체크
-                  로그인&로그아웃
-                    - [임시] 메인페이지에 로그인된 회원정보 표시
-                    - 로그인 실패 시 alert 추가
+                  회원서비스
+                    - 회원가입 [무료회원 / 일반, 싹틔우미, 노블회원]
+                      - [임시] 인증번호 문자발송 + 일치여부확인
+                      - 주소검색 다음api적용
+                      - 회원가입 시 정규화&유효성 체크
+                    - 로그인&로그아웃
+                      - [임시] 메인페이지에 로그인된 회원정보 표시
+                      - 로그인 실패 시 alert 추가
+                    - 회원정보 관리
+                      - 회원정보 조회 전 비밀번호 재요청으로 재검증
+                      - 회원정보 수정
+                      - 회원탈퇴
                   공지사항
                     - 접근에 권한 불필요
                     - admin role 회원만 작성/수정/삭제 가능
                     - 리스트부분 비동기방식 적용
                     - 조건조회 : 카테고리별 / 내용검색 / 제목검색
                     - 게시글 : 등록(POST) / 조회(GET) / 수정(PUT) / 삭제(DELETE)
-                    - 파일 첨부(멀티플) / 다운로드 / 삭제
+                    - 썸머노트영역 외 파일 첨부(멀티플) / 다운로드 / 삭제
           </pre>
         </div>
       </main>

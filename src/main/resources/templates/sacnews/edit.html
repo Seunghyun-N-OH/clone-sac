@@ -56,8 +56,16 @@
                 </div>
                 <textarea id="summernote" name="content" th:text="${notice.content}"></textarea>
               <!-- Content(including image file) above ##########################################-->
+                <div class="pre-existing-attachs">
+                  <ul th:if="${attachments}">
+                    <li th:each="a : ${attachments}">
+                      <a th:href="@{|/sacnews/notice/${notice.no}/attach?fno=${a.fno}|}">[[${a.fileName}]]</a><a href="#">삭제하기</a>
+                    </li>
+                  </ul>
+                </div>
+              <!-- Pre-existing Attachment(s) above ########################################## -->
                 <div class="submitLine">
-                  <input type="file" name="attachment" id="attach">
+                  <input id="attach" multiple="multiple" type="file" name="attach">
               <!-- Attachment above ##########################################-->
                   <div class="drafterNbutton">
                     <span class="red-font">[수정 시 작성자명이 변경됩니다.]</span>

@@ -106,3 +106,81 @@ main > .themeArea {
   color: #555;
   border: 1px solid #555;
 }
+
+.contentArea > h3.microTitle {
+  font-size: 24px;
+  color: #333333;
+  font-weight: 500;
+}
+
+.contentArea > h3.microTitle::after {
+  content: "";
+  display: inline-block;
+  height: 7px;
+  width: 40px;
+  background: #ed1839;
+  top: -25px;
+  left: -145px;
+  position: relative;
+}
+
+.contentArea > .overview {
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
+  padding: 40px 40px 40px 40px;
+  justify-content: space-between;
+  height: 20vh;
+}
+
+.contentArea > .overview > div,
+.contentArea > .overview > form {
+  width: 50%;
+  height: 100%;
+}
+
+.contentArea > .overview .dataArea {
+  width: 100%;
+  height: 100%;
+}
+
+.contentArea > .overview > .inst {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inst > .innerTitle {
+  font-size: 20px;
+  color: #333333;
+  font-weight: 500;
+}
+
+.inst > .innerText {
+  font-size: 15px;
+  color: #484848;
+}
+
+.contentArea > .overview > form,
+.dataArea {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.dataArea > .checkInput {
+  width: 70%;
+  padding: 0.5rem;
+  height: 2.5rem;
+}
+
+.dataArea > .checkMe {
+  width: 20%;
+  height: 2.5rem;
+  margin-left: 3%;
+  color: #fff;
+  font-size: 15px;
+  background: #ed1839;
+  border: none;
+  cursor: pointer;
+}

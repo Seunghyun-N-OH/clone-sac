@@ -3,6 +3,15 @@
   <head>
     <th:block th:insert="/fragments/global::head-links"/>
     <link rel="stylesheet" href="/styles/pages/members/mypage.css"/>
+    <script src="/javascript/mypage/mypage.js"></script>
+    <script th:inline="javascript">
+      $(function(){
+        var error = '[[${error}]]';
+        if(error != "null"){
+          alert(error);
+        }
+      })
+    </script>
     <title>Document</title>
   </head>
   <body>
@@ -74,8 +83,22 @@
             </div>
 
             <!-- mypage > myinfoEnter Area ############################################ -->
-            <div class="contentArea"></div>
-
+            <div class="contentArea">
+              <h3 class="microTitle">개인정보관리</h3>
+              <div class="overview">
+                <div class="inst">
+                  <span class="innerTitle">비밀번호 확인</span>
+                  <span class="innerText">개인정보보호를 위하여 비밀번호를 다시 한 번 확인합니다.</span>
+                  <span class="innerText">비밀번호는 타인에게 노출되지 않도록 주의 해주시기 바랍니다.</span>
+                </div>
+                <form action="/member/mypage/myinfoEdit" method="post" id="toEditForm">
+                  <div class="dataArea">
+                    <input type="password" name="pw" id="pw" class="checkInput" placeholder="비밀번호를 입력하세요.">
+                    <button type="button" onclick="toEditPage()" class="checkMe" >확인</button>
+                  </div>
+                </form>
+              </div>
+            </div>
             <!-- end of maincontents ############################################### -->
           </div>
         </section>

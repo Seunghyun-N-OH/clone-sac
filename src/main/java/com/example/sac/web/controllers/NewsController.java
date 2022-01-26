@@ -110,9 +110,10 @@ public class NewsController {
     // TODO 파일수정 포함시키기
     // admin전용, 공지 수정할거 다 수정하고 수정적용 버튼 누르면 할일
     @RequestMapping(value = "/admin/sacnews/notice", method = RequestMethod.PUT)
-    public String editSubmit(NoticeD data, String publisher) {
+    public String editSubmit(NoticeD data, MultipartHttpServletRequest htsr, String publisher) {
         data.setDrafter(MembershipD.builder().userId(publisher).build());
-        ns.editNotice(data);
+        Set<MultipartFile> att = Set.copyOf(htsr.getFiles("attach"));
+        ns.editNotice(data, att);
         return "redirect:/sacnews/notice/" + data.getNo();
     }
 

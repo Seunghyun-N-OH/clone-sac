@@ -15,11 +15,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 @Getter
 @Table(name = "member_entity")
 public class Membership {
@@ -37,10 +39,10 @@ public class Membership {
     // [to be added : corp]
 
     @Id
+    @Column(updatable = false)
     private String userId;
     @Column(nullable = false)
     private String userPw;
-    // TODO create & check rule
 
     @Column(nullable = false)
     private String name;
