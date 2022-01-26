@@ -42,6 +42,10 @@ dependencies {
 //	MVC
 	implementation 'org.springframework:spring-webmvc:5.3.15'
 
+// cloud-config
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.6.3'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config:3.1.0'
+
 }
 
 test {

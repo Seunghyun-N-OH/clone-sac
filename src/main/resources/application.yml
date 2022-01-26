@@ -1,0 +1,3 @@
+spring:
+  config:
+    import: optional:configserver:http://13.209.186.39:8998/

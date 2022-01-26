@@ -10,15 +10,17 @@ var pwRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])
             $("#findPostal").click(startDaumAPI);
             $("#postal").click(startDaumAPI);
             $("#address1").click(startDaumAPI);
+            $("#useridInput").change(function(){
+                $("#idverified").val('n');
+            });
         })
 
         function nextPageCheck(){
             if(!genderCheck()){
                 return false;
             }
-            if(!checkIdAvailability()){
-                alert(checkIdAvailability());
-                alert("아이디를 다시 확인 후 중복확인을 해주세요");
+            if($("#idverified").val()==='n') {
+                alert("아이디 중복여부를 확인해주세요.");
                 return false;
             }
             if(!pwRuleCheck()){
@@ -166,6 +168,7 @@ var pwRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])
             $("#idCheckResult").css("color", "red");
             $("#idCheckResult").show();
             $("#idCheckResult").text("사용할 수 없는 아이디형식입니다. 8~16자, 영소문자,숫자 만 입력가능");
+            $("#idverified").val('n');
             return false;
         }
 
@@ -179,19 +182,20 @@ var pwRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])
                 $("#idLine").css("height" , "5rem");
                 $("#idName").css("height" , "5rem");
                 $("#idValue").css("height" , "5rem");
+                
                 if(res){      // returns true if ID is available
                     $("#idCheckResult").show();
                     $("#idCheckResult").css("color", "green");
                     $("#idCheckResult").text("사용 가능한 아이디입니다.");
-                    return true;
+                    $("#idverified").val('y');
                 } else {                // if not, returns false
                     $("#idCheckResult").show();
                     $("#idCheckResult").css("color", "red");
                     $("#idCheckResult").text("이미 사용중인 아이디입니다.");
+                    alert("이미 사용중인 아이디입니다.");
+                    $("#idverified").val('n');
                     return false;
                 }
             }
         })
-
-
     }
