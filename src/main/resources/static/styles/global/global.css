@@ -6,6 +6,70 @@
   font-family: "NanumSquare", sans-serif;
 }
 
+/* TODO delete###################### */
+.index-temporal * {
+  color: #555;
+}
+
+.index-table,
+.done {
+  width: 70vw;
+}
+
+.index-table *,
+.done * {
+  color: #555;
+  text-align: center;
+  margin: 1px;
+}
+
+.index-table tr,
+.index-table td,
+.index-table th {
+  border: 1px solid rgb(13, 0, 194);
+}
+
+.done tr,
+.done td,
+.done th {
+  border: 1px solid rgb(177, 106, 0);
+}
+
+.column1,
+.column2,
+.column3,
+.column4,
+.column5,
+.column6 {
+  padding: 1rem;
+}
+
+.index-table .column1,
+.index-table .column6,
+.index-table .column4 {
+  width: 10%;
+}
+
+.index-table .column2,
+.index-table .column3 {
+  width: 15%;
+}
+
+.index-table .column5 {
+  width: 40%;
+}
+
+.index-table .microList {
+  margin-left: 5%;
+}
+
+.index-table .microList li {
+  list-style: circle;
+  width: 100%;
+  text-align: left;
+}
+
+/* TODO ############################# */
 .flex {
   display: flex;
 }
