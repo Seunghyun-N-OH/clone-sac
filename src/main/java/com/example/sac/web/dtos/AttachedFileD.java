@@ -1,6 +1,6 @@
 package com.example.sac.web.dtos;
 
-import com.example.sac.domain.entities.AttachedFile;
+import com.example.sac.domain.entities.AttachedFileE;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +18,8 @@ public class AttachedFileD {
     private String fileContentType;
     private NoticeD notice;
 
-    public AttachedFile toEntity() {
-        return AttachedFile.builder()
+    public AttachedFileE toEntity() {
+        return AttachedFileE.builder()
                 .fno(this.getFno())
                 .fileName(this.getFileName())
                 .filePath(this.getFilePath())

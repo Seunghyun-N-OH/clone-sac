@@ -10,9 +10,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.sac.domain.entities.AttachedFile;
-import com.example.sac.domain.entities.Notice;
+import com.example.sac.domain.entities.AttachedFileE;
+import com.example.sac.domain.entities.NoticeE;
 import com.example.sac.web.dtos.AttachedFileD;
+import com.example.sac.web.dtos.EventImageD;
 import com.google.gson.JsonObject;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -37,10 +38,10 @@ public class UpAndDownFile {
     private static long fileNo_sub = Integer.toUnsignedLong(LocalDate.now().getDayOfYear());
 
     // 공지사항 등록 시 파일 업로드할 때
-    public static AttachedFileD uploadFile(MultipartFile a, Notice data) {
+    public static AttachedFileD uploadFile(MultipartFile a, NoticeE data) {
         AttachedFileD c;
         try {
-            String newFileName = Long.toString(fileNo + fileNo_sub) + a.getOriginalFilename();
+            String newFileName = Long.toString(fileNo + fileNo_sub) + "_notice_" + a.getOriginalFilename();
             // File dest_dir = cpr.getFile(); // TODO local
             // a.transferTo(new File(dest_dir, newFileName)); // TODO local
             a.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
@@ -59,7 +60,7 @@ public class UpAndDownFile {
     }
 
     // 파일 받고싶어하면
-    public static void downFile(HttpServletResponse response, AttachedFile afile)
+    public static void downFile(HttpServletResponse response, AttachedFileE afile)
             throws FileNotFoundException, IOException {
         String fileName = afile.getFileName();
         String url = localRoot + afile.getFilePath() + fileName;
@@ -92,8 +93,8 @@ public class UpAndDownFile {
     }
 
     // 어떤 파일을 삭제하고싶으면 일단 사이즈 상관없이 리스트로 받아서
-    public static void deleteFiles(List<AttachedFile> a) {
-        for (AttachedFile b : a) { // 그 리스트를 하나씩 뜯어서
+    public static void deleteFiles(List<AttachedFileE> a) {
+        for (AttachedFileE b : a) { // 그 리스트를 하나씩 뜯어서
             File c = new File(localRoot + b.getFilePath() + b.getFileName());
             if (c.exists())
                 // 그 정보로 파일 찾아본다음 있으면
@@ -108,7 +109,7 @@ public class UpAndDownFile {
         // 제이슨오브젝트 빈 객체 하나 만들어서
         JsonObject jo = new JsonObject();
         // ClassPathResource cpr = new ClassPathResource("static" + p); // TODO local
-        String newFilename = Long.toString(fileNo++ + fileNo_sub) + a.getOriginalFilename();
+        String newFilename = Long.toString(fileNo++ + fileNo_sub) + "_summernote_" + a.getOriginalFilename();
 
         try {
             // File fileRoot = cpr.getFile(); // TODO local
@@ -127,6 +128,26 @@ public class UpAndDownFile {
 
         // 이제 성공이건 실패건 responseCode가 들어있는 제이슨오브젝트를 스트링형태로 바꿔서 리턴
         return jo.toString();
+    }
+
+    // 행사정보 등록 전용
+    public static EventImageD upEventImage(MultipartFile a) {
+        EventImageD c;
+        try {
+            String newFileName = Long.toString(fileNo + fileNo_sub) + "_show_" + a.getOriginalFilename();
+            // File dest_dir = cpr.getFile(); // TODO local
+            // a.transferTo(new File(dest_dir, newFileName)); // TODO local
+            a.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
+            c = EventImageD.builder()
+                    .fileName(newFileName)
+                    .filePath(p)
+                    .build();
+            // 지정해둔 로컬경로에 파일 업로드하고, 그 파일에 대한 정보들 담은 dto 만들어서 리턴
+            return c;
+        } catch (IllegalStateException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

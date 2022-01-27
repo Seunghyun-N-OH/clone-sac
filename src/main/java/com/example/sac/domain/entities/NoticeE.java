@@ -34,7 +34,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 @Table(name = "notice_board")
-public class Notice {
+public class NoticeE {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long no;

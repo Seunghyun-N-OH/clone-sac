@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <th:block th:insert="/fragments/global::head-links" />
+    <link rel="stylesheet" href="/styles/pages/show/list.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <section class="themeArea">
+          <h4>&nbsp;</h4>
+          <h3>공연·전시</h3>
+        </section>
+        <section class="navigator">
+          <div class="navsizebox">
+            <div class="navigate">
+              <a class="navHome" href="/"
+                ><img src="/imgsrc/assets/cwac-menu_icon01.png" alt=""
+              /></a>
+              <a class="navSelect" href="#">공연·전시</a>
+              <a class="navSelect" href="#">진행/예정 프로그램</a>
+            </div>
+            <div class="actions">
+              <a class="printicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon03.png" alt=""
+              /></a>
+              <a class="shareicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon04.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </section>
+        <section class="pageContents">
+          <div class="pageTitle">
+            <p>진행/예정 프로그램</p>
+          </div>
+          <div class="maincontents">
+            <!-- TODO 구현후 ajax로 ############################################################## -->
+            <div class="showList">
+              <table>
+                <thead>
+                  <tr class="tableh">
+                    <th class="column1">행사명</th>
+                    <th class="column2">기간</th>
+                    <th class="column3">장소</th>
+                    <th class="column4"><!--예매상태--></th>
+                  </tr>
+                </thead>
+              </table>
+              <!-- <table>      // TODO delete after testing
+                <tbody>
+                  <tr class="tablel">
+                    <td class="column1">테스트행사명</td>
+                    <td class="column2">테스트기간</td>
+                    <td class="column3">테스트장소</td>
+                    <td class="column4">안팔아요<!--예매상태--><!--</td>
+                  </tr>
+                </tbody>
+              </table> -->
+              <table th:if="${shows}">
+                <tbody>
+                  <tr class="tablel" th:each="a : ${shows}">
+                    <td class="column1">
+                      [[${a.eventTitle}]]
+                      <span th:if="${a.sacPlanned} eq y">SAC기획</span>
+                      <span th:if="${a.sacPlanned} eq c">공동주최</span>
+                    </td>
+                    <td th:if="${a.eventGroup} eq 'exhibition'" class="column2">
+                      <!-- 전시일 때 ######################## -->
+                      [[${a.eventTime}]]
+                    </td>
+                    <td th:if="${a.eventGroup} eq 'show'" class="column2">
+                      <!-- 공연일 때 ######################### -->
+                      기간
+                    </td>
+                    <td class="column3">[[${a.venue1}]]</td>
+                    <td th:if="${a.onSale} eq 's'" class="column4">
+                      현장판매
+                      <!--판매상태 's'-->
+                    </td>
+                    <td th:if="${a.onSale} eq 'o'" class="column4">
+                      <a href="#"> 예약하기<!--판매상태 'o'--> </a>
+                    </td>
+                    <td th:if="${a.onSale} eq 'p'" class="column4">
+                      예정<!--판매상태 'p'-->
+                    </td>
+                    <td th:if="${a.onSale} eq 'c'" class="column4">
+                      종료<!--판매상태 'c'-->
+                    </td>
+                    <td th:if="${a.onSale} eq 'i'" class="column4">
+                      초대<!--판매상태 'i'-->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- 여기까지 ######################################################################## -->
+          </div>
+        </section>
+      </main>
+    </th:block>
+  </body>
+</html>

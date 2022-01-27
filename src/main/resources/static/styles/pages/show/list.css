@@ -1,0 +1,52 @@
+main > .themeArea {
+  background: url("/imgsrc/theme-show.jpg") no-repeat;
+}
+
+.pageContents * {
+  color: #555;
+}
+
+.showList,
+.showList > table {
+  width: 100%;
+}
+
+tr {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  text-align: left;
+}
+
+.showList .column1 {
+  width: 40%;
+}
+.showList .column2 {
+  width: 30%;
+}
+.showList .column3 {
+  width: 20%;
+}
+.showList .column4 {
+  width: 10%;
+}
+
+.tableh {
+  background-color: #f0f0f0;
+  font-size: 16px;
+  color: #333;
+  border-bottom: 1px solid #a0a0a0;
+  border-top: 2px solid #a0a0a0;
+}
+
+.tablel {
+  font-size: 16px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+input,
+select {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}

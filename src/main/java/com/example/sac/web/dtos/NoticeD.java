@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.example.sac.SecuritiyThings.entities.Membership;
-import com.example.sac.domain.entities.Notice;
+import com.example.sac.domain.entities.NoticeE;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,8 +32,8 @@ public class NoticeD {
     private LocalDateTime cTime;
     private LocalDateTime eTime;
 
-    public Notice toEntity() {
-        return Notice.builder()
+    public NoticeE toEntity() {
+        return NoticeE.builder()
                 .no(this.getNo())
                 .category(this.getCategory())
                 .drafter(Membership.builder().userId(this.drafter.getUserId()).build())

@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class AttachedFile {
+public class AttachedFileE {
     @Id
     private long fno; // 파일 하나당 생기는 id
     @Column(nullable = false)
@@ -31,7 +31,7 @@ public class AttachedFile {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
-    private Notice notice; // 등록된다면, 이게 어떤 공지의 첨부파일인지 알고있을 그 공지사항의 id
+    private NoticeE notice; // 등록된다면, 이게 어떤 공지의 첨부파일인지 알고있을 그 공지사항의 id
 
     // 불러올때 dto를 들고가기 위해 dto로 바꿔주는 함수
     public AttachedFileD toDto() {

@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.sac.SecuritiyThings.repositories.NoticeR;
-import com.example.sac.domain.entities.AttachedFile;
-import com.example.sac.domain.entities.Notice;
+import com.example.sac.domain.entities.AttachedFileE;
+import com.example.sac.domain.entities.NoticeE;
 import com.example.sac.domain.repositories.AttachedFileR;
 import com.example.sac.domain.services.NoticeS;
 import com.example.sac.domain.services.functions.UpAndDownFile;
@@ -36,7 +36,7 @@ public class NoticeSI implements NoticeS {
     // 공지사항들중에 중요한애들은 카테고리분류 이런거 상관없이 항상 맨위에 보여질 것이라
     // 반복적으로 쓰이니 따로 함수작성
     public List<NoticeLD> getImportantList() {
-        List<Notice> importantTmp = nr.findByImportantOrderByEffectiveDateBDesc('y');
+        List<NoticeE> importantTmp = nr.findByImportantOrderByEffectiveDateBDesc('y');
         if (!importantTmp.isEmpty()) {
             return importantTmp.stream().map(a -> a.toDto().toListDto()).collect(Collectors.toList());
         } else {
@@ -50,7 +50,7 @@ public class NoticeSI implements NoticeS {
     // 공지사항 새로 작성
     @Override
     public void postNewNotice(NoticeD data, Set<MultipartFile> attachedFile) {
-        Notice e = (nr.save(data.toEntity())); // 우선 첨부파일 제외 공지사항내용 save, 저장된 entity 리턴받아두고
+        NoticeE e = (nr.save(data.toEntity())); // 우선 첨부파일 제외 공지사항내용 save, 저장된 entity 리턴받아두고
         for (MultipartFile ab : attachedFile) { // response에서 가져온 attachedFile 을 하나씩 까봐서
             if (!ab.getOriginalFilename().isEmpty()) { // null상태인지 확인 (첨부파일 없으면 null값인, 길이1 List)
                 AttachedFileD a = UpAndDownFile.uploadFile(ab, e);
@@ -71,7 +71,7 @@ public class NoticeSI implements NoticeS {
         }
 
         // 이제 안중요한애들 불러서 모델에 넣어줌
-        List<Notice> normalNotice = nr.findByImportantOrderByEffectiveDateBDesc('n');
+        List<NoticeE> normalNotice = nr.findByImportantOrderByEffectiveDateBDesc('n');
         if (!normalNotice.isEmpty()) {
             m.addAttribute("noticelist",
                     normalNotice.stream().map(a -> a.toDto().toListDto()).collect(Collectors.toList()));
@@ -85,21 +85,21 @@ public class NoticeSI implements NoticeS {
     @Override
     public String noticeDetail(long notice, Model m) {
         // 상세페이지에서 다음글 이동을 위한 다음글 dto, 있으면가져감
-        Optional<Notice> next = nr.findById(notice + 1);
+        Optional<NoticeE> next = nr.findById(notice + 1);
         if (next.isPresent()) {
             m.addAttribute("next", next.get().toDto().toListDto());
         }
         // 상세페이지에서 이전글 이동을 위한 이전글 dto, 이거도 있으면 가져감
-        Optional<Notice> previous = nr.findById(notice - 1);
+        Optional<NoticeE> previous = nr.findById(notice - 1);
         if (previous.isPresent()) {
             m.addAttribute("previous", previous.get().toDto().toListDto());
         }
 
         // 지금 보려는 글의 모든정보 불러다가 모델에 넣어서 페이지이동
-        Optional<Notice> raw = nr.findById(notice);
+        Optional<NoticeE> raw = nr.findById(notice);
         if (raw.isPresent()) { // 혹시나 페이지 이동하는사이 글 삭제되어서 없으면 다시 목록으로
             m.addAttribute("notice", raw.get().toDto());
-            List<AttachedFile> attachments = afr.findByNoticeNo(notice);
+            List<AttachedFileE> attachments = afr.findByNoticeNo(notice);
             if (!attachments.isEmpty()) {
                 m.addAttribute("attachedFiles", attachments.stream().map(a -> a.toDto()).collect(Collectors.toList()));
             }
@@ -120,7 +120,7 @@ public class NoticeSI implements NoticeS {
 
         // 요청받은 카테고리에 해당하는 글만 골라서 가져가기
         if (!nr.findByCategoryOrderByEffectiveDateBDesc(cat).isEmpty()) {
-            List<Notice> raw = nr.findByCategoryOrderByEffectiveDateBDesc(cat);
+            List<NoticeE> raw = nr.findByCategoryOrderByEffectiveDateBDesc(cat);
             m.addAttribute("noticelist", raw.stream().map(a -> a.toDto().toListDto()).collect(Collectors.toList()));
         }
 
@@ -160,10 +160,10 @@ public class NoticeSI implements NoticeS {
     // TODO 파일도 수정해야하니 같이 가져가기
     @Override
     public String noticeEdit(long targetNo, Model m) {
-        Optional<Notice> raw = nr.findById(targetNo);
+        Optional<NoticeE> raw = nr.findById(targetNo);
         if (raw.isPresent()) { // 이거도 혹시나 불러오는데 그사이 '다른admin'이 삭제할까봐 체크하고
             m.addAttribute("notice", raw.get().toDto());
-            List<AttachedFile> a = afr.findByNoticeNo(targetNo);
+            List<AttachedFileE> a = afr.findByNoticeNo(targetNo);
             if (!a.isEmpty()) {
                 m.addAttribute("attachments", a.stream().map(b -> b.toDto()).collect(Collectors.toList()));
             }
@@ -179,7 +179,7 @@ public class NoticeSI implements NoticeS {
     public void editNotice(NoticeD data, Set<MultipartFile> attachedFile) {
         // 바뀐 정보가 포함된 DTO를 entity로 바꿔서 save()함수 사용해 update
         // TODO 파일수정 포함시키기
-        Notice e = nr.save(data.toEntity());
+        NoticeE e = nr.save(data.toEntity());
         for (MultipartFile ab : attachedFile) { // response에서 가져온 attachedFile 을 하나씩 까봐서
             if (!ab.getOriginalFilename().isEmpty()) { // null상태인지 확인 (첨부파일 없으면 null값인, 길이1 List)
                 AttachedFileD a = UpAndDownFile.uploadFile(ab, e);
@@ -208,7 +208,7 @@ public class NoticeSI implements NoticeS {
     @Override
     public void downService(long nn, long fn, HttpServletResponse response) throws FileNotFoundException, IOException {
         // 어떤 공지의 어떤 파일인지 찾아와서
-        Optional<AttachedFile> raw = afr.findByFnoAndNoticeNo(fn, nn);
+        Optional<AttachedFileE> raw = afr.findByFnoAndNoticeNo(fn, nn);
         if (raw.isPresent()) {
             UpAndDownFile.downFile(response, raw.get());
             // 그 파일 내려주기

@@ -1,0 +1,50 @@
+table,
+tbody,
+tr {
+  width: 100%;
+}
+
+.tableTopLine {
+  border-top: 2px solid #ddd;
+  background: #a0a0a0a0;
+}
+
+.oneLine {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.oneLine .nameBlock {
+  width: 30%;
+  text-align: center;
+  padding: 1rem;
+  border-right: 1px solid #eee;
+}
+
+.oneLine .valueBlock {
+  width: 60%;
+  padding: 1rem 1rem 1rem 2rem;
+}
+
+select {
+  background-color: unset;
+  color: #333;
+}
+
+input.full-length {
+  width: 80%;
+}
+
+input.half-length {
+  width: 35%;
+}
+
+.inputGenerator {
+  padding: 0.5rem 1rem;
+  background-color: unset;
+  border-radius: 5px;
+  border-color: #dd0000;
+}

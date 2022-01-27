@@ -2,20 +2,20 @@ package com.example.sac.SecuritiyThings.repositories;
 
 import java.util.List;
 
-import com.example.sac.domain.entities.Notice;
+import com.example.sac.domain.entities.NoticeE;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface NoticeR extends JpaRepository<Notice, Long> {
+public interface NoticeR extends JpaRepository<NoticeE, Long> {
 
-    List<Notice> findByImportantOrderByEffectiveDateBDesc(char important);
+    List<NoticeE> findByImportantOrderByEffectiveDateBDesc(char important);
 
-    List<Notice> findByCategoryOrderByEffectiveDateBDesc(String cat);
+    List<NoticeE> findByCategoryOrderByEffectiveDateBDesc(String cat);
 
-    List<Notice> findByContentContainingOrTitleContainingOrderByEffectiveDateBDesc(String content, String title);
+    List<NoticeE> findByContentContainingOrTitleContainingOrderByEffectiveDateBDesc(String content, String title);
 
-    List<Notice> findByContentContainingOrderByEffectiveDateBDesc(String content);
+    List<NoticeE> findByContentContainingOrderByEffectiveDateBDesc(String content);
 
-    List<Notice> findByTitleContainingOrderByEffectiveDateBDesc(String title);
+    List<NoticeE> findByTitleContainingOrderByEffectiveDateBDesc(String title);
 
 }
