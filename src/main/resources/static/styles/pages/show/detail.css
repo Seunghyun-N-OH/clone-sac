@@ -1,0 +1,85 @@
+main > .themeArea {
+  background: url("/imgsrc/assets/show/show-detail-theme.gif") no-repeat;
+  height: 600px;
+}
+
+.pageContents * {
+  color: #555;
+}
+
+main > .themeArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: unset;
+  text-align: unset;
+}
+
+.likeBtn {
+  background: #383737;
+  border: 1px solid #383737;
+  font-size: 13px;
+  color: #fff;
+  border-radius: 15px;
+}
+
+.basicInfoArea {
+  display: flex;
+  max-width: 1280px;
+  justify-content: space-between;
+  width: 100%;
+}
+.basicInfoArea > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+div.InfoArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+div.PosterArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.col1 {
+  width: 15%;
+  color: #a3a3a3;
+}
+
+.col2 {
+  width: 50%;
+}
+
+.eventTitle {
+  width: 100%;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+.PosterArea > button {
+  width: 220px;
+  height: 53px;
+  font-size: 17px;
+  background: #ed1839;
+  color: #fff;
+  border: none;
+}
+
+thead > td,
+thead > tr {
+  padding: 1rem 0;
+}
+
+.tableL > .col1 {
+  border-top: 1px solid #2e2e2e;
+  padding: 0.15rem 0;
+}

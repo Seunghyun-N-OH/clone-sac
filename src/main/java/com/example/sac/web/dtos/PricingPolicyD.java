@@ -17,6 +17,7 @@ public class PricingPolicyD {
     private long priceId;
     private String subject;
     private int price;
+    private EventD event;
 
     public PricingPolicyE toEntity() {
         return PricingPolicyE.builder()

@@ -7,10 +7,12 @@ import com.example.sac.web.dtos.EventD;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ShowController {
@@ -35,9 +37,12 @@ public class ShowController {
     @RequestMapping(value = "/admin/show/register", method = RequestMethod.POST)
     public String submitRegister(EventD a, @RequestParam List<String> subject, @RequestParam List<Integer> price,
             MultipartFile poster_file, MultipartFile detailImage_file) {
-        System.out.println(poster_file.getSize());
-        System.out.println(detailImage_file.getSize());
         ss.registerEvent(a, subject, price, poster_file, detailImage_file);
         return "redirect:/show/show_list";
+    }
+
+    @RequestMapping(value = "/show/{eventId}", method = RequestMethod.GET)
+    public String toDetail(@PathVariable long eventId, Model m, RedirectAttributes ra) {
+        return ss.getShowDetail(eventId, m, ra);
     }
 }

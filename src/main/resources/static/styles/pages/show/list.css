@@ -20,12 +20,13 @@ tr {
 
 .showList .column1 {
   width: 40%;
+  text-overflow: ellipsis;
 }
 .showList .column2 {
-  width: 30%;
+  width: 20%;
 }
 .showList .column3 {
-  width: 20%;
+  width: 30%;
 }
 .showList .column4 {
   width: 10%;
@@ -40,13 +41,60 @@ tr {
 }
 
 .tablel {
-  font-size: 16px;
+  font-size: 15px;
   color: #333;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
 }
 
 input,
 select {
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
+}
+
+.red-border {
+  padding: 0.25rem;
+}
+
+.planner {
+  margin-left: 1rem;
+}
+
+.onlinePurchase {
+  background-color: #ed1839;
+  color: #fff;
+  border: 1px solid #424242;
+}
+
+.inviteOnly {
+  background-color: #7f3db8;
+  color: #fff;
+  border: 1px solid #424242;
+}
+
+.upComming {
+  background-color: #3960a5;
+  color: #fff;
+  border: 1px solid #424242;
+}
+
+.closed {
+  background-color: #e9e9e9;
+  color: #000;
+  border: 1px solid #424242;
+}
+
+.onSitePurchase {
+  background-color: #38b888;
+  color: #fff;
+  border: 1px solid #424242;
+}
+
+.salesStatus {
+  display: inline-block;
+  width: 5rem;
+  padding: 0.25rem 0;
+  text-align: center;
 }

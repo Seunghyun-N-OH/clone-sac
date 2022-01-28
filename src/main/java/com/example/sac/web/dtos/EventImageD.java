@@ -16,7 +16,7 @@ import lombok.ToString;
 public class EventImageD {
     private long imageId; // 이미지파일 id
     private String fileName; // 파일이름
-    private String filePath; // 경로+이름
+    private String filePath; // 경로(파일이름없음)
 
     public EventImageE toEntity() {
         return EventImageE.builder()

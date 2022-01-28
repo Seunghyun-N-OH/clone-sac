@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <th:block th:insert="/fragments/global::head-links" />
+    <link rel="stylesheet" href="/styles/pages/show/detail.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <section class="themeArea">
+          <div class="basicInfoArea">
+            <!-- 행사정보 ######################################### -->
+            <div class="InfoArea">
+                <table style="display:flex;justify-content: left; width : 100%;">
+                    <thead>
+                        
+                        <td>
+                            <button class="likeBtn" type="button">찜하기</button>
+                            
+                            <span
+                                class="planner"
+                                th:unless="${event.sacPlanned} eq 'n'"
+                                >SAC기획</span
+                                >
+                        </td>
+                        <tr>
+                            <td class="eventTitle">[[${event.eventTitle}]]</td>
+                        </tr>
+                    </thead>
+                </table>
+              <table style="font-size : 14px;">
+                <tbody>
+                  <tr class="tableL">
+                    <td class="col1">기간</td>
+                    <td class="col2" th:if="${event.openDate}">
+                      [[${event.openDate}]] ~ [[${event.finDate}]]
+                    </td>
+                    <td class="col2" th:if="${event.eventTime}">
+                      <!-- TODO Lazy Loading 처리한 후 행사시간 출력태그 작성 + substring 처리-->
+                    </td>
+                  </tr>
+                  <tr class="tableL">
+                    <td class="col1">시간</td>
+                    <!-- <td class="col2" th:if="${event.eventTime}"> -->
+                      <!-- TODO Lazy Loading 처리한 후 행사시간 출력태그 작성 + substring 처리 -->
+                    <!-- </td> -->
+                    <td class="col2" th:if="${event.openTime}">
+                        [[${event.openTime}]] ~ [[${event.closeTime}]] (※매주 월요일 휴관)
+                    </td>
+                  </tr>
+                  <tr class="tableL" th:if="${event.lastEntrance}">
+                    <td class="col1">입장마감</td>
+                    <td class="col2">
+                      [[${event.lastEntrance}]]
+                    </td>
+                  </tr>
+                  <tr class="tableL">
+                    <td class="col1">장소</td>
+                    <td class="col2">
+                      <span>
+                        [[${event.venue1}]] [[${event.venue2}]]
+                        [[${event.venue3}]]
+                      </span>
+                    </td>
+                  </tr>
+                  <tr class="tableL" th:if="${event.requiredAge}">
+                    <td class="col1">입장연령</td>
+                    <td class="col2">
+                      <span>[[${event.requiredAge}]]</span>
+                    </td>
+                  </tr>
+                  <tr class="tableL" th:if="${event.runningTime}">
+                    <td class="col1" style="font-size:12px">관람시간(분)</td>
+                    <td class="col2">[[${event.runningTime}]]</td>
+                  </tr>
+                  <tr class="tableL" th:if="${event.pricingPolicy}">
+                    <td class="col1">가격</td>
+                    <td class="col2">
+                      <span th:each="a : ${event.pricingPolicy}">
+                        [[${a.subject}]] [[${a.price}]]원 /
+                      </span>
+                    </td>
+                  </tr>
+                  <tr class="tableL" th:if="${event.organizer}">
+                    <td class="col1">주최</td>
+                    <td class="col2">
+                      <span th:each="a : ${event.organizer}"> [[${a}]], </span>
+                    </td>
+                  </tr>
+                  <tr class="tableL" th:if="${event.host}">
+                    <td class="col1">주관</td>
+                    <td class="col2">
+                      <span th:each="a : ${event.host}"> [[${a}]], </span>
+                    </td>
+                  </tr>
+                  <tr class="tableL" th:if="${event.sponsor}">
+                    <td class="col1">후원</td>
+                    <td class="col2">
+                      <span th:each="a : ${event.sponsor}"> [[${a}]], </span>
+                    </td>
+                  </tr>
+                  <tr class="tableL" th:if="${event.contact}">
+                    <td class="col1" style="border-bottom : 1px solid #2e2e2e">문의</td>
+                    <td class="col2">
+                      <span> [[${event.contact}]] </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="PosterArea">
+              <!-- onsale여부, default poster, poster -->
+              <img th:unless="${event.poster}" src="/imgsrc/noImage300x300.png" style="width:220px" alt="">
+              <img th:if="${event.poster}" th:src="${event.poster.filePath} + ${event.poster.fileName}" style="width:220px" alt="">
+              <button type="button" style="cursor : unset" th:if="${event.onSale} eq o">예매</button>
+              <button type="button" style="cursor : unset" th:if="${event.onSale} eq s">현장예매</button>
+              <button type="button" style="cursor : unset" th:if="${event.onSale} eq p">예정</button>
+              <button type="button" style="cursor : unset" th:if="${event.onSale} eq c">종료</button>
+              <button type="button" style="cursor : unset" th:if="${event.onSale} eq i">초대행사</button>
+            </div>
+            <!-- ######################################### 행사정보 끝 -->
+          </div>
+        </section>
+        <section class="navigator">
+          <div class="navsizebox">
+            <div class="navigate">
+              <a class="navHome" href="/"
+                ><img src="/imgsrc/assets/cwac-menu_icon01.png" alt=""
+              /></a>
+              <a class="navSelect" href="#">공연·전시</a>
+              <a class="navSelect" href="#">진행/예정 프로그램</a>
+            </div>
+            <div class="actions">
+              <a class="printicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon03.png" alt=""
+              /></a>
+              <a class="shareicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon04.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </section>
+        <section class="pageContents">
+          <div class="pageTitle">
+            <p>진행/예정 프로그램</p>
+          </div>
+          <div class="maincontents">
+            <!--  ############################################################## -->
+            <div th:if="${event.detailImage}">
+                <img th:src="${event.detailImage.filePath} + ${event.detailImage.fileName}" style="width : 100%" alt="">
+            </div>
+            <!--  ############################################################## -->
+          </div>
+        </section>
+      </main>
+    </th:block>
+  </body>
+</html>

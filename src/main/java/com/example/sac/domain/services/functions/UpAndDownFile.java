@@ -16,6 +16,7 @@ import com.example.sac.web.dtos.AttachedFileD;
 import com.example.sac.web.dtos.EventImageD;
 import com.google.gson.JsonObject;
 
+// import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.multipart.MultipartFile;
 
 // 주석 업데이트 220126
@@ -41,7 +42,7 @@ public class UpAndDownFile {
     public static AttachedFileD uploadFile(MultipartFile a, NoticeE data) {
         AttachedFileD c;
         try {
-            String newFileName = Long.toString(fileNo + fileNo_sub) + "_notice_" + a.getOriginalFilename();
+            String newFileName = Long.toString(fileNo++ + fileNo_sub) + "_notice_" + a.getOriginalFilename();
             // File dest_dir = cpr.getFile(); // TODO local
             // a.transferTo(new File(dest_dir, newFileName)); // TODO local
             a.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
@@ -134,7 +135,7 @@ public class UpAndDownFile {
     public static EventImageD upEventImage(MultipartFile a) {
         EventImageD c;
         try {
-            String newFileName = Long.toString(fileNo + fileNo_sub) + "_show_" + a.getOriginalFilename();
+            String newFileName = Long.toString(fileNo++ + fileNo_sub) + "_show_" + a.getOriginalFilename();
             // File dest_dir = cpr.getFile(); // TODO local
             // a.transferTo(new File(dest_dir, newFileName)); // TODO local
             a.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
