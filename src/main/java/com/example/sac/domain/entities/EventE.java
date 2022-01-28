@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -136,10 +137,9 @@ public class EventE {
                 .sponsor(this.getSponsor())
                 .requiredAge(this.getRequiredAge())
                 .onSale(this.getOnSale())
-                // .pricingPolicy(this.getPricingPolicy().stream().map(a ->
-                // a.toDto()).collect(Collectors.toList()))
-                // .poster(this.getPoster().toDto())
-                // .detailImage(this.getDetailImage().toDto())
+                .pricingPolicy(this.getPricingPolicy().stream().map(a -> a.toDto()).collect(Collectors.toList()))
+                .poster(this.getPoster().toDto())
+                .detailImage(this.getDetailImage().toDto())
                 .contact(this.getContact())
                 .openDate(this.getOpenDate())
                 .finDate(this.getFinDate())
