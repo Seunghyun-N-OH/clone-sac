@@ -1,3 +1,25 @@
-# spring:
-#   config:
-#     import: optional:configserver:http://13.209.186.39:8998/
+spring:
+  datasource:
+    url: jdbc:mariadb://s-database.cdrgph6avp84.ap-northeast-2.rds.amazonaws.com:3306/s_database1
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: admin
+    password: 20220117
+  cloud:
+    config:
+      enabled: false
+      uri: http://localhost:9296
+
+  # JPA settings
+  jpa:
+    open-in-view: false
+    show-sql: true
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+    hibernate:
+      use-new-id-generator-mappings: false
+      ddl-auto: update
+
+  # attached files' limit size
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
