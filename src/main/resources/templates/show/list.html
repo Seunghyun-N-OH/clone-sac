@@ -72,7 +72,7 @@
                     </td>
                     <td th:if="${a.eventGroup} eq 'exhibition'" class="column2">
                       <!-- 전시일 때 ######################## -->
-                      [[${a.eventTime}]]
+                      [[${a.openDate}]] ~ [[${a.finDate}]]
                     </td>
                     <td th:if="${a.eventGroup} eq 'show'" class="column2">
                       <!-- 공연일 때 ######################### -->
