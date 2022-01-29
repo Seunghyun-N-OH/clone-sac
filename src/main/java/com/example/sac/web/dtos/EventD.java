@@ -3,9 +3,10 @@ package com.example.sac.web.dtos;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.example.sac.domain.entities.EventE;
+import com.example.sac.domain.entities.EventImage;
+import com.example.sac.domain.entities.PricingPolicy;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,11 +46,11 @@ public class EventD {
     // 입장/관람 가능 나이제한
     private char onSale; // [s, o, p, c, i]
     // 입장권 판매상태 (s)ite, (o)nline, (p)lanned, (c)losed, (i)nvitational
-    private List<PricingPolicyD> pricingPolicy; // [성인-15000, 청소년-12000 ...]
+    private List<PricingPolicy> pricingPolicy; // [성인-15000, 청소년-12000 ...]
     // 가격정책
-    private EventImageD poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+    private EventImage poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
     // 포스터
-    private EventImageD detailImage; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+    private EventImage detailImage; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
     // 상세페이지
     private String contact; // [010-5516-2461]
     // 문의전화
@@ -91,7 +92,7 @@ public class EventD {
                     .sponsor(this.getSponsor())
                     .requiredAge(this.getRequiredAge())
                     .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy().stream().map(a -> a.toEntity()).collect(Collectors.toList()))
+                    .pricingPolicy(this.getPricingPolicy())
                     .contact(this.getContact())
                     .openDate(this.getOpenDate())
                     .finDate(this.getFinDate())
@@ -116,8 +117,8 @@ public class EventD {
                     .sponsor(this.getSponsor())
                     .requiredAge(this.getRequiredAge())
                     .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy().stream().map(a -> a.toEntity()).collect(Collectors.toList()))
-                    .detailImage(this.getDetailImage().toEntity())
+                    .pricingPolicy(this.getPricingPolicy())
+                    .detailImage(this.getDetailImage())
                     .contact(this.getContact())
                     .openDate(this.getOpenDate())
                     .finDate(this.getFinDate())
@@ -142,8 +143,8 @@ public class EventD {
                     .sponsor(this.getSponsor())
                     .requiredAge(this.getRequiredAge())
                     .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy().stream().map(a -> a.toEntity()).collect(Collectors.toList()))
-                    .poster(this.getPoster().toEntity())
+                    .pricingPolicy(this.getPricingPolicy())
+                    .poster(this.getPoster())
                     .contact(this.getContact())
                     .openDate(this.getOpenDate())
                     .finDate(this.getFinDate())
@@ -168,9 +169,9 @@ public class EventD {
                     .sponsor(this.getSponsor())
                     .requiredAge(this.getRequiredAge())
                     .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy().stream().map(a -> a.toEntity()).collect(Collectors.toList()))
-                    .poster(this.getPoster().toEntity())
-                    .detailImage(this.getDetailImage().toEntity())
+                    .pricingPolicy(this.getPricingPolicy())
+                    .poster(this.getPoster())
+                    .detailImage(this.getDetailImage())
                     .contact(this.getContact())
                     .openDate(this.getOpenDate())
                     .finDate(this.getFinDate())

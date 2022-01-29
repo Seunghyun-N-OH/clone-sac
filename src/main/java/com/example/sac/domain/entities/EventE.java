@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -80,17 +78,17 @@ public class EventE {
 
     @OneToMany(mappedBy = "event")
     @Builder.Default // 양방향 1:N
-    private List<PricingPolicyE> pricingPolicy = new ArrayList<>(); // [성인-15000, 청소년-12000 ...]
+    private List<PricingPolicy> pricingPolicy = new ArrayList<>(); // [성인-15000, 청소년-12000 ...]
     // 가격정책
 
     @OneToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "poster_id") // 단방향 1:1 [EventImageE 는 FK 안가지고, EventE 만 FK 가짐]
-    private EventImageE poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+    private EventImage poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
     // 포스터
 
     @OneToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "detail_id") // 단방향 1:1 [EventImageE 는 FK 안가지고, EventE 만 FK 가짐]
-    private EventImageE detailImage; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+    private EventImage detailImage; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
     // 상세페이지
 
     @Column(nullable = false)
@@ -139,7 +137,7 @@ public class EventE {
                     .sponsor(this.getSponsor())
                     .requiredAge(this.getRequiredAge())
                     .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy().stream().map(b -> b.toDto()).collect(Collectors.toList()))
+                    .pricingPolicy(this.getPricingPolicy())
                     .contact(this.getContact())
                     .openDate(this.getOpenDate())
                     .finDate(this.getFinDate())
@@ -164,8 +162,8 @@ public class EventE {
                     .sponsor(this.getSponsor())
                     .requiredAge(this.getRequiredAge())
                     .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy().stream().map(b -> b.toDto()).collect(Collectors.toList()))
-                    .detailImage(this.getDetailImage().toDto())
+                    .pricingPolicy(this.getPricingPolicy())
+                    .detailImage(this.getDetailImage())
                     .contact(this.getContact())
                     .openDate(this.getOpenDate())
                     .finDate(this.getFinDate())
@@ -190,8 +188,8 @@ public class EventE {
                     .sponsor(this.getSponsor())
                     .requiredAge(this.getRequiredAge())
                     .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy().stream().map(b -> b.toDto()).collect(Collectors.toList()))
-                    .poster(this.getPoster().toDto())
+                    .pricingPolicy(this.getPricingPolicy())
+                    .poster(this.getPoster())
                     .contact(this.getContact())
                     .openDate(this.getOpenDate())
                     .finDate(this.getFinDate())
@@ -216,9 +214,9 @@ public class EventE {
                     .sponsor(this.getSponsor())
                     .requiredAge(this.getRequiredAge())
                     .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy().stream().map(b -> b.toDto()).collect(Collectors.toList()))
-                    .poster(this.getPoster().toDto())
-                    .detailImage(this.getDetailImage().toDto())
+                    .pricingPolicy(this.getPricingPolicy())
+                    .poster(this.getPoster())
+                    .detailImage(this.getDetailImage())
                     .contact(this.getContact())
                     .openDate(this.getOpenDate())
                     .finDate(this.getFinDate())

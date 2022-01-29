@@ -53,8 +53,8 @@
               <p class="edate">[[${notice.effectiveDateE}]]</p>
             </div>
             <div id="attached">
-              <ul th:if="${attachedFiles}">
-                <li class="afile" th:each="a : ${attachedFiles}">
+              <ul th:if="${notice.attachment}">
+                <li class="afile" th:each="a : ${notice.attachment}">
                   <p style="font-weight: bold;">*첨부파일 : </p><a th:href="@{|/sacnews/notice/${notice.no}/attach?fno=${a.fno}|}">[[${a.fileName}]]</a>
                 </li>
               </ul>

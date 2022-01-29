@@ -11,6 +11,24 @@
     <script src="/javascript/sacnews/newPost.js"></script>
     <script src="/javascript/summernote/summernote-lite.js"></script>
     <script src="/javascript/summernote/summernote-ko-KR.js"></script>
+    <script th:inline="javascript">
+      $(function(){
+        initSelectors;
+      })
+      
+      function initSelectors(){
+        $("#categorySelector").find("option[value!=/*${notice.category}*/]").select;
+        $("#isPublicSelector").find("option[value!=/*${notice.important}*/]").select;
+      }
+
+      function addDelete(a){
+        var target = document.getElementById("deleteBox");
+        var fakeBox = document.createElement('span');
+        fakeBox.innerHTML="<input type='tex'' name='dfiles' hidden value='"+a+"'>";
+        target.appendChild(fakeBox);
+        document.getElementById(a).style.color="red";
+      }
+    </script>
     <title>Document</title>
   </head>
   <body>
@@ -25,16 +43,16 @@
              th:action="@{/admin/sacnews/notice}"
               id="newPost"
               method="post"
+              enctype="multipart/form-data"
             >
             <input type="hidden" name="_method" value="PUT"/>
-            <input type="text" name="no" th:value="${notice.no}"/>
-            <input type="text" name="publisher" th:value="${notice.drafter.userId}">
-            <input type="text" id="ogCategory" th:value="${notice.category}">
-            <input type="text" id="ogImportant" th:value="${notice.important}">
+            <input type="text" name="no" th:value="${notice.no}" hidden/>
+            <input type="text" id="ogCategory" th:value="${notice.category}" hidden>
+            <input type="text" id="ogImportant" th:value="${notice.important}" hidden>
+            <input type="text" name="views" th:value="${notice.views}" hidden>
               <!-- beginning of new post Form #############################################-->
                 <div class="postSetting">
                     <select name="category" id="categorySelector">
-                        <option value="" selected>변경 시 선택</option>
                         <option value="안내">안내</option>
                         <option value="회원">회원</option>
                         <option value="대관">대관</option>
@@ -43,7 +61,6 @@
                         <option value="발표">발표</option>
                     </select>
                     <select name="important" id="isPublicSelector">
-                        <option value="" selected>변경 시 선택</option>
                         <option value="y">중요</option>
                         <option value="n">일반</option>
                     </select>
@@ -57,9 +74,10 @@
                 <textarea id="summernote" name="content" th:text="${notice.content}"></textarea>
               <!-- Content(including image file) above ##########################################-->
                 <div class="pre-existing-attachs">
-                  <ul th:if="${attachments}">
-                    <li th:each="a : ${attachments}">
-                      <a th:href="@{|/sacnews/notice/${notice.no}/attach?fno=${a.fno}|}">[[${a.fileName}]]</a><a href="#">삭제하기</a>
+                  <ul th:if="${notice.attachment}">
+                    <li th:each="a : ${notice.attachment}">
+                      <a th:id="${a.fno}" th:href="@{|/sacnews/notice/${notice.no}/attach?fno=${a.fno}|}">[[${a.fileName}]]</a>
+                      <button class="deleteBtn" th:onclick="addDelete(/*[[${a.fno}]]*/)" type="button">삭제하기</button>
                     </li>
                   </ul>
                 </div>
@@ -67,9 +85,11 @@
                 <div class="submitLine">
                   <input id="attach" multiple="multiple" type="file" name="attach">
               <!-- Attachment above ##########################################-->
-                  <div class="drafterNbutton">
-                    <span class="red-font">[수정 시 작성자명이 변경됩니다.]</span>
-                    <span >작성자 : <span th:text="${notice.drafter.userId}"></span></span>
+                  <div class="drafterNbutton" id="deleteBox">
+                    <span class="red-font">[수정 시 작성자명이 업데이트됩니다.]</span>
+                    <span>수정 전 작성자명 : [[${notice.drafter}]]</span>
+                    <span>| 수정 후 작성자 : <span sec:authentication="principal.username"></span></span>
+                    <input type="text" name="drafter" th:value="${notice.drafter}" hidden>
                     <button onclick="checkAndSubmit()" type="button">수정</button>
                     <button onclick="location.href='/sacnews/notice'" type="button">취소</button>
                   </div>

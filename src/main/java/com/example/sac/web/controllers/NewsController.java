@@ -2,6 +2,7 @@ package com.example.sac.web.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -65,9 +66,8 @@ public class NewsController {
     @RequestMapping(value = "/admin/file/notice", method = RequestMethod.POST, produces = "application/json; charset=utf8")
     public String noticeAttachUpload(@RequestParam("file") MultipartFile f) {
         return UpAndDownFile.uploadFile_summernote(f);
-    }
+    } // 게시글 제목 누르면 상세페이지로 들어가기
 
-    // 게시글 제목 누르면 상세페이지로 들어가기
     @RequestMapping(value = "/sacnews/notice/{notice}", method = RequestMethod.GET)
     public String showDetail(@PathVariable long notice, Model m) {
         // 보려는 게시글 번호랑 모델 가지고 서비스로
@@ -95,26 +95,19 @@ public class NewsController {
 
     // TODO 이후 admincontroller 따로 생성해 옮길지 결정
     // admin전용, 내용 다 쓴 공지 등록버튼 누르면 등록해주기
+    // 220129 재작성, 연관관계 재설정
     @RequestMapping(value = "/admin/sacnews/notice/post", method = RequestMethod.POST)
     public String postNewNotice(NoticeD data, MultipartHttpServletRequest htsr, Principal p) {
-        // 있을지 모르는 첨부파일을 일단 뽑고
-        Set<MultipartFile> att = Set.copyOf(htsr.getFiles("attach"));
-        // 자동입력되어야 할 작성자이름 principal에서 뽑아서 지정해주고
-        data.setDrafter(MembershipD.builder().userId(p.getName()).build());
-        // 작성자정보가 입력된 공지정보, 있을지모르는 첨부파일 들고 서비스로
-        ns.postNewNotice(data, att);
-        return "redirect:/sacnews/notice";
+        return ns.postNewNotice(data, List.copyOf(htsr.getFiles("attach")), p.getName());
     }
 
     // TODO 이후 admincontroller 따로 생성해 옮길지 결정
     // TODO 파일수정 포함시키기
     // admin전용, 공지 수정할거 다 수정하고 수정적용 버튼 누르면 할일
     @RequestMapping(value = "/admin/sacnews/notice", method = RequestMethod.PUT)
-    public String editSubmit(NoticeD data, MultipartHttpServletRequest htsr, String publisher) {
-        data.setDrafter(MembershipD.builder().userId(publisher).build());
-        Set<MultipartFile> att = Set.copyOf(htsr.getFiles("attach"));
-        ns.editNotice(data, att);
-        return "redirect:/sacnews/notice/" + data.getNo();
+    public String editSubmit(NoticeD data, MultipartHttpServletRequest htsr, @RequestParam List<Long> dfiles,
+            Principal p) {
+        return ns.editNotice(data, List.copyOf(htsr.getFiles("attach")), dfiles, p.getName());
     }
 
     // TODO 이후 admincontroller 따로 생성해 옮길지 결정
@@ -122,8 +115,7 @@ public class NewsController {
     @RequestMapping(value = "/admin/sacnews/notice", method = RequestMethod.DELETE)
     public String deleteSubmit(long no) {
         // 삭제하려는 공지 번호 들고 서비스가기
-        ns.deleteNotice(no);
-        return "redirect:/sacnews/notice";
+        return ns.deleteNotice(no);
     }
 
     // TODO 이후 admincontroller 따로 생성해 옮길지 결정

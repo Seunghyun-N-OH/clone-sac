@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.example.sac.web.dtos.PricingPolicyD;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class PricingPolicyE {
+public class PricingPolicy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long priceId;
@@ -35,11 +33,4 @@ public class PricingPolicyE {
     @JoinColumn(name = "evente_id")
     private EventE event;
 
-    public PricingPolicyD toDto() {
-        return PricingPolicyD.builder()
-                .priceId(this.getPriceId())
-                .subject(this.getSubject())
-                .price(this.getPrice())
-                .build();
-    }
 }

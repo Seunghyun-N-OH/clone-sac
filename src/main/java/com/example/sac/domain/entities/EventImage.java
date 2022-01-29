@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import com.example.sac.web.dtos.EventImageD;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class EventImageE {
+public class EventImage {
     @Id
     @GeneratedValue
     @Column(name = "image_id")
@@ -28,12 +26,4 @@ public class EventImageE {
 
     @Column(nullable = false)
     private String filePath; // 경로(파일이름없음)
-
-    public EventImageD toDto() {
-        return EventImageD.builder()
-                .imageId(this.getImageId())
-                .fileName(this.getFileName())
-                .filePath(this.getFilePath())
-                .build();
-    }
 }

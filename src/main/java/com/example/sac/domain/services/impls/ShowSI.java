@@ -8,13 +8,12 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import com.example.sac.domain.entities.EventE;
-import com.example.sac.domain.entities.PricingPolicyE;
+import com.example.sac.domain.entities.PricingPolicy;
 import com.example.sac.domain.repositories.EventR;
 import com.example.sac.domain.repositories.PricingPolicyR;
 import com.example.sac.domain.services.ShowS;
 import com.example.sac.domain.services.functions.UpAndDownFile;
 import com.example.sac.web.dtos.EventD;
-import com.example.sac.web.dtos.PricingPolicyD;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -34,9 +33,9 @@ public class ShowSI implements ShowS {
 
     @Override
     public void registerEvent(EventD a, List<String> s, List<Integer> p, MultipartFile po, MultipartFile d) {
-        List<PricingPolicyD> pricingPolicyD = new ArrayList<>();
+        List<PricingPolicy> pricingPolicyD = new ArrayList<>();
         for (int i = 0; i < s.size(); i++) {
-            pricingPolicyD.add(PricingPolicyD.builder().subject(s.get(i)).price(p.get(i)).build());
+            pricingPolicyD.add(PricingPolicy.builder().subject(s.get(i)).price(p.get(i)).build());
         }
         a.setPricingPolicy(pricingPolicyD);
         if (!po.isEmpty())
@@ -45,8 +44,8 @@ public class ShowSI implements ShowS {
             a.setDetailImage(UpAndDownFile.upEventImage(d));
         long no = er.save(a.toEntity()).getId();
 
-        for (PricingPolicyD ee : pricingPolicyD) {
-            ppr.save(PricingPolicyE.builder().price(ee.getPrice()).subject(ee.getSubject())
+        for (PricingPolicy ee : pricingPolicyD) {
+            ppr.save(PricingPolicy.builder().price(ee.getPrice()).subject(ee.getSubject())
                     .event(EventE.builder().id(no).build()).build());
         }
     }
