@@ -46,15 +46,16 @@ public class UpAndDownFile {
         List<AttachedFile> c = new ArrayList<>();
         for (MultipartFile b : a) {
             try {
+                AttachedFile d = new AttachedFile();
                 String newFileName = Long.toString(fileNo++ + fileNo_sub) + "_notice_" + b.getOriginalFilename();
                 File dest_dir = cpr.getFile(); // TODO local
                 b.transferTo(new File(dest_dir, newFileName)); // TODO local
                 // a.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
-                c.add(AttachedFile.builder().fileName(newFileName)
-                        .fno(fileNo++)
-                        .filePath(p)
-                        .fileContentType(b.getContentType())
-                        .build());
+                d.setFileName(newFileName);
+                d.setFilePath(p);
+                d.setFileContentType(b.getContentType());
+                c.add(d);
+                System.out.println(d);
                 // 지정해둔 로컬경로에 파일 업로드하고, 그 파일에 대한 정보들 담은 dto 만들어서 리턴
             } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();

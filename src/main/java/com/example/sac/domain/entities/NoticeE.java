@@ -12,6 +12,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -63,7 +64,7 @@ public class NoticeE {
     @Column(nullable = true)
     private LocalDate effectiveDateE; // 이 공지가 언제까지 적용되는 공지인지
 
-    @OneToMany(mappedBy = "notice", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "notice")
     @Builder.Default
     private List<AttachedFile> attachment = new ArrayList<>();
 
@@ -92,8 +93,8 @@ public class NoticeE {
     }
 
     public void addFile(AttachedFile f) {
-        this.attachment.add(f);
         f.setNotice(this);
+        this.attachment.add(f);
     }
 
     public void removeFile(int i) {

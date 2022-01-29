@@ -177,7 +177,7 @@ public class NoticeSI implements NoticeS {
     // 220129 연관관계 재설정 후 코드 재작성완료
     @Override
     public String postNewNotice(NoticeD data, List<MultipartFile> attachedFile, String drafter) {
-        NoticeE newPost = NoticeE.builder()
+        NoticeE newPost = nr.save(NoticeE.builder()
                 .category(data.getCategory())
                 .drafter(drafter)
                 .important(data.getImportant())
@@ -188,12 +188,12 @@ public class NoticeSI implements NoticeS {
                 .effectiveDateE(data.getEffectiveDateE())
                 .cTime(data.getCTime())
                 .eTime(data.getETime())
-                .build();
+                .build());
         for (AttachedFile a : UpAndDownFile.uploadMultipleFiles(attachedFile)) {
             newPost.addFile(a);
+            afr.save(a);
         }
         System.out.println();
-        nr.save(newPost);
 
         return "redirect:/sacnews/notice";
     }
