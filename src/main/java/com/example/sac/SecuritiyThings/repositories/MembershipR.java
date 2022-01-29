@@ -1,4 +1,4 @@
-package com.example.sac.domain.repositories;
+package com.example.sac.SecuritiyThings.repositories;
 
 import com.example.sac.SecuritiyThings.entities.Membership;
 

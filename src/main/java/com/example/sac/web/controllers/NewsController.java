@@ -3,13 +3,11 @@ package com.example.sac.web.controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.sac.domain.services.NoticeS;
 import com.example.sac.domain.services.functions.UpAndDownFile;
-import com.example.sac.web.dtos.MembershipD;
 import com.example.sac.web.dtos.NoticeD;
 
 import org.springframework.stereotype.Controller;
@@ -102,10 +100,10 @@ public class NewsController {
     }
 
     // TODO 이후 admincontroller 따로 생성해 옮길지 결정
-    // TODO 파일수정 포함시키기
     // admin전용, 공지 수정할거 다 수정하고 수정적용 버튼 누르면 할일
     @RequestMapping(value = "/admin/sacnews/notice", method = RequestMethod.PUT)
-    public String editSubmit(NoticeD data, MultipartHttpServletRequest htsr, @RequestParam List<Long> dfiles,
+    public String editSubmit(NoticeD data, MultipartHttpServletRequest htsr,
+            @RequestParam(required = false) List<Long> dfiles,
             Principal p) {
         return ns.editNotice(data, List.copyOf(htsr.getFiles("attach")), dfiles, p.getName());
     }

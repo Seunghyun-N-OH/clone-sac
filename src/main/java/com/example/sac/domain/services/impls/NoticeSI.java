@@ -2,7 +2,6 @@ package com.example.sac.domain.services.impls;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,10 +9,10 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
-import com.example.sac.SecuritiyThings.repositories.NoticeR;
 import com.example.sac.domain.entities.AttachedFile;
 import com.example.sac.domain.entities.NoticeE;
 import com.example.sac.domain.repositories.AttachedFileR;
+import com.example.sac.domain.repositories.NoticeR;
 import com.example.sac.domain.services.NoticeS;
 import com.example.sac.domain.services.functions.UpAndDownFile;
 import com.example.sac.web.dtos.NoticeD;
@@ -103,75 +102,6 @@ public class NoticeSI implements NoticeS {
         }
     }
 
-    // 공지 수정하러 갈때 기존정보 불러가기
-    // TODO 파일도 수정해야하니 같이 가져가기
-    @Override
-    @Transactional
-    public String noticeEdit(long targetNo, Model m) {
-        Optional<NoticeE> raw = nr.findById(targetNo);
-        if (raw.isPresent()) { // 이거도 혹시나 불러오는데 그사이 '다른admin'이 삭제할까봐 체크하고
-            NoticeE raw_with_files = raw.get();
-            System.out.println(raw_with_files.getAttachment());
-            m.addAttribute("notice", raw_with_files.toDto());
-            // 가져감
-            return "sacnews/edit";
-        } else {
-            return "redirect:/sacnews/notice";
-        }
-    }
-
-    // TODO 이거 하던중..
-    // 내용 바꿔서 이제 수정할라그러면
-    @Override
-    @Transactional
-    public String editNotice(NoticeD d, List<MultipartFile> f, List<Long> df, String n) {
-        Optional<NoticeE> on = nr.findById(d.getNo());
-        if (on.isPresent()) {
-            NoticeE data = on.get();
-            System.out.println("before file handling : " + data.getAttachment());
-
-            for (AttachedFile file : UpAndDownFile.uploadMultipleFiles(f)) {
-                if (!file.getFileName().isEmpty())
-                    data.addFile(file);
-            }
-
-            for (long target : df) {
-                for (long i = 0; i < data.getAttachment().size(); i++) {
-                    if (data.getAttachment().get((int) i).getFno() == target) {
-                        afr.delete(data.getAttachment().get((int) i));
-                    }
-                }
-            }
-            System.out.println("after file handling : " + data.getAttachment());
-
-            NoticeE updated = NoticeE.builder()
-                    .no(data.getNo())
-                    .category(d.getCategory())
-                    .drafter(n)
-                    .important(d.getImportant())
-                    .title(d.getTitle())
-                    .content(d.getContent())
-                    .effectiveDateB(d.getEffectiveDateB())
-                    .effectiveDateE(d.getEffectiveDateE())
-                    .attachment(data.getAttachment())
-                    .build();
-
-            nr.save(updated);
-
-            return "redirect:/sacnews/notice/" + d.getNo();
-        } else {
-            return "redirect:/sacnews/notice";
-        }
-
-    }
-
-    // 공지 삭제하려그러면
-    @Override
-    public String deleteNotice(long no) {
-        nr.deleteById(no);
-        return "redirect:/sacnews/notice";
-    }
-
     // #####################################################################################################
 
     // 220129 연관관계 재설정 후 코드 재작성완료
@@ -236,6 +166,88 @@ public class NoticeSI implements NoticeS {
         } else {
             return null;
         }
+    }
+
+    // 220129 연관관계 재설정 후 코드 재작성완료
+    // 내용 바꿔서 이제 수정할라그러면
+    @Override
+    @Transactional
+    public String editNotice(NoticeD d, List<MultipartFile> f, List<Long> df, String n) {
+        Optional<NoticeE> on = nr.findById(d.getNo());
+        if (on.isPresent()) {
+            NoticeE data = on.get();
+            System.out.println("on got");
+
+            for (AttachedFile file : UpAndDownFile.uploadMultipleFiles(f)) {
+                if (!file.getFileName().isEmpty()) {
+                    data.addFile(file);
+                    afr.save(file);
+                }
+            }
+
+            if (df != null) {
+                for (long target : df) {
+                    System.out.println("target : " + target);
+                    for (long i = 0; i < data.getAttachment().size(); i++) {
+                        if (data.getAttachment().get((int) i).getFno() == target) {
+                            UpAndDownFile.deleteFile(data.getAttachment().get((int) i));
+                            afr.delete(data.getAttachment().get((int) i));
+                        }
+                    }
+                }
+            }
+
+            NoticeE updated = NoticeE.builder()
+                    .no(data.getNo())
+                    .category(d.getCategory())
+                    .drafter(n)
+                    .important(d.getImportant())
+                    .title(d.getTitle())
+                    .content(d.getContent())
+                    .effectiveDateB(d.getEffectiveDateB())
+                    .effectiveDateE(d.getEffectiveDateE())
+                    .attachment(data.getAttachment())
+                    .build();
+
+            nr.save(updated);
+
+            return "redirect:/sacnews/notice/" + d.getNo();
+        } else {
+            return "redirect:/sacnews/notice";
+        }
+    }
+
+    // 220129 연관관계 재설정 후 코드 재작성완료
+    // 공지 수정하러 갈때 기존정보 불러가기
+    @Override
+    @Transactional
+    public String noticeEdit(long targetNo, Model m) {
+        Optional<NoticeE> raw = nr.findWithAttachmentByNo(targetNo);
+        if (raw.isPresent()) { // 이거도 혹시나 불러오는데 그사이 '다른admin'이 삭제할까봐 체크하고
+            NoticeE raw_with_files = raw.get();
+            m.addAttribute("notice", raw_with_files.toDto());
+            // 가져감
+            return "sacnews/edit";
+        } else {
+            return "redirect:/sacnews/notice";
+        }
+    }
+
+    // 220129 연관관계 재설정 후 코드 재작성완료
+    // 공지 삭제하려그러면
+    @Override
+    public String deleteNotice(long no) {
+        Optional<NoticeE> notice2delete = nr.findWithAttachmentByNo(no);
+        if (notice2delete.isPresent()) {
+            NoticeE n = notice2delete.get();
+            // attachment
+            for (long a : n.removeAllFiles()) {
+                afr.deleteById(a);
+            }
+            System.out.println("all files table deleted");
+            nr.deleteById(n.getNo());
+        }
+        return "redirect:/sacnews/notice";
     }
 
 }

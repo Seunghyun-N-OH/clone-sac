@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.sac.domain.entities.AttachedFile;
-import com.example.sac.domain.entities.NoticeE;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

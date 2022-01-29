@@ -37,8 +37,4 @@ public class AttachedFile {
     void setNotice(NoticeE n) {
         this.notice = n;
     }
-
-    void deleteFile() {
-
-    }
 }

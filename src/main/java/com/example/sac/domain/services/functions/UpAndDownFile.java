@@ -5,10 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +15,7 @@ import com.example.sac.domain.entities.AttachedFile;
 import com.example.sac.domain.entities.EventImage;
 import com.google.gson.JsonObject;
 
-import org.springframework.core.io.ClassPathResource; //  TODO Local
+// import org.springframework.core.io.ClassPathResource; //  TODO Local
 import org.springframework.web.multipart.MultipartFile;
 
 // 주석 업데이트 220126
@@ -28,13 +24,14 @@ import org.springframework.web.multipart.MultipartFile;
 public class UpAndDownFile {
 
     // TODO 로컬에서 작동할 path
-    private static final String p = "/uploads/notice/includingIMGs/";
-    private static final ClassPathResource cpr = new ClassPathResource("static" + p);
-    private static final String localRoot = "E:/test/sac/bin/main/static";
+    // private static final String p = "/uploads/notice/includingIMGs/";
+    // private static final ClassPathResource cpr = new ClassPathResource("static" +
+    // p);
+    // private static final String localRoot = "E:/test/sac/bin/main/static";
 
     // TODO ec2에서 작동할 path
-    // private static final String p = "/uploads/imgs/upload/";
-    // private static final String localRoot = "/home/ec2-user/src/root";
+    private static final String p = "/uploads/imgs/upload/";
+    private static final String localRoot = "/home/ec2-user/src/root";
 
     // 업로드된 파일이 저장 될 때, 중복으로 인한 문제가 생기지 않도록 앞에 붙여줄 번호
     private static long fileNo = 10L;
@@ -46,16 +43,20 @@ public class UpAndDownFile {
         List<AttachedFile> c = new ArrayList<>();
         for (MultipartFile b : a) {
             try {
-                AttachedFile d = new AttachedFile();
-                String newFileName = Long.toString(fileNo++ + fileNo_sub) + "_notice_" + b.getOriginalFilename();
-                File dest_dir = cpr.getFile(); // TODO local
-                b.transferTo(new File(dest_dir, newFileName)); // TODO local
-                // a.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
-                d.setFileName(newFileName);
-                d.setFilePath(p);
-                d.setFileContentType(b.getContentType());
-                c.add(d);
-                System.out.println(d);
+                if (!b.getOriginalFilename().isEmpty()) {
+                    System.out.println(Integer.toUnsignedLong(LocalDateTime.now().getSecond()) + "+"
+                            + Integer.toUnsignedLong(LocalDateTime.now().getNano()));
+                    String newFileName = Long.toString(fileNo++ + fileNo_sub) + "_notice_" + b.getOriginalFilename();
+                    // File dest_dir = cpr.getFile(); // TODO local
+                    // b.transferTo(new File(dest_dir, newFileName)); // TODO local
+                    b.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
+
+                    c.add(AttachedFile.builder()
+                            .fileName(newFileName)
+                            .filePath(p)
+                            .fileContentType(b.getContentType())
+                            .build());
+                }
                 // 지정해둔 로컬경로에 파일 업로드하고, 그 파일에 대한 정보들 담은 dto 만들어서 리턴
             } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
@@ -97,31 +98,19 @@ public class UpAndDownFile {
         os.close();
     }
 
-    // 어떤 파일을 삭제하고싶으면 일단 사이즈 상관없이 리스트로 받아서
-    public static void deleteFiles(List<AttachedFile> a) {
-        for (AttachedFile b : a) { // 그 리스트를 하나씩 뜯어서
-            File c = new File(localRoot + b.getFilePath() + b.getFileName());
-            if (c.exists())
-                // 그 정보로 파일 찾아본다음 있으면
-                c.delete();
-            // 삭제해버린다
-        }
-
-    }
-
     // summernote사용해 파일 올라올 때
     public static String uploadFile_summernote(MultipartFile a) {
         // 제이슨오브젝트 빈 객체 하나 만들어서
         JsonObject jo = new JsonObject();
-        ClassPathResource cpr = new ClassPathResource("static" + p); // TODO local
+        // ClassPathResource cpr = new ClassPathResource("static" + p); // TODO local
         String newFilename = Long.toString(fileNo++ + fileNo_sub) + "_summernote_" + a.getOriginalFilename();
 
         try {
-            File fileRoot = cpr.getFile(); // TODO local
-            File tDirectory = new File(fileRoot, newFilename); // TODO local
-            a.transferTo(tDirectory); // TODO local
+            // File fileRoot = cpr.getFile(); // TODO local
+            // File tDirectory = new File(fileRoot, newFilename); // TODO local
+            // a.transferTo(tDirectory); // TODO local
             // 파일 옮기고
-            // a.transferTo(new File(localRoot + p, newFilename)); // TODO ec2
+            a.transferTo(new File(localRoot + p, newFilename)); // TODO ec2
             jo.addProperty("url", p + newFilename);
             // 옮긴경로+파일명 값 을 url이라는 이름으로 제이슨오브젝트에 넣고
             jo.addProperty("responseCode", "success");
@@ -140,9 +129,9 @@ public class UpAndDownFile {
         EventImage c;
         try {
             String newFileName = Long.toString(fileNo++ + fileNo_sub) + "_show_" + a.getOriginalFilename();
-            File dest_dir = cpr.getFile(); // TODO local
-            a.transferTo(new File(dest_dir, newFileName)); // TODO local
-            // a.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
+            // File dest_dir = cpr.getFile(); // TODO local
+            // a.transferTo(new File(dest_dir, newFileName)); // TODO local
+            a.transferTo(new File(localRoot + p, newFileName)); // TODO ec2
             c = EventImage.builder()
                     .fileName(newFileName)
                     .filePath(p)
@@ -156,19 +145,10 @@ public class UpAndDownFile {
     }
 
     public static void deleteFile(AttachedFile f) {
-        // TODO Local
         File c = new File(localRoot + f.getFilePath() + f.getFileName());
         if (c.exists())
             // 그 정보로 파일 찾아본다음 있으면
             c.delete();
         // 삭제해버린다
-
-        // TODO ec2
-        // Path filePaths = Paths.get(localRoot + f.getFilePath() + f.getFileName());
-        // try {
-        // Files.deleteIfExists(filePaths);
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
     }
 }

@@ -8,8 +8,8 @@ import java.util.Set;
 
 import com.example.sac.SecuritiyThings.dtos.SecureD;
 import com.example.sac.SecuritiyThings.entities.Membership;
+import com.example.sac.SecuritiyThings.repositories.MembershipR;
 import com.example.sac.SecuritiyThings.service.MemberS;
-import com.example.sac.domain.repositories.MembershipR;
 import com.example.sac.web.dtos.MembershipD;
 
 import org.json.simple.JSONObject;

@@ -31,15 +31,14 @@
             <td  class="column5">
               <ul class="microList">
                 <li>
-                  공연/전시 entity 항목 결정 (공통)
+                  공연/전시 테이블 생성 <span class="red-font">**** 연관관계 재설정 및 서비스 재작성, 수정예정 ****</span>
                   <br>
-                  <span class="red-font">**** 연관관계 재확인 및 서비스 재작성 ****</span>
                 </li>
                 <li>
                   공연정보 등록 시 첨부되는 포스터, 상세페이지 전용 테이블 생성<br>-다운로드 가능성 없으므로 content-type 등 불필요한 column 제외
                 </li>
                 <li>
-                  <a href="/admin/show/register">행사정보 등록 / 목록 전체조회</a>
+                  <a href="/admin/show/register">(admin)행사정보 등록 / 목록 전체조회</a>
                 </li>
               </ul>
             </td>
@@ -76,6 +75,7 @@
             <th  class="column4">java<br>html<br>css<br>js</th>
             <td  class="column5">
               <ul class="microList">
+                  **** 연관관계 재확인 및 서비스 재작성 완료
                 <li>
                   (admin)공지사항 작성<br>-Summernote활용<br>-Summernote 외 파일(n개)첨부기능
                 </li>
@@ -86,7 +86,7 @@
                   공지사항 상세 조회<br>-첨부파일 다운로드
                 </li>
                 <li>
-                  (admin)공지사항 수정<br>-내용수정<br>-첨부파일 추가
+                  (admin)공지사항 수정<br>-내용수정<br>-첨부파일 추가 및 기존 첨부파일 삭제
                 </li>
               </ul>
             </td>
@@ -106,7 +106,7 @@
                   <!-- https://codevang.tistory.com/273?category=857253 -->
                 </li>
                 <li>
-                  Spring Cloud Config 적용
+                  Spring Cloud Config 적용 <span class="red-font">[enable=false 처리]</span>
                   <!-- https://madplay.github.io/post/introduction-to-spring-cloud-config -->
                 </li>
               </ul>
@@ -155,26 +155,13 @@
                 <li>
                   <a href="/admin/show/register"> 조건조회 / 상세조회 / 수정 / 삭제</a>
                 </li>
-              </ul>
-            </td>
-            <td  class="column6">
-              <a style="z-index: 888;color : red" href="/show/show_list">확인</a>
-            </td>
-          </tr>
-          <tr>
-            <th  class="column1">작업중</th>
-            <th  class="column2">전당소식</th>
-            <td  class="column3">공지사항</td>
-            <th  class="column4">java</th>
-            <td  class="column5">
-              <ul class="microList">
                 <li>
-                  (admin)수정 시, 기존 첨부파일 삭제기능 추가
+                  월별 행사일정 구현을 위해 달력형태 페이지 레이아웃 작성
                 </li>
               </ul>
             </td>
             <td  class="column6">
-              <a style="z-index: 888;color : red" href="/sacnews/notice">확인</a>
+              <a style="z-index: 888;color : red" href="/show/show_list">확인</a>
             </td>
           </tr>
           <tr>
@@ -186,6 +173,9 @@
               <ul class="microList">
                 <li>
                   table column 추가로 각 공지사항 별 공개여부 선택적용
+                </li>
+                <li>
+                  summernote 내 이미지 업로드 이후 관리(기존 이미지 삭제) 방식 고안
                 </li>
               </ul>
             </td>
