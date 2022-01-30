@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.example.sac.domain.entities.EventE;
-import com.example.sac.domain.entities.EventImage;
+import com.example.sac.domain.entities.EventDetailImg;
+import com.example.sac.domain.entities.EventPoster;
 import com.example.sac.domain.entities.PricingPolicy;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -46,12 +46,16 @@ public class EventD {
     // 입장/관람 가능 나이제한
     private char onSale; // [s, o, p, c, i]
     // 입장권 판매상태 (s)ite, (o)nline, (p)lanned, (c)losed, (i)nvitational
+
     private List<PricingPolicy> pricingPolicy; // [성인-15000, 청소년-12000 ...]
     // 가격정책
-    private EventImage poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+
+    private EventPoster poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
     // 포스터
-    private EventImage detailImage; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+
+    private List<EventDetailImg> detail_img; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
     // 상세페이지
+
     private String contact; // [010-5516-2461]
     // 문의전화
 
@@ -70,117 +74,9 @@ public class EventD {
     // 일별 행사 종료시간
 
     // [일정] 행사가 회차별로 진행되는 경우 입력 #################################################
-    // "${#dates.format(boardVO.regdate, 'yyyy-MM-dd HH:mm')}"
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private List<LocalDateTime> eventTime; // [2022-01-27 12:00]
     // 회차별 시작시간
     private int runningTime; // [90, 100, 180 ...]
-
-    public EventE toEntity() {
-        if (this.getPoster() == null && this.getDetailImage() == null) {
-            System.out.println("Poster & Detail are null");
-            return EventE.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1())
-                    .venue2(this.getVenue2())
-                    .venue3(this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .host(this.getHost())
-                    .organizer(this.getOrganizer())
-                    .sponsor(this.getSponsor())
-                    .requiredAge(this.getRequiredAge())
-                    .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy())
-                    .contact(this.getContact())
-                    .openDate(this.getOpenDate())
-                    .finDate(this.getFinDate())
-                    .openTime(this.getOpenTime())
-                    .lastEntrance(this.getLastEntrance())
-                    .closeTime(this.getCloseTime())
-                    .eventTime(this.getEventTime())
-                    .runningTime(this.getRunningTime())
-                    .build();
-        } else if (this.getPoster() == null && this.getDetailImage() != null) {
-            System.out.println("Poster is null, but not Detail");
-            return EventE.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1())
-                    .venue2(this.getVenue2())
-                    .venue3(this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .host(this.getHost())
-                    .organizer(this.getOrganizer())
-                    .sponsor(this.getSponsor())
-                    .requiredAge(this.getRequiredAge())
-                    .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy())
-                    .detailImage(this.getDetailImage())
-                    .contact(this.getContact())
-                    .openDate(this.getOpenDate())
-                    .finDate(this.getFinDate())
-                    .openTime(this.getOpenTime())
-                    .lastEntrance(this.getLastEntrance())
-                    .closeTime(this.getCloseTime())
-                    .eventTime(this.getEventTime())
-                    .runningTime(this.getRunningTime())
-                    .build();
-        } else if (this.getPoster() != null && this.getDetailImage() == null) {
-            System.out.println("Poster is not null, but Detail is");
-            return EventE.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1())
-                    .venue2(this.getVenue2())
-                    .venue3(this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .host(this.getHost())
-                    .organizer(this.getOrganizer())
-                    .sponsor(this.getSponsor())
-                    .requiredAge(this.getRequiredAge())
-                    .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy())
-                    .poster(this.getPoster())
-                    .contact(this.getContact())
-                    .openDate(this.getOpenDate())
-                    .finDate(this.getFinDate())
-                    .openTime(this.getOpenTime())
-                    .lastEntrance(this.getLastEntrance())
-                    .closeTime(this.getCloseTime())
-                    .eventTime(this.getEventTime())
-                    .runningTime(this.getRunningTime())
-                    .build();
-        } else {
-            System.out.println("Both Poster and Detail are not null");
-            return EventE.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1())
-                    .venue2(this.getVenue2())
-                    .venue3(this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .host(this.getHost())
-                    .organizer(this.getOrganizer())
-                    .sponsor(this.getSponsor())
-                    .requiredAge(this.getRequiredAge())
-                    .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy())
-                    .poster(this.getPoster())
-                    .detailImage(this.getDetailImage())
-                    .contact(this.getContact())
-                    .openDate(this.getOpenDate())
-                    .finDate(this.getFinDate())
-                    .openTime(this.getOpenTime())
-                    .lastEntrance(this.getLastEntrance())
-                    .closeTime(this.getCloseTime())
-                    .eventTime(this.getEventTime())
-                    .runningTime(this.getRunningTime())
-                    .build();
-        }
-    }
+    // 러닝타임
 }

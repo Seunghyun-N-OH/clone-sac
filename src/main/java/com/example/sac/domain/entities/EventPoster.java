@@ -3,9 +3,7 @@ package com.example.sac.domain.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,18 +15,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class PricingPolicy {
+public class EventPoster {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long priceId;
+    @GeneratedValue
+    @Column(name = "image_id")
+    private long imageId; // 이미지파일 id
 
     @Column(nullable = false)
-    private String subject;
+    private String fileName; // 파일이름
 
     @Column(nullable = false)
-    private int price;
-
-    @ManyToOne
-    private EventE event;
-
+    private String filePath; // 경로(파일이름없음)
 }

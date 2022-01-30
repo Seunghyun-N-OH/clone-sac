@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.example.sac.domain.services.functions.UpAndDownFile;
 import com.example.sac.web.dtos.NoticeD;
+import com.example.sac.web.dtos.NoticeLD;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
@@ -88,6 +89,16 @@ public class NoticeE {
                 .attachment(this.getAttachment())
                 .cTime(this.getCTime())
                 .eTime(this.getETime())
+                .build();
+    }
+
+    public NoticeLD toListDto() {
+        return NoticeLD.builder()
+                .no(this.getNo())
+                .category(this.getCategory())
+                .title(this.getTitle())
+                .effectiveDateB(this.getEffectiveDateB())
+                .effectiveDateE(this.getEffectiveDateE())
                 .build();
     }
 

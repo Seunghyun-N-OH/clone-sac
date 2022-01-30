@@ -18,15 +18,11 @@
             <div class="InfoArea">
                 <table style="display:flex;justify-content: left; width : 100%;">
                     <thead>
-                        
                         <td>
-                            <button class="likeBtn" type="button">찜하기</button>
-                            
-                            <span
-                                class="planner"
-                                th:unless="${event.sacPlanned} eq 'n'"
-                                >SAC기획</span
-                                >
+                            <button class="likeBtn" type="button">찜하기</button> 
+                            <span class="planner"th:unless="${event.sacPlanned} eq 'n'">
+                                SAC기획
+                            </span>
                         </td>
                         <tr>
                             <td class="eventTitle">[[${event.eventTitle}]]</td>

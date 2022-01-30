@@ -25,9 +25,15 @@ public class ShowController {
 
     @RequestMapping(value = "/show/show_list", method = RequestMethod.GET)
     public String toShowList(Model m) {
-        ss.getShowList(m);
-        return "show/list";
+        return ss.getShowList(m);
     }
+
+    @RequestMapping(value = "/show/{eventId}", method = RequestMethod.GET)
+    public String toDetail(@PathVariable long eventId, Model m, RedirectAttributes ra) {
+        return ss.getShowDetail(eventId, m, ra);
+    }
+
+    // (admin functions) ###################
 
     @RequestMapping(value = "/admin/show/register", method = RequestMethod.GET)
     public String toRegister() {
@@ -37,12 +43,8 @@ public class ShowController {
     @RequestMapping(value = "/admin/show/register", method = RequestMethod.POST)
     public String submitRegister(EventD a, @RequestParam List<String> subject, @RequestParam List<Integer> price,
             MultipartFile poster_file, MultipartFile detailImage_file) {
-        ss.registerEvent(a, subject, price, poster_file, detailImage_file);
+        System.out.println(a);
+        // ss.registerEvent(a, subject, price, poster_file, detailImage_file);
         return "redirect:/show/show_list";
-    }
-
-    @RequestMapping(value = "/show/{eventId}", method = RequestMethod.GET)
-    public String toDetail(@PathVariable long eventId, Model m, RedirectAttributes ra) {
-        return ss.getShowDetail(eventId, m, ra);
     }
 }

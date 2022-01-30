@@ -48,7 +48,7 @@ public class NoticeSI implements NoticeS {
         List<NoticeE> normalNotice = nr.findByImportantOrderByEffectiveDateBDesc('n');
         if (!normalNotice.isEmpty()) {
             m.addAttribute("noticelist",
-                    normalNotice.stream().map(a -> a.toDto().toListDto()).collect(Collectors.toList()));
+                    normalNotice.stream().map(a -> a.toListDto()).collect(Collectors.toList()));
         }
 
         // 이 정보들 보여줄 형식이 있는 html파일 리턴
@@ -67,7 +67,7 @@ public class NoticeSI implements NoticeS {
         // 요청받은 카테고리에 해당하는 글만 골라서 가져가기
         if (!nr.findByCategoryOrderByEffectiveDateBDesc(cat).isEmpty()) {
             List<NoticeE> raw = nr.findByCategoryOrderByEffectiveDateBDesc(cat);
-            m.addAttribute("noticelist", raw.stream().map(a -> a.toDto().toListDto()).collect(Collectors.toList()));
+            m.addAttribute("noticelist", raw.stream().map(a -> a.toListDto()).collect(Collectors.toList()));
         }
 
         return "sacnews/listPart";
@@ -137,6 +137,7 @@ public class NoticeSI implements NoticeS {
         if (raw.isPresent()) {
             NoticeE data = raw.get();
             System.out.println(data.getAttachment()); // Lazy 로딩 select 쿼리날리기
+            // 이게 왜 되는거지...
             m.addAttribute("notice", raw.get().toDto());
             return "sacnews/detail";
         } else {
@@ -162,7 +163,7 @@ public class NoticeSI implements NoticeS {
     public List<NoticeLD> getImportantList() {
         List<NoticeE> importantTmp = nr.findByImportantOrderByEffectiveDateBDesc('y');
         if (!importantTmp.isEmpty()) {
-            return importantTmp.stream().map(a -> a.toDto().toListDto()).collect(Collectors.toList());
+            return importantTmp.stream().map(a -> a.toListDto()).collect(Collectors.toList());
         } else {
             return null;
         }

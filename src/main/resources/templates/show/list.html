@@ -8,13 +8,13 @@
     <th:block th:insert="/fragments/global::head-links" />
     <link rel="stylesheet" href="/styles/pages/show/list.css" />
     <title>Document</title>
-    <!-- <script th:inline="javascript">
+    <script th:inline="javascript">
       $(function () {
-        if ("[[${error}]]" != "null") {
-          alert("[[${error}]]");
+        var error = "[[${error}]]";
+        if (error != "null") {
+          alert(error);
         }
-      }); -->
-      <!-- TODO redirectAttribute 로 보낸 에러메시지 왜 안뜨는지 고치기... -->
+      });
     </script>
   </head>
   <body>
@@ -60,23 +60,21 @@
                   </tr>
                 </thead>
               </table>
-              <!-- <table>      // TODO delete after testing
-                <tbody>
-                  <tr class="tablel">
-                    <td class="column1">테스트행사명</td>
-                    <td class="column2">테스트기간</td>
-                    <td class="column3">테스트장소</td>
-                    <td class="column4">안팔아요<!--예매상태--><!--</td>
-                  </tr>
-                </tbody>
-              </table> -->
               <table th:if="${shows}">
                 <tbody>
                   <tr class="tablel" th:each="a : ${shows}">
                     <td class="column1">
                       <a th:href="@{|/show/${a.id}|}">[[${a.eventTitle}]]</a>
-                      <span class="red-font red-border planner" th:if="${a.sacPlanned} eq y">SAC기획</span>
-                      <span class="red-font red-border planner" th:if="${a.sacPlanned} eq c">공동주최</span>
+                      <span
+                        class="red-font red-border planner"
+                        th:if="${a.sacPlanned} eq y"
+                        >SAC기획</span
+                      >
+                      <span
+                        class="red-font red-border planner"
+                        th:if="${a.sacPlanned} eq c"
+                        >공동주최</span
+                      >
                     </td>
                     <td th:if="${a.eventGroup} eq 'exhibition'" class="column2">
                       <!-- 전시일 때 ######################## -->
@@ -92,16 +90,21 @@
                       <!--판매상태 's'-->
                     </td>
                     <td th:if="${a.onSale} eq 'o'" class="column4">
-                      <a class="salesStatus onlinePurchase" href="#"> 예매하기<!--판매상태 'o'--> </a>
+                      <a class="salesStatus onlinePurchase" href="#">
+                        예매하기<!--판매상태 'o'-->
+                      </a>
                     </td>
                     <td th:if="${a.onSale} eq 'p'" class="column4">
-                      <p class="salesStatus upComming">예정</p><!--판매상태 'p'-->
+                      <p class="salesStatus upComming">예정</p>
+                      <!--판매상태 'p'-->
                     </td>
                     <td th:if="${a.onSale} eq 'c'" class="column4">
-                      <p class="salesStatus closed">종료</p><!--판매상태 'c'-->
+                      <p class="salesStatus closed">종료</p>
+                      <!--판매상태 'c'-->
                     </td>
                     <td th:if="${a.onSale} eq 'i'" class="column4">
-                      <p clas="salesStatus inviteOnly">초대</p><!--판매상태 'i'-->
+                      <p clas="salesStatus inviteOnly">초대</p>
+                      <!--판매상태 'i'-->
                     </td>
                   </tr>
                 </tbody>

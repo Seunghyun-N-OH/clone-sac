@@ -22,6 +22,10 @@ public class EventLD {
     // 전시인지 공연인지 구분
     private String venue1; // [음악당, 오페라하우스, 전시장]
     // 진행장소 대분류
+    private String venue2; // [한가람디자인미술관, 한가람미술관]
+    // 진행장소 중분류
+    private String venue3; // [1층, 2층, 특별관]
+    // 진행장소 소분류
     private char sacPlanned; // [c, y, n]
     // sac 기획행사인지여부
     private String eventTitle; // [라이프사진전, 샤갈달리뷔페]

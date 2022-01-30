@@ -12,7 +12,7 @@ public interface ShowS {
 
     void registerEvent(EventD a, List<String> subject, List<Integer> price, MultipartFile poster, MultipartFile detail);
 
-    void getShowList(Model m);
+    String getShowList(Model m);
 
     String getShowDetail(long eventId, Model m, RedirectAttributes ra);
 

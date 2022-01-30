@@ -35,13 +35,4 @@ public class NoticeD {
     private LocalDateTime cTime;
     private LocalDateTime eTime;
 
-    public NoticeLD toListDto() {
-        NoticeLD a = new NoticeLD();
-        a.setNo(this.getNo());
-        a.setCategory(this.getCategory());
-        a.setTitle(this.getTitle());
-        a.setEffectiveDateB(this.getEffectiveDateB());
-        a.setEffectiveDateE(this.getEffectiveDateE());
-        return a;
-    }
 }

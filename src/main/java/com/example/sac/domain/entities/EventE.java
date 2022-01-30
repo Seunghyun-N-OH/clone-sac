@@ -55,9 +55,8 @@ public class EventE {
     private String eventTitle; // [라이프사진전, 샤갈달리뷔페]
     // 행사 명
     @ElementCollection
-    @CollectionTable(name = "host")
-    @Builder.Default
-    private List<String> host = new ArrayList<>(); // [동아일보]
+    @Column(nullable = false)
+    private List<String> host; // [동아일보]
     // 주관
     @ElementCollection
     @CollectionTable(name = "organizer")
@@ -82,13 +81,13 @@ public class EventE {
     // 가격정책
 
     @OneToOne(optional = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "poster_id") // 단방향 1:1 [EventImageE 는 FK 안가지고, EventE 만 FK 가짐]
-    private EventImage poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+    @JoinColumn(name = "poster_id") // 단방향 1:1 [포스터는 1개만 등록받을 것]
+    private EventPoster poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
     // 포스터
 
-    @OneToOne(optional = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "detail_id") // 단방향 1:1 [EventImageE 는 FK 안가지고, EventE 만 FK 가짐]
-    private EventImage detailImage; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+    @OneToMany // 단방향 1:N [상세페이지는 여러개가 될 수 있음]
+    @JoinColumn
+    private List<EventDetailImg> detail_img; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
     // 상세페이지
 
     @Column(nullable = false)
@@ -122,135 +121,47 @@ public class EventE {
     // 러닝타임
 
     public EventD toDto() {
-        if (this.getPoster() == null && this.getDetailImage() == null) {
-            System.out.println("Poster & Detail are null");
-            return EventD.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1())
-                    .venue2(this.getVenue2())
-                    .venue3(this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .host(this.getHost())
-                    .organizer(this.getOrganizer())
-                    .sponsor(this.getSponsor())
-                    .requiredAge(this.getRequiredAge())
-                    .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy())
-                    .contact(this.getContact())
-                    .openDate(this.getOpenDate())
-                    .finDate(this.getFinDate())
-                    .openTime(this.getOpenTime())
-                    .lastEntrance(this.getLastEntrance())
-                    .closeTime(this.getCloseTime())
-                    .eventTime(this.getEventTime())
-                    .runningTime(this.getRunningTime())
-                    .build();
-        } else if (this.getPoster() == null && this.getDetailImage() != null) {
-            System.out.println("Poster is null, but not Detail");
-            return EventD.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1())
-                    .venue2(this.getVenue2())
-                    .venue3(this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .host(this.getHost())
-                    .organizer(this.getOrganizer())
-                    .sponsor(this.getSponsor())
-                    .requiredAge(this.getRequiredAge())
-                    .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy())
-                    .detailImage(this.getDetailImage())
-                    .contact(this.getContact())
-                    .openDate(this.getOpenDate())
-                    .finDate(this.getFinDate())
-                    .openTime(this.getOpenTime())
-                    .lastEntrance(this.getLastEntrance())
-                    .closeTime(this.getCloseTime())
-                    .eventTime(this.getEventTime())
-                    .runningTime(this.getRunningTime())
-                    .build();
-        } else if (this.getPoster() != null && this.getDetailImage() == null) {
-            System.out.println("Poster is not null, but Detail is");
-            return EventD.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1())
-                    .venue2(this.getVenue2())
-                    .venue3(this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .host(this.getHost())
-                    .organizer(this.getOrganizer())
-                    .sponsor(this.getSponsor())
-                    .requiredAge(this.getRequiredAge())
-                    .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy())
-                    .poster(this.getPoster())
-                    .contact(this.getContact())
-                    .openDate(this.getOpenDate())
-                    .finDate(this.getFinDate())
-                    .openTime(this.getOpenTime())
-                    .lastEntrance(this.getLastEntrance())
-                    .closeTime(this.getCloseTime())
-                    .eventTime(this.getEventTime())
-                    .runningTime(this.getRunningTime())
-                    .build();
-        } else {
-            System.out.println("Both Poster and Detail are not null");
-            return EventD.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1())
-                    .venue2(this.getVenue2())
-                    .venue3(this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .host(this.getHost())
-                    .organizer(this.getOrganizer())
-                    .sponsor(this.getSponsor())
-                    .requiredAge(this.getRequiredAge())
-                    .onSale(this.getOnSale())
-                    .pricingPolicy(this.getPricingPolicy())
-                    .poster(this.getPoster())
-                    .detailImage(this.getDetailImage())
-                    .contact(this.getContact())
-                    .openDate(this.getOpenDate())
-                    .finDate(this.getFinDate())
-                    .openTime(this.getOpenTime())
-                    .lastEntrance(this.getLastEntrance())
-                    .closeTime(this.getCloseTime())
-                    .eventTime(this.getEventTime())
-                    .runningTime(this.getRunningTime())
-                    .build();
-        }
+        return EventD.builder()
+                .id(this.id)
+                .eventGroup(this.eventGroup)
+                .venue1(this.venue1)
+                .venue2(this.venue2)
+                .venue3(this.venue3)
+                .sacPlanned(this.sacPlanned)
+                .eventTitle(this.eventTitle)
+                .host(this.host)
+                .organizer(this.organizer)
+                .sponsor(this.sponsor)
+                .requiredAge(this.requiredAge)
+                .onSale(this.onSale)
+                .pricingPolicy(this.pricingPolicy)
+                .poster(this.poster)
+                .detail_img(this.detail_img)
+                .contact(this.contact)
+                .openDate(this.openDate)
+                .finDate(this.finDate)
+                .openTime(this.openTime)
+                .lastEntrance(this.lastEntrance)
+                .closeTime(this.closeTime)
+                .eventTime(this.eventTime)
+                .runningTime(this.runningTime)
+                .build();
     }
 
-    public EventLD toLDto() {
-        if (this.getEventGroup().equals("exhibition")) {
-            return EventLD.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1() + this.getVenue2() + this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .onSale(this.getOnSale())
-                    .openDate(this.getOpenDate())
-                    .finDate(this.getFinDate())
-                    .build();
-        } else {
-            return EventLD.builder()
-                    .id(this.getId())
-                    .eventGroup(this.getEventGroup())
-                    .venue1(this.getVenue1() + this.getVenue2() + this.getVenue3())
-                    .sacPlanned(this.getSacPlanned())
-                    .eventTitle(this.getEventTitle())
-                    .onSale(this.getOnSale())
-                    .eventTime(this.getEventTime())
-                    .build();
-        }
+    public EventLD toListDto() {
+        return EventLD.builder()
+                .id(this.id)
+                .eventGroup(this.eventGroup)
+                .venue1(this.venue1)
+                .venue2(this.venue2)
+                .venue3(this.venue3)
+                .sacPlanned(this.sacPlanned)
+                .eventTitle(this.eventTitle)
+                .onSale(this.onSale)
+                .openDate(this.openDate)
+                .finDate(this.finDate)
+                .eventTime(this.eventTime)
+                .build();
     }
+
 }

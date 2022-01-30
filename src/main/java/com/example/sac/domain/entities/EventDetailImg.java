@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class EventImage {
+public class EventDetailImg {
     @Id
     @GeneratedValue
     @Column(name = "image_id")
