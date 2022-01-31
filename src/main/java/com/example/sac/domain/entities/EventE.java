@@ -86,8 +86,9 @@ public class EventE {
     // 포스터
 
     @OneToMany // 단방향 1:N [상세페이지는 여러개가 될 수 있음]
-    @JoinColumn
-    private List<EventDetailImg> detail_img; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+    @JoinColumn(name = "event_id")
+    @Builder.Default
+    private List<EventDetailImg> detail_img = new ArrayList<>(); // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
     // 상세페이지
 
     @Column(nullable = false)
@@ -164,4 +165,12 @@ public class EventE {
                 .build();
     }
 
+    public void addPricingPolicy(PricingPolicy a) {
+        this.pricingPolicy.add(a);
+        a.setEvent(this);
+    }
+
+    public void addEventDetailImg(EventDetailImg a) {
+        this.detail_img.add(a);
+    }
 }

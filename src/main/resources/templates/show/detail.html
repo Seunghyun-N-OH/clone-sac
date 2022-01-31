@@ -18,7 +18,7 @@
             <div class="InfoArea">
                 <table style="display:flex;justify-content: left; width : 100%;">
                     <thead>
-                        <td>
+                        <td  th:if="${event.sacPlanned}">
                             <button class="likeBtn" type="button">찜하기</button> 
                             <span class="planner"th:unless="${event.sacPlanned} eq 'n'">
                                 SAC기획
@@ -31,25 +31,22 @@
                 </table>
               <table style="font-size : 14px;">
                 <tbody>
-                  <tr class="tableL">
+                  <tr class="tableL"th:if="${event.openDate}">
                     <td class="col1">기간</td>
-                    <td class="col2" th:if="${event.openDate}">
+                    <td class="col2" >
                       [[${event.openDate}]] ~ [[${event.finDate}]]
                     </td>
-                    <td class="col2" th:if="${event.eventTime}">
-                      <!-- TODO Lazy Loading 처리한 후 행사시간 출력태그 작성 + substring 처리-->
-                    </td>
                   </tr>
-                  <tr class="tableL">
+                  <tr class="tableL" th:if="${event.eventTime}">
                     <td class="col1">시간</td>
-                    <!-- <td class="col2" th:if="${event.eventTime}"> -->
-                      <!-- TODO Lazy Loading 처리한 후 행사시간 출력태그 작성 + substring 처리 -->
-                    <!-- </td> -->
+                    <td class="col2">
+                      <span  th:each="a : ${event.eventTime}">[[${a}]] / </span>
+                    </td>
                     <td class="col2" th:if="${event.openTime}">
                         [[${event.openTime}]] ~ [[${event.closeTime}]] (※매주 월요일 휴관)
                     </td>
                   </tr>
-                  <tr class="tableL" th:if="${event.lastEntrance}">
+                  <tr class="tableL" th:if="${event.lastEntrance} ne ''">
                     <td class="col1">입장마감</td>
                     <td class="col2">
                       [[${event.lastEntrance}]]
@@ -147,8 +144,8 @@
           </div>
           <div class="maincontents">
             <!--  ############################################################## -->
-            <div th:if="${event.detailImage}">
-                <img th:src="${event.detailImage.filePath} + ${event.detailImage.fileName}" style="width : 100%" alt="">
+            <div th:if="${event.detail_img}">
+                <img th:each="a : ${event.detail_img}" th:src="${a.filePath} + ${a.fileName}" style="width : 100%" alt="">
             </div>
             <!--  ############################################################## -->
           </div>

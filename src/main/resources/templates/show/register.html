@@ -48,6 +48,7 @@
               action="/admin/show/register"
               method="post"
               enctype="multipart/form-data"
+              id="eventForm"
             >
               <table>
                 <tbody>
@@ -56,25 +57,31 @@
                     <th class="valueBlock">data or input</th>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">행사구분</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      행사구분
+                    </td>
                     <td class="valueBlock">
                         <input type="radio" name="eventGroup" id="show" value="show" class="customRadio">
-                        <label for="show" class="customRadioLabel">공연</label>
+                        <label for="show" id="showBtn" class="customRadioLabel">공연</label>
                         <input type="radio" name="eventGroup" id="exhibition" value="exhibition" class="customRadio">
                         <label for="exhibition" class="customRadioLabel">전시</label>
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">행사 장소</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      행사 장소
+                    </td>
                     <td class="valueBlock">
                         <select name="venue1" id="venue1">
-                            <option selected>===대분류===</option>
+                            <option value="" selected>===대분류===</option>
                             <option value="음악당">음악당</option>
                             <option value="오페라하우스">오페라하우스</option>
                             <option value="전시장">전시장</option>
                         </select>
                         <select name="venue2" id="venue2">
-                            <option selected>===중분류===</option>
+                            <option value="" selected>===중분류===</option>
                             <option value="콘서트홀">콘서트홀</option>
                             <option value="IBK챔버홀">IBK챔버홀</option>
                             <option value="리사이틀홀">리사이틀홀</option>
@@ -89,7 +96,7 @@
                             <option value="비타민스테이션(한가람미술관 제7전시실)">비타민스테이션(제7전시실)</option>
                         </select>
                         <select name="venue3" id="venue3">
-                            <option selected>===소분류===</option>
+                            <option value="" selected>===소분류===</option>
                             <option value="제1전시실, 제2전시실">1층</option>
                             <option value="제3전시실, 제4전시실">2층</option>
                             <option value="제5전시실, 제6전시실">3층</option>
@@ -100,10 +107,13 @@
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">예술의전당 기획여부</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      예술의전당 기획여부
+                    </td>
                     <td class="valueBlock">
                         <select name="sacPlanned" id="sacPlanned">
-                            <option selected>===대분류===</option>
+                            <option value="" selected>===대분류===</option>
                             <option class="c" value="c">공동주최</option>
                             <option class="y" value="y">SAC기획</option>
                             <option class="n" value="n">대관전시</option>
@@ -111,43 +121,61 @@
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">행사명</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      행사명
+                    </td>
                     <td class="valueBlock">
-                        <input type="text" name="eventTitle" class="full-length" placeholder="행사명을 정확하게 입력해주세요">
+                        <input type="text" id="eventTitle" name="eventTitle" class="full-length" placeholder="행사명을 정확하게 입력해주세요">
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">주관사</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      주관사
+                    </td>
                     <td class="valueBlock" id="hostLine"> <!-- TODO 입력방식 바꿀 지 이후 결정 -->
-                        <input type="text" name="host" class="half-length" placeholder="주관 단체(기업 명)">
+                        <input type="text" id="host" name="host" class="half-length" placeholder="주관 단체(기업 명)">
                         <button type="button" class="inputGenerator" onclick="addHostLine()">주관사 추가</button>
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">주최사</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      주최사
+                    </td>
                     <td class="valueBlock" id="organizerLine">
-                        <input type="text" name="organizer" class="half-length" placeholder="주최 단체(기업 명)">
+                        <input type="text" id="organizer" name="organizer" class="half-length" placeholder="주최 단체(기업 명)">
                         <button type="button" class="inputGenerator" onclick="addOrganizerLine()">주최사 추가</button>
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">후원/협찬/협력사</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      후원/협찬/협력사
+                    </td>
                     <td class="valueBlock" id="sponsorLine">
-                        <input type="text" name="sponsor" class="half-length" placeholder="후원인, 단체, 기업 명">
+                        <input type="text" id="sponsor" name="sponsor" class="half-length" placeholder="후원인, 단체, 기업 명">
                         <button type="button" class="inputGenerator" onclick="addSponsorLine()">후원/협찬/협력사 추가</button>
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">연령제한</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      연령제한
+                    </td>
                     <td class="valueBlock">
-                        <input type="text" name="requiredAge" class="full-length" placeholder="입장/관람 제한기준을 명확하게 표기해주세요.">
+                        <input type="text" id="rAge" name="requiredAge" class="full-length" placeholder="입장/관람 제한기준을 명확하게 표기해주세요.">
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">입장권 판매</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      입장권 판매
+                    </td>
                     <td class="valueBlock">
                         <select name="onSale" id="onSale">
-                            <option selected>===이후변경가능===</option>
+                            <option value="" selected>===이후변경가능===</option>
                             <option value='s'>현장판매</option>
                             <option value='o'>온라인</option>
                             <option value='p'>판매예정</option>
@@ -157,65 +185,76 @@
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">입장권 판매가 정책</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      입장권 판매가 정책
+                    </td>
                     <td class="valueBlock" id="priceBlock">
-                        <input type="text" name="subject" class="half-length" placeholder="대상 (연령 또는 자격기준)">
-                        <input type="text" name="price"class="half-length" placeholder="판매가격">
+                        <input type="text" id="sub1" name="subject" class="half-length" placeholder="대상 (연령 또는 자격기준)">
+                        <input type="text" id="pri1" name="price"class="half-length" placeholder="판매가격">
                         <button type="button" class="inputGenerator" onclick="addPriceLine()">가격정책 추가</button>
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">행사 포스터(메인이미지)</td>
+                    <td class="nameBlock">행사 포스터(메인이미지) <p class="red-font">1개 파일만 등록 가능</p> </td>
                     <td class="valueBlock">
                         <input type="file" name="poster_file" >
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">행사 이미지(상세페이지)</td>
+                    <td class="nameBlock">행사 이미지(상세페이지) <p class="red-font">2개 이상 등록 가능</p></td>
                     <td class="valueBlock">
-                        <input type="file" name="detailImage_file" >
+                        <input type="file" multiple="multiple" name="detailImage_file" >
                     </td>
                   </tr>
                   <tr class="oneLine">
-                    <td class="nameBlock">문의처</td>
+                    <td class="nameBlock">
+                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
+                      문의처
+                    </td>
                     <td class="valueBlock">
-                        <input type="text" name="contact" class="full-length" placeholder="고객문의 및 담당자소통이 가능한 번호">
+                        <input type="text" id="contact" name="contact" class="full-length" placeholder="고객문의 및 담당자소통이 가능한 번호">
                     </td>
                   </tr>
                   <tr class="oneLine">
                     <td class="nameBlock">개막일</td>
                     <td class="valueBlock">
-                        <input type="date" name="openDate"><p class="red-font">* 기간제로 진행되는 행사에만 해당</p>
+                        <input type="date" id="openDate" name="openDate">
+                        <p class="red-font">* 기간제로 진행되는 행사에만 해당 (전시회 등)</p>
                     </td>
                   </tr>
                   <tr class="oneLine">
                     <td class="nameBlock">폐막일</td>
                     <td class="valueBlock">
-                        <input type="date" name="finDate"><p class="red-font">* 기간제로 진행되는 행사에만 해당</p>
+                        <input type="date" name="finDate">
+                        <p class="red-font">* 기간제로 진행되는 행사에만 해당 (전시회 등)</p>
                     </td>
                   </tr>
                   <tr class="oneLine">
                     <td class="nameBlock">개관시간</td>
                     <td class="valueBlock">
-                        <input type="time" name="openTime"><p class="red-font">* 운영시간이 있는 행사에만 해당</p>
+                        <input type="time" name="openTime">
+                        <p class="red-font">* 운영시간이 있는 행사에만 해당 (전시회 등)</p>
                     </td>
                   </tr>
                   <tr class="oneLine">
                     <td class="nameBlock">입장마감시간</td>
                     <td class="valueBlock">
-                        <input type="time" name="lastEntrance"><p class="red-font">* 운영시간이 있는 행사에만 해당</p>
+                        <input type="time" name="lastEntrance">
+                        <p class="red-font">* 운영시간이 있는 행사에만 해당 (전시회 등)</p>
                     </td>
                   </tr>
                   <tr class="oneLine">
                     <td class="nameBlock">폐관시간</td>
                     <td class="valueBlock">
-                        <input type="time" name="closeTime"><p class="red-font">* 운영시간이 있는 행사에만 해당</p>
+                        <input type="time" name="closeTime">
+                        <p class="red-font">* 운영시간이 있는 행사에만 해당 (전시회 등)</p>
                     </td>
                   </tr>
                   <tr class="oneLine">
                     <td class="nameBlock">회차별 시작시간</td>
                     <td class="valueBlock" id="eventTimeLine">
-                        <p class="red-font">* 회차제로 진행되는 행사에만 해당</p>
+                        <p class="red-font" style="margin-bottom:0.5rem">* 회차제로 진행되는 행사에만 해당 (공연, 연주회 등)</p>
                         <input type="datetime-local" name="eventTime">
                         <button type="button" class="inputGenerator" onclick="addEventTimeLine()">회차별 시작시간추가</button>
                     </td>
@@ -224,7 +263,7 @@
                     <td class="nameBlock">회차별 시간</td>
                     <td class="valueBlock">
                         <select name="hours" id="hours">
-                          <option value="1">0</option>
+                          <option value="0">0</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -254,13 +293,13 @@
                           <option value="55">55</option>
                         </select>
                         <span>분</span>
-                        <input type="number" name="runningTime" class="full-length">
+                        <input type="number" id="rt" value="0" name="runningTime" class="full-length">
                         <p class="red-font">* 회차제로 진행되는 행사에만 해당</p>
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <button type="submit" class="registerBtn">등록하기</button>
+              <button type="button" onclick="submitCheck()" class="registerBtn">등록하기</button>
             </form>
             <!-- 여기까지 ######################################################################## -->
           </div>

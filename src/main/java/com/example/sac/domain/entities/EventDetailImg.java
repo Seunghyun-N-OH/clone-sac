@@ -9,17 +9,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
+@ToString
 public class EventDetailImg {
     @Id
     @GeneratedValue
-    @Column(name = "image_id")
-    private long imageId; // 이미지파일 id
+    private long id; // 이미지파일 id
 
     @Column(nullable = false)
     private String fileName; // 파일이름

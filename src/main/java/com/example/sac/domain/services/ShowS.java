@@ -10,7 +10,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public interface ShowS {
 
-    void registerEvent(EventD a, List<String> subject, List<Integer> price, MultipartFile poster, MultipartFile detail);
+    void registerEvent(EventD a, List<String> subject, List<Integer> price, MultipartFile poster,
+            List<MultipartFile> detail);
 
     String getShowList(Model m);
 

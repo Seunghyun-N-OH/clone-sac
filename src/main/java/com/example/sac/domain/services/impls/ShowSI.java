@@ -7,13 +7,16 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import com.example.sac.domain.entities.EventDetailImg;
 import com.example.sac.domain.entities.EventE;
+import com.example.sac.domain.entities.EventPoster;
 import com.example.sac.domain.entities.PricingPolicy;
 import com.example.sac.domain.repositories.EventDetailImgR;
 import com.example.sac.domain.repositories.EventPosterR;
 import com.example.sac.domain.repositories.EventR;
 import com.example.sac.domain.repositories.PricingPolicyR;
 import com.example.sac.domain.services.ShowS;
+import com.example.sac.domain.services.functions.UpAndDownFile;
 import com.example.sac.web.dtos.EventD;
 import com.example.sac.web.dtos.EventLD;
 
@@ -49,12 +52,64 @@ public class ShowSI implements ShowS {
     }
 
     @Override
+    public void registerEvent(EventD a, List<String> s, List<Integer> p, MultipartFile po, List<MultipartFile> d) {
+
+        // 파일저장 - 포스터
+        EventPoster poster = UpAndDownFile.upEventPoster(po);
+
+        // 행사정보 자체 저장
+        EventE inData = EventE.builder()
+                .eventGroup(a.getEventGroup())
+                .venue1(a.getVenue1())
+                .venue2(a.getVenue2())
+                .venue3(a.getVenue3())
+                .sacPlanned(a.getSacPlanned())
+                .eventTitle(a.getEventTitle())
+                .host(a.getHost())
+                .organizer(a.getOrganizer())
+                .sponsor(a.getSponsor())
+                .requiredAge(a.getRequiredAge())
+                .onSale(a.getOnSale())
+                .poster(poster)
+                .contact(a.getContact())
+                .openDate(a.getOpenDate())
+                .lastEntrance(a.getLastEntrance())
+                .closeTime(a.getCloseTime())
+                .eventTime(a.getEventTime())
+                .runningTime(a.getRunningTime())
+                .build();
+        // 파일저장 - 상세페이지
+        List<EventDetailImg> details = UpAndDownFile.upEventDetailImages(d);
+        for (EventDetailImg de : details) {
+            edir.save(de);
+            inData.addEventDetailImg(de);
+        }
+        // 행사정보에 가격정책 추가+저장
+        List<PricingPolicy> pricingPolicyD = new ArrayList<>();
+        for (int i = 0; i < s.size(); i++) {
+            pricingPolicyD.add(PricingPolicy.builder().subject(s.get(i)).price(p.get(i)).build());
+        }
+        EventE savedEvent = er.save(inData);
+        for (PricingPolicy pp : pricingPolicyD) {
+            savedEvent.addPricingPolicy(pp);
+            ppr.save(pp);
+        }
+
+        System.out.println(savedEvent.toString());
+    }
+
+    @Override
     @Transactional
     public String getShowDetail(long eventId, Model m, RedirectAttributes ra) {
         Optional<EventE> raw = er.findById(eventId);
         if (raw.isPresent()) {
-            EventD data = raw.get().toDto();
-            m.addAttribute("event", data);
+            EventE data = raw.get();
+            System.out.println(data.getDetail_img().stream().toString());
+            System.out.println(data.getPoster().toString());
+            System.out.println(data.getPricingPolicy());
+            System.out.println(data.getEventTime());
+            System.out.println(data.toString());
+            m.addAttribute("event", data.toDto());
             return "show/detail";
         } else {
             ra.addFlashAttribute("error", "행사 정보가 존재하지 않습니다");
@@ -69,40 +124,6 @@ public class ShowSI implements ShowS {
         // implementation
         // m.addAttribute("event", raw.get().toDto());
         // return "show/detail";
-        // }
-    }
-
-    @Override
-    public void registerEvent(EventD a, List<String> s, List<Integer> p, MultipartFile po, MultipartFile d) {
-
-        // 파일저장 - 포스터
-        // 파일저장 - 상세페이지
-        // 행사정보 자체 저장
-        // 행사정보에 가격정책 추가+저장
-        // TODO 2201310353 : notice 프로세스 복습하다가 끔
-
-        List<PricingPolicy> prices = new ArrayList<>();
-        for (int i = 0; i < s.size(); i++) {
-            prices.add(PricingPolicy.builder().subject(s.get(i)).price(p.get(i)).build());
-        }
-        for (PricingPolicy a : prices) {
-
-        }
-
-        // List<PricingPolicy> pricingPolicyD = new ArrayList<>();
-        // for (int i = 0; i < s.size(); i++) {
-        // pricingPolicyD.add(PricingPolicy.builder().subject(s.get(i)).price(p.get(i)).build());
-        // }
-        // a.setPricingPolicy(pricingPolicyD);
-        // if (!po.isEmpty())
-        // a.setPoster(UpAndDownFile.upEventImage(po));
-        // if (!d.isEmpty())
-        // a.setDetailImage(UpAndDownFile.upEventImage(d));
-        // long no = er.save(a.toEntity()).getId();
-
-        // for (PricingPolicy ee : pricingPolicyD) {
-        // ppr.save(PricingPolicy.builder().price(ee.getPrice()).subject(ee.getSubject())
-        // .event(EventE.builder().id(no).build()).build());
         // }
     }
 
