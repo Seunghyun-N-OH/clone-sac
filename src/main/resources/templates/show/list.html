@@ -80,9 +80,12 @@
                       <!-- 전시일 때 ######################## -->
                       [[${a.openDate}]] ~ [[${a.finDate}]]
                     </td>
-                    <td th:if="${a.eventGroup} eq 'show'" class="column2">
+                    <td th:if="${#lists.size(a.eventTime) > 0}" class="column2">
+                      <p th:each="b : ${a.eventTime}">
+                        [[${#strings.substring(b,0,10)}]]
+                        [[${#strings.substring(b,11,16)}]]
+                      </p>
                       <!-- 공연일 때 ######################### -->
-                      기간
                     </td>
                     <td class="column3">[[${a.venue1}]]</td>
                     <td th:if="${a.onSale} eq 's'" class="column4">
@@ -103,7 +106,7 @@
                       <!--판매상태 'c'-->
                     </td>
                     <td th:if="${a.onSale} eq 'i'" class="column4">
-                      <p clas="salesStatus inviteOnly">초대</p>
+                      <p class="salesStatus inviteOnly">초대</p>
                       <!--판매상태 'i'-->
                     </td>
                   </tr>

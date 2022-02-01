@@ -61,7 +61,6 @@ function submitCheck(){
     if(!pricePolicyCheck()) return false;
     if(!contactCheck()) return false;
     
-    alert("submitCheck passed.");
     $("#eventForm").submit();
 }
 

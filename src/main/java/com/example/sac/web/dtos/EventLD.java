@@ -42,9 +42,8 @@ public class EventLD {
     // 행사 폐막일
 
     // [일정] 행사가 회차별로 진행되는 경우 입력 #################################################
-    // "${#dates.format(boardVO.regdate, 'yyyy-MM-dd HH:mm')}"
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    // TODO 날짜+시간형식이 안이뻐서 html상에서 받는 방식을 바꿀지 고려
+    // TODO 날짜+시간형식이 안이뻐서 html상에서 받는 방식을 바꿀지 고려, 현재는 thymeleaf subtring으로 처리중
     private List<LocalDateTime> eventTime; // [2022-01-27 12:00]
     // 회차별 시작시간
 }

@@ -41,7 +41,9 @@
                   <tr class="tableL" th:if="${#lists.size(event.eventTime) > 0}">
                     <td class="col1">시간</td>
                     <td class="col2">
-                      <span  th:each="a : ${event.eventTime}">[[${a}]] / </span>
+                      <span  th:each="a : ${event.eventTime}">
+                        [[${#strings.substring(a,0,10)}]] [[${#strings.substring(a,11,16)}]] / 
+                      </span>
                     </td>
                     <td class="col2" th:if="${event.openTime}">
                         [[${event.openTime}]] ~ [[${event.closeTime}]] (※매주 월요일 휴관)
@@ -150,17 +152,17 @@
             </div>
             <!--  ############################################################## -->
             <div class="controlBtns">
-              <form th:action="@{|/admin/show/manage|}" method="post">
+              <form sec:authorize="hasRole('ADMIN')" th:action="@{|/admin/show/manage|}" method="post">
                 <input type="hidden" name="_method" value="PUT"/>
                 <input type="text" th:value="${event.id}" name="evid" hidden>
-                <button type="submit" class="toEdit red-font red-border">수정</button>
+                <button type="submit" class="red-font red-border">수정</button>
               </form>
-              <form th:action="@{|/admin/show/manage|}" id="delForm" method="post">
+              <form sec:authorize="hasRole('ADMIN')" th:action="@{|/admin/show/manage|}" id="delForm" method="post">
                 <input type="hidden" name="_method" value="delete"/>
                 <input type="text" th:value="${event.id}" name="evid" hidden>
-                <button type="button" onclick="doubleCheckDelete()" class="deleteEvent red-font red-border">삭제</button>
+                <button type="button" onclick="doubleCheckDelete()" class="red-font red-border">삭제</button>
               </form>
-              <button onclick="location.href='/show'" class="toListPage red-font red-border">목록으로</button>
+              <button onclick="location.href='/show'" class="red-font red-border">목록으로</button>
             </div>
           </div>
         </section>

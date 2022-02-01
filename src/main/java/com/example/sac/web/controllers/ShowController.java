@@ -52,7 +52,7 @@ public class ShowController {
     @RequestMapping(value = "/admin/show/register", method = RequestMethod.PUT)
     public String submitEdit(EventD a, @RequestParam List<String> subject, @RequestParam List<Integer> price,
             MultipartFile poster_file, MultipartHttpServletRequest htsr, String deletePoster,
-            @RequestParam List<String> deleteDetails) {
+            @RequestParam(required = false) List<Long> deleteDetails) {
         return ss.saveEditedEvent(a, subject, price, poster_file,
                 List.copyOf(htsr.getFiles("detailImage_file")), deletePoster, deleteDetails);
     }

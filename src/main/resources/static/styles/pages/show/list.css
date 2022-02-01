@@ -68,7 +68,7 @@ select {
   border: 1px solid #424242;
 }
 
-.inviteOnly {
+p.inviteOnly {
   background-color: #7f3db8;
   color: #fff;
   border: 1px solid #424242;

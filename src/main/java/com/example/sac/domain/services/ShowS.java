@@ -20,6 +20,6 @@ public interface ShowS {
         String deleteEventWithId(long evid);
 
         String saveEditedEvent(EventD a, List<String> subject, List<Integer> price, MultipartFile poster_file,
-                        List<MultipartFile> copyOf, String deletePoster, List<String> deleteDetails);
+                        List<MultipartFile> copyOf, String deletePoster, List<Long> deleteDetails);
 
 }

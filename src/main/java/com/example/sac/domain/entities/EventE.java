@@ -161,7 +161,7 @@ public class EventE {
                 .onSale(this.onSale)
                 .openDate(this.openDate)
                 .finDate(this.finDate)
-                .eventTime(this.eventTime)
+                .eventTime(this.getEventTime())
                 .build();
     }
 
