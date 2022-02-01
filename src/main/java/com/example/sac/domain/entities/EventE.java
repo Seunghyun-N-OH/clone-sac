@@ -166,6 +166,7 @@ public class EventE {
     }
 
     public void addPricingPolicy(PricingPolicy a) {
+        System.out.println(this.getPricingPolicy());
         this.pricingPolicy.add(a);
         a.setEvent(this);
     }

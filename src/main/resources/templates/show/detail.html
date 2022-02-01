@@ -8,6 +8,7 @@
     <th:block th:insert="/fragments/global::head-links" />
     <link rel="stylesheet" href="/styles/pages/show/detail.css" />
     <title>Document</title>
+    <script src="/javascript/show/edit.js"></script>
   </head>
   <body>
     <th:block th:insert="~{/fragments/global::global(~{this::main})}">
@@ -31,13 +32,13 @@
                 </table>
               <table style="font-size : 14px;">
                 <tbody>
-                  <tr class="tableL"th:if="${event.openDate}">
+                  <tr class="tableL" th:unless="${event.openDate} eq null">
                     <td class="col1">기간</td>
-                    <td class="col2" >
+                    <td class="col2">
                       [[${event.openDate}]] ~ [[${event.finDate}]]
                     </td>
                   </tr>
-                  <tr class="tableL" th:if="${event.eventTime}">
+                  <tr class="tableL" th:if="${#lists.size(event.eventTime) > 0}">
                     <td class="col1">시간</td>
                     <td class="col2">
                       <span  th:each="a : ${event.eventTime}">[[${a}]] / </span>
@@ -46,7 +47,7 @@
                         [[${event.openTime}]] ~ [[${event.closeTime}]] (※매주 월요일 휴관)
                     </td>
                   </tr>
-                  <tr class="tableL" th:if="${event.lastEntrance} ne ''">
+                  <tr class="tableL" th:unless="${event.lastEntrance} eq ''">
                     <td class="col1">입장마감</td>
                     <td class="col2">
                       [[${event.lastEntrance}]]
@@ -67,7 +68,7 @@
                       <span>[[${event.requiredAge}]]</span>
                     </td>
                   </tr>
-                  <tr class="tableL" th:if="${event.runningTime}">
+                  <tr class="tableL" th:if="${event.runningTime} ne '0'">
                     <td class="col1" style="font-size:12px">관람시간(분)</td>
                     <td class="col2">[[${event.runningTime}]]</td>
                   </tr>
@@ -148,6 +149,19 @@
                 <img th:each="a : ${event.detail_img}" th:src="${a.filePath} + ${a.fileName}" style="width : 100%" alt="">
             </div>
             <!--  ############################################################## -->
+            <div class="controlBtns">
+              <form th:action="@{|/admin/show/manage|}" method="post">
+                <input type="hidden" name="_method" value="PUT"/>
+                <input type="text" th:value="${event.id}" name="evid" hidden>
+                <button type="submit" class="toEdit red-font red-border">수정</button>
+              </form>
+              <form th:action="@{|/admin/show/manage|}" id="delForm" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <input type="text" th:value="${event.id}" name="evid" hidden>
+                <button type="button" onclick="doubleCheckDelete()" class="deleteEvent red-font red-border">삭제</button>
+              </form>
+              <button onclick="location.href='/show'" class="toListPage red-font red-border">목록으로</button>
+            </div>
           </div>
         </section>
       </main>

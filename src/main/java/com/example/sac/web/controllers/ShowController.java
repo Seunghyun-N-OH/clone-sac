@@ -24,7 +24,7 @@ public class ShowController {
 
     private final ShowS ss;
 
-    @RequestMapping(value = "/show/show_list", method = RequestMethod.GET)
+    @RequestMapping(value = { "/show/show_list", "/show" }, method = RequestMethod.GET)
     public String toShowList(Model m) {
         return ss.getShowList(m);
     }
@@ -47,5 +47,24 @@ public class ShowController {
         System.out.println(a);
         ss.registerEvent(a, subject, price, poster_file, List.copyOf(htsr.getFiles("detailImage_file")));
         return "redirect:/show/show_list";
+    }
+
+    @RequestMapping(value = "/admin/show/register", method = RequestMethod.PUT)
+    public String submitEdit(EventD a, @RequestParam List<String> subject, @RequestParam List<Integer> price,
+            MultipartFile poster_file, MultipartHttpServletRequest htsr, String deletePoster,
+            @RequestParam List<String> deleteDetails) {
+        return ss.saveEditedEvent(a, subject, price, poster_file,
+                List.copyOf(htsr.getFiles("detailImage_file")), deletePoster, deleteDetails);
+    }
+
+    @RequestMapping(value = "/admin/show/manage", method = RequestMethod.PUT)
+    public String toEditPage(@RequestParam long evid, Model m, RedirectAttributes ra) {
+        ss.getShowDetail(evid, m, ra);
+        return "show/editPage";
+    }
+
+    @RequestMapping(value = "/admin/show/manage", method = RequestMethod.DELETE)
+    public String deleteThisEvent(@RequestParam long evid) {
+        return ss.deleteEventWithId(evid);
     }
 }

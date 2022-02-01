@@ -48,3 +48,10 @@ input.half-length {
   border-radius: 5px;
   border-color: #dd0000;
 }
+
+.fileButtons {
+  background: unset;
+  color: red;
+  padding: 0.25rem 0.5rem;
+  border-radius: 10px;
+}

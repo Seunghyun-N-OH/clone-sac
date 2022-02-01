@@ -10,11 +10,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public interface ShowS {
 
-    void registerEvent(EventD a, List<String> subject, List<Integer> price, MultipartFile poster,
-            List<MultipartFile> detail);
+        void registerEvent(EventD a, List<String> subject, List<Integer> price, MultipartFile poster,
+                        List<MultipartFile> detail);
 
-    String getShowList(Model m);
+        String getShowList(Model m);
 
-    String getShowDetail(long eventId, Model m, RedirectAttributes ra);
+        String getShowDetail(long eventId, Model m, RedirectAttributes ra);
+
+        String deleteEventWithId(long evid);
+
+        String saveEditedEvent(EventD a, List<String> subject, List<Integer> price, MultipartFile poster_file,
+                        List<MultipartFile> copyOf, String deletePoster, List<String> deleteDetails);
 
 }

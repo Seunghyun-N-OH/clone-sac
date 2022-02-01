@@ -1,5 +1,6 @@
 package com.example.sac.domain.services.impls;
 
+import java.lang.StackWalker.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -73,6 +74,7 @@ public class ShowSI implements ShowS {
                 .poster(poster)
                 .contact(a.getContact())
                 .openDate(a.getOpenDate())
+                .finDate(a.getFinDate())
                 .lastEntrance(a.getLastEntrance())
                 .closeTime(a.getCloseTime())
                 .eventTime(a.getEventTime())
@@ -105,7 +107,8 @@ public class ShowSI implements ShowS {
         if (raw.isPresent()) {
             EventE data = raw.get();
             System.out.println(data.getDetail_img().stream().toString());
-            System.out.println(data.getPoster().toString());
+            if (data.getPoster() != null)
+                System.out.println(data.getPoster().toString());
             System.out.println(data.getPricingPolicy());
             System.out.println(data.getEventTime());
             System.out.println(data.toString());
@@ -115,16 +118,86 @@ public class ShowSI implements ShowS {
             ra.addFlashAttribute("error", "행사 정보가 존재하지 않습니다");
             return "redirect:/show/show_list";
         }
-        // Optional<EventE> raw = er.findById(eventId);
-        // if (raw.isEmpty()) {
-        // ra.addFlashAttribute("error", "행사 정보가 존재하지 않습니다.");
-        // return "redirect:/show/show_list";
-        // } else {
-        // System.out.println(raw.get().toDto().toString()); // TODO delete after
-        // implementation
-        // m.addAttribute("event", raw.get().toDto());
-        // return "show/detail";
-        // }
+    }
+
+    @Override
+    @Transactional
+    public String deleteEventWithId(long evid) {
+        Optional<EventE> raw = er.findById(evid);
+        if (raw.isPresent()) {
+            for (PricingPolicy a : raw.get().getPricingPolicy()) {
+                ppr.deleteById(a.getPriceId());
+            }
+            if (raw.get().getPoster() != null)
+                UpAndDownFile.deletePosterFile(raw.get().getPoster());
+            for (EventDetailImg a : raw.get().getDetail_img()) {
+                UpAndDownFile.deleteDetailImage(a);
+                edir.deleteById(a.getId());
+            }
+            er.deleteById(evid);
+            return "redirect:/show";
+        } else {
+            return "redirect:/show/evid";
+        }
+    }
+
+    @Override
+    public String saveEditedEvent(EventD a, List<String> subject, List<Integer> price, MultipartFile poster_file,
+            List<MultipartFile> copyOf, String deletePoster, List<String> deleteDetails) {
+        System.out.println("Service : " + a);
+        Optional<EventE> before = er.findById(a.getId());
+        if (!before.isPresent())
+            return "redirect:/show";
+        else {
+            if (!poster_file.getOriginalFilename().isEmpty()) {
+                EventPoster newPoster = UpAndDownFile.upEventPoster(poster_file);
+                UpAndDownFile.deletePosterFile(before.get().getPoster());
+                EventE newData = EventE.builder()
+                        .id(a.getId())
+                        .eventGroup(a.getEventGroup())
+                        .venue1(a.getVenue1())
+                        .venue2(a.getVenue2())
+                        .venue3(a.getVenue3())
+                        .sacPlanned(a.getSacPlanned())
+                        .eventTitle(a.getEventTitle())
+                        .host(a.getHost())
+                        .organizer(a.getOrganizer())
+                        .sponsor(a.getSponsor())
+                        .requiredAge(a.getRequiredAge())
+                        .onSale(a.getOnSale())
+                        .poster(newPoster)
+                        .contact(a.getContact())
+                        .openDate(a.getOpenDate())
+                        .finDate(a.getFinDate())
+                        .lastEntrance(a.getLastEntrance())
+                        .closeTime(a.getCloseTime())
+                        .eventTime(a.getEventTime())
+                        .runningTime(a.getRunningTime())
+                        .build();
+                List<EventDetailImg> newDetails = UpAndDownFile.upEventDetailImages(copyOf);
+                if (!newDetails.isEmpty()) {
+                    for (EventDetailImg de : newDetails) {
+                        edir.save(de);
+                        newData.addEventDetailImg(de);
+                    }
+                }
+                List<PricingPolicy> pricingPolicyD = new ArrayList<>();
+                if (!subject.isEmpty()) {
+                    for (int i = 0; i < subject.size(); i++) {
+                        pricingPolicyD.add(PricingPolicy.builder().subject(subject.get(i)).price(price.get(i)).build());
+                    }
+                }
+                EventE newSaved = er.save(newData);
+                for (PricingPolicy npp : pricingPolicyD) {
+                    newSaved.addPricingPolicy(npp);
+                    ppr.save(npp);
+                }
+                return "redirect:/show/" + newSaved.getId();
+                // TODO 기존파일 삭제기능 추가 구현
+            }
+
+            return "redirect:/show";
+        }
     }
 
 }

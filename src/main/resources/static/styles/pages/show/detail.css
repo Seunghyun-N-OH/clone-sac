@@ -83,3 +83,14 @@ thead > tr {
   border-top: 1px solid #2e2e2e;
   padding: 0.15rem 0;
 }
+
+.controlBtns {
+  display: flex;
+  justify-content: center;
+}
+
+.controlBtns > button {
+  background-color: unset;
+  padding: 1rem;
+  margin: 0.5rem;
+}
