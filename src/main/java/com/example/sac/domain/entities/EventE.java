@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.example.sac.domain.services.functions.UpAndDownFile;
 import com.example.sac.web.dtos.EventD;
 import com.example.sac.web.dtos.EventLD;
 
@@ -171,7 +172,18 @@ public class EventE {
         a.setEvent(this);
     }
 
+    public void removePricingPolicy(PricingPolicy a) {
+        System.out.println(this.getPricingPolicy());
+        a.setEvent(null);
+        this.pricingPolicy.remove(a);
+    }
+
     public void addEventDetailImg(EventDetailImg a) {
         this.detail_img.add(a);
+    }
+
+    public void removePoster() {
+        UpAndDownFile.deletePosterFile(this.getPoster());
+        this.poster = null;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.sac.domain.services.impls;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -131,8 +132,10 @@ public class ShowSI implements ShowS {
             for (PricingPolicy a : raw.get().getPricingPolicy()) {
                 ppr.deleteById(a.getPriceId());
             }
-            if (raw.get().getPoster() != null)
+            if (raw.get().getPoster() != null) {
                 UpAndDownFile.deletePosterFile(raw.get().getPoster());
+                epr.deleteById(raw.get().getPoster().getImageId());
+            }
             for (EventDetailImg a : raw.get().getDetail_img()) {
                 UpAndDownFile.deleteDetailImage(a);
                 edir.deleteById(a.getId());
@@ -140,7 +143,7 @@ public class ShowSI implements ShowS {
             er.deleteById(evid);
             return "redirect:/show";
         } else {
-            return "redirect:/show/evid";
+            return "redirect:/show/" + evid;
         }
     }
 
@@ -160,8 +163,8 @@ public class ShowSI implements ShowS {
             // 5. 포스터 교체 + 상세페이지삭제/추가
             // 6. 포스터삭제 + 상세페이지삭제/추가
             if (deletePoster != null) {
-                UpAndDownFile.deletePosterFile(before.get().getPoster());
                 epr.deleteById(before.get().getPoster().getImageId());
+                before.get().removePoster();
             }
             if (deleteDetails != null) {
                 for (Long detailNo : deleteDetails) {
@@ -170,7 +173,15 @@ public class ShowSI implements ShowS {
                     edir.deleteById(detailNo);
                 }
             }
+
+            for (PricingPolicy ab : before.get().getPricingPolicy()) {
+                ab.setEvent(null);
+                ppr.delete(ab);
+            }
+
             EventE newData;
+            List<PricingPolicy> pricingPolicyD = new ArrayList<>();
+
             if (!poster_file.getOriginalFilename().isEmpty()) {
                 EventPoster newPoster = UpAndDownFile.upEventPoster(poster_file);
                 newData = EventE.builder()
@@ -190,6 +201,7 @@ public class ShowSI implements ShowS {
                         .contact(a.getContact())
                         .openDate(a.getOpenDate())
                         .finDate(a.getFinDate())
+                        .pricingPolicy(pricingPolicyD)
                         .lastEntrance(a.getLastEntrance())
                         .closeTime(a.getCloseTime())
                         .eventTime(a.getEventTime())
@@ -213,6 +225,7 @@ public class ShowSI implements ShowS {
                         .contact(a.getContact())
                         .openDate(a.getOpenDate())
                         .finDate(a.getFinDate())
+                        .pricingPolicy(pricingPolicyD)
                         .lastEntrance(a.getLastEntrance())
                         .closeTime(a.getCloseTime())
                         .eventTime(a.getEventTime())
@@ -226,19 +239,18 @@ public class ShowSI implements ShowS {
                     newData.addEventDetailImg(de);
                 }
             }
-            List<PricingPolicy> pricingPolicyD = new ArrayList<>();
-            if (!subject.isEmpty()) {
-                for (int i = 0; i < subject.size(); i++) {
-                    pricingPolicyD.add(PricingPolicy.builder().subject(subject.get(i)).price(price.get(i)).build());
-                }
-            }
+
             EventE newSaved = er.save(newData);
+
+            for (int i = 0; i < subject.size(); i++) {
+                pricingPolicyD.add(PricingPolicy.builder().subject(subject.get(i)).price(price.get(i)).build());
+            }
+
             for (PricingPolicy npp : pricingPolicyD) {
                 newSaved.addPricingPolicy(npp);
                 ppr.save(npp);
             }
             return "redirect:/show/" + newSaved.getId();
-            // TODO 기존파일 삭제기능 추가 구현
         }
     }
 
