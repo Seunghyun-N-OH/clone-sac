@@ -55,9 +55,6 @@ function submitCheck(){
     if(!isVenueSelected()) return false;
     if(!isPlannerSelected()) return false;
     if(!eventTitleCheck()) return false;
-    if(!hostCheck()) return false;
-    if(!organizerCheck()) return false;
-    if(!sponsorCheck()) return false;
     if(!requiredAgeCheck()) return false;
     if(!onSaleCheck()) return false;
     if(!pricePolicyCheck()) return false;

@@ -79,11 +79,6 @@ public class MembershipController {
         return "membership/join-4";
     }
 
-    // @RequestMapping(value = "/member/signin", method = RequestMethod.GET)
-    // public String getLoginForm() {
-    // return "membership/login";
-    // }
-
     @RequestMapping(value = "/member/signin", method = RequestMethod.GET)
     public String loginFaild(@RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "exception", required = false) String exception,

@@ -53,9 +53,6 @@ function submitCheck(){
     if(!isVenueSelected()) return false;
     if(!isPlannerSelected()) return false;
     if(!eventTitleCheck()) return false;
-    if(!hostCheck()) return false;
-    if(!organizerCheck()) return false;
-    if(!sponsorCheck()) return false;
     if(!requiredAgeCheck()) return false;
     if(!onSaleCheck()) return false;
     if(!pricePolicyCheck()) return false;
@@ -85,7 +82,7 @@ function isVenueSelected(){
 }
 
 function isPlannerSelected(){
-    if($("#sacPlanned").val()=='n'){
+    if($("#sacPlanned").val()=='o'){
         alert("예술의전당 기획여부를 선택해주세요.");
         $("#sacPlanned").focus();
         return false;

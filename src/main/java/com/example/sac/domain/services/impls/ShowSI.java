@@ -1,7 +1,6 @@
 package com.example.sac.domain.services.impls;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -156,12 +155,6 @@ public class ShowSI implements ShowS {
         if (!before.isPresent())
             return "redirect:/show";
         else {
-            // 1. 포스터만 삭제함
-            // 2. 포스터랑 상세페이지 다 삭제함
-            // 3. 포스터만 교체함
-            // 4. 상세페이지만 삭제+ 추가함
-            // 5. 포스터 교체 + 상세페이지삭제/추가
-            // 6. 포스터삭제 + 상세페이지삭제/추가
             if (deletePoster != null) {
                 epr.deleteById(before.get().getPoster().getImageId());
                 before.get().removePoster();
@@ -198,6 +191,7 @@ public class ShowSI implements ShowS {
                         .requiredAge(a.getRequiredAge())
                         .onSale(a.getOnSale())
                         .poster(newPoster)
+                        .detail_img(before.get().getDetail_img())
                         .contact(a.getContact())
                         .openDate(a.getOpenDate())
                         .finDate(a.getFinDate())
@@ -222,6 +216,7 @@ public class ShowSI implements ShowS {
                         .requiredAge(a.getRequiredAge())
                         .onSale(a.getOnSale())
                         .poster(before.get().getPoster())
+                        .detail_img(before.get().getDetail_img())
                         .contact(a.getContact())
                         .openDate(a.getOpenDate())
                         .finDate(a.getFinDate())
@@ -252,6 +247,24 @@ public class ShowSI implements ShowS {
             }
             return "redirect:/show/" + newSaved.getId();
         }
+    }
+
+    @Override
+    @Transactional
+    public String getShowIndex(Model m) {
+        List<EventE> raw = er.findAll();
+
+        for (EventE a : raw) {
+            System.out.println(a.getEventTime());
+            if (a.getPoster() != null)
+                System.out.println(a.getPoster().toString());
+        }
+
+        if (!raw.isEmpty()) {
+            List<EventD> allLists = raw.stream().map(a -> a.toDto()).collect(Collectors.toList());
+            m.addAttribute("rotateList", allLists);
+        }
+        return "/index";
     }
 
 }

@@ -29,6 +29,11 @@ public class ShowController {
         return ss.getShowList(m);
     }
 
+    @RequestMapping(value = { "/" }, method = RequestMethod.GET)
+    public String getIndexRotator(Model m) {
+        return ss.getShowIndex(m);
+    }
+
     @RequestMapping(value = "/show/{eventId}", method = RequestMethod.GET)
     public String toDetail(@PathVariable long eventId, Model m, RedirectAttributes ra) {
         return ss.getShowDetail(eventId, m, ra);

@@ -19,11 +19,14 @@
             <div class="InfoArea">
                 <table style="display:flex;justify-content: left; width : 100%;">
                     <thead>
-                        <td  th:if="${event.sacPlanned}">
-                            <button class="likeBtn" type="button">찜하기</button> 
-                            <span class="planner"th:unless="${event.sacPlanned} eq 'n'">
+                        <td class="flex" th:if="${event.sacPlanned}">
+                            <button class="likeBtn" type="button"><img src="/imgsrc/assets/cwa-top_star.png" alt=""> 찜하기</button> 
+                            <p class="planner"th:if="${event.sacPlanned} == 'y'">
                                 SAC기획
-                            </span>
+                            </p>
+                            <p class="planner"th:if="${event.sacPlanned} == 'c'">
+                              공동주최
+                            </p>
                         </td>
                         <tr>
                             <td class="eventTitle">[[${event.eventTitle}]]</td>
@@ -82,19 +85,19 @@
                       </span>
                     </td>
                   </tr>
-                  <tr class="tableL" th:if="${event.organizer}">
+                  <tr class="tableL" th:if="${not #lists.isEmpty(event.organizer)}">
                     <td class="col1">주최</td>
                     <td class="col2">
                       <span th:each="a : ${event.organizer}"> [[${a}]], </span>
                     </td>
                   </tr>
-                  <tr class="tableL" th:if="${event.host}">
+                  <tr class="tableL" th:if="${not #lists.isEmpty(event.host)}">
                     <td class="col1">주관</td>
                     <td class="col2">
                       <span th:each="a : ${event.host}"> [[${a}]], </span>
                     </td>
                   </tr>
-                  <tr class="tableL" th:if="${event.sponsor}">
+                  <tr class="tableL" th:if="${not #lists.isEmpty(event.sponsor)}">
                     <td class="col1">후원</td>
                     <td class="col2">
                       <span th:each="a : ${event.sponsor}"> [[${a}]], </span>

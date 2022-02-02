@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <th:block th:insert="/fragments/global::head-links"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <div sec:authorize="isAuthenticated()" class="index-temporal" style="display:flex; flex-direction : column ; justify-content: center;align-items: flex-start; position : absolute; left : 100px; top : 120px;">
+          <span>로그인정보 :: TEST ONLY</span>
+          <pre>Roles : <span class="red-font" sec:authentication="principal.authorities"></span></pre>
+          <pre>Username : <span class="red-font" sec:authentication="principal.username"></span></pre>
+          <pre>Password : <span class="red-font" sec:authentication="principal.password"></span></pre>
+          <pre>MemberType : <span class="red-font" sec:authentication="principal.memberType"></span></pre>
+        </div>
+        <table class="index-table done" style="margin-top : 10% ; border : 1px solid rgb(0, 129, 11)">
+          <tr>
+            <th class="column1">상태</th>
+            <th class="column2">분류1</th>
+            <th class="column3">분류2</th>
+            <th class="column4">분류3</th>
+            <th class="column5">비고</th>
+            <th class="column6">확인</th>
+          </tr>
+          <tr>
+            <th  class="column1">완료</th>
+            <th  class="column2">공연·전시</th>
+            <td  class="column3">등록<br>목록조회</td>
+            <th  class="column4">java<br>html<br>css<br>javascript</th>
+            <td  class="column5">
+              <ul class="microList">
+                <li>
+                  공연/전시 테이블 생성
+                  <br>
+                </li>
+                <li>
+                  공연정보 등록 시 첨부되는 포스터, 상세페이지 전용 테이블 생성<br>-다운로드 가능성 없으므로 content-type 등 불필요한 column 제외
+                </li>
+                <li>
+                  <a href="/admin/show/register">(admin)행사정보 등록 / 목록 전체조회 / 행사 상세정보 조회</a>
+                </li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/show/show_list">확인</a>
+            </td>
+          </tr>
+          <tr>
+            <th  class="column1">완료</th>
+            <th  class="column2">회원서비스</th>
+            <td  class="column3">가입<br>로그인<br>로그아웃<br>회원정보수정<br>탈퇴<br>유료회원 혜택</td>
+            <th  class="column4">java<br>html<br>css<br>js</th>
+            <td  class="column5">
+              <ul class="microList">
+                <li>
+                  개인회원 - 무료회원 가입
+                </li>
+                <li>
+                  휴대폰 본인확인 > coolSMS API를 사용, 문자발송 인증번호 인증으로 대체
+                </li>
+                <li>
+                  다음 주소검색API 사용
+                </li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/member/signup">확인</a>
+            </td>
+          </tr>
+          <tr>
+            <th  class="column1">완료</th>
+            <th  class="column2">전당소식</th>
+            <td  class="column3">공지사항</td>
+            <th  class="column4">java<br>html<br>css<br>js</th>
+            <td  class="column5">
+              <ul class="microList">
+                  **** 연관관계 재확인 및 서비스 재작성 완료
+                <li>
+                  (admin)공지사항 작성<br>-Summernote활용<br>-Summernote 외 파일(n개)첨부기능
+                </li>
+                <li>
+                  공지사항 목록 조회<br>-카테고리,검색 등 조건조회 ajax비동기처리
+                </li>
+                <li>
+                  공지사항 상세 조회<br>-첨부파일 다운로드
+                </li>
+                <li>
+                  (admin)공지사항 수정<br>-내용수정<br>-첨부파일 추가 및 기존 첨부파일 삭제
+                </li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/sacnews/notice">확인</a>
+            </td>
+          </tr>
+          <tr>
+            <th  class="column1">완료</th>
+            <th  class="column2">프로젝트</th>
+            <td  class="column3">-</td>
+            <th  class="column4">-</th>
+            <td  class="column5">
+              <ul class="microList">
+                <li>
+                  Spring Security 적용<br>-csrf disabled<br>-loginfailHandler 적용
+                  <!-- https://codevang.tistory.com/273?category=857253 -->
+                </li>
+                <li>
+                  Spring Cloud Config 적용 <span class="red-font">[enable=false 처리]</span>
+                  <!-- https://madplay.github.io/post/introduction-to-spring-cloud-config -->
+                </li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/member/signup"></a>
+            </td>
+          </tr>
+        </table>
+        <!-- 완료############################################## -->
+        <table class="index-table" style="margin-top : 10%;margin-bottom:10% ; border : 1px solid rgb(13,0,194)">
+          <tr>
+            <th class="column1">상태</th>
+            <th class="column2">분류1</th>
+            <th class="column3">분류2</th>
+            <th class="column4">분류3</th>
+            <th class="column5">비고</th>
+            <th class="column6">확인</th>
+          </tr>
+          <tr>
+            <th  class="column1">작업중</th>
+            <th  class="column2">회원서비스</th>
+            <td  class="column3">탈퇴페이지</td>
+            <th  class="column4">java<br>html<br>css<br>js</th>
+            <td  class="column5">
+              <ul class="microList">
+                <li>
+                  비밀번호 재확인 과정 포함 예정
+                </li>
+                <li>
+                  입력받는 탈퇴사유 및 코멘트 저장
+                </li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/member/mypage/myMembershipResign">확인</a>
+            </td>
+          </tr>
+          <tr>
+            <th  class="column1">작업중</th>
+            <th  class="column2">공연·전시</th>
+            <td  class="column3">-</td>
+            <th  class="column4">java</th>
+            <td  class="column5">
+              <ul class="microList">
+                <li>
+                  <a href="/admin/show/register"> 조건조회 / 상세조회 / 수정 / 삭제</a>
+                </li>
+                <li>
+                  월별 행사일정 구현을 위해 달력형태 페이지 레이아웃 작성
+                </li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/show/show_list">확인</a>
+            </td>
+          </tr>
+          <tr>
+            <th  class="column1">예정</th>
+            <th  class="column2">전당소식</th>
+            <td  class="column3">공지사항</td>
+            <th  class="column4">java</th>
+            <td  class="column5">
+              <ul class="microList">
+                <li>
+                  table column 추가로 각 공지사항 별 공개여부 선택적용
+                </li>
+                <li>
+                  summernote 내 이미지 업로드 이후 관리(기존 이미지 삭제) 방식 고안
+                </li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/sacnews/notice">확인</a>
+            </td>
+          </tr>
+          <tr>
+            <th  class="column1">예정</th>
+            <th  class="column2">회원서비스</th>
+            <td  class="column3">회원가입</td>
+            <th  class="column4">html<br>css</th>
+            <td  class="column5">
+              <ul class="microList">
+                <li>
+                  회원가입 완료페이지 작성
+                </li>
+                <li>
+                  유료회원 회원가입기능
+                </li>
+                <li>
+                  무료회원 유료회원으로 변경기능
+                </li>
+                <li>
+                  신규회원 SNS계정 가입
+                </li>
+                <li>
+                  기존회원 SNS계정 연동
+                </li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/member/signup">확인</a>
+            </td>
+          </tr>
+          <tr>
+            <th  class="column1">예정</th>
+            <th  class="column2">회원서비스</th>
+            <td  class="column3">상담</td>
+            <th  class="column4">html<br>css<br>java<br>js</th>
+            <td  class="column5">
+              <ul class="microList">
+                <li>
+                  admin <-> client 간 실시간 채팅기능<br>-admin은 전체채팅을 관리<br>-client는 단일 채팅 개설 및 종료만 가능
+                </li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/member/signup">확인</a>
+            </td>
+          </tr>
+          <tr>
+            <th  class="column1">예정</th>
+            <th  class="column2">프로젝트</th>
+            <td  class="column3">-</td>
+            <th  class="column4">-</th>
+            <td  class="column5">
+              <ul class="microList">
+                <li>
+                  URL 규칙 및 구조 정리/적용 (범주별 / 기능별 등)
+                </li>
+                <li>
+                  JWT (?)<!-- https://wnwngus.tistory.com/65 -->
+                </li>
+                <li>
+                  배포 자동화
+                </li>
+                <li>파일 관리를 위해 업로드경로 카테고리 및 페이지단위에 따라 분리</li>
+              </ul>
+            </td>
+            <td  class="column6">
+              <a style="z-index: 888;color : red" href="/member/signup"></a>
+            </td>
+          </tr>
+        </table>
+      </main>
+    </th:block>
+  </body>
+</html>

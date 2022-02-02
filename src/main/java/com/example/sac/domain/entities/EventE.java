@@ -52,21 +52,23 @@ public class EventE {
     @Column(nullable = false)
     private char sacPlanned; // [c, y, n]
     // sac 기획행사인지여부
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String eventTitle; // [라이프사진전, 샤갈달리뷔페]
     // 행사 명
     @ElementCollection
-    @Column(nullable = false)
+    @Column(nullable = true)
     private List<String> host; // [동아일보]
     // 주관
     @ElementCollection
     @CollectionTable(name = "organizer")
     @Builder.Default
+    @Column(nullable = true)
     private List<String> organizer = new ArrayList<>(); // [영국문화원]
     // 주최
     @ElementCollection
     @CollectionTable(name = "sponsor")
     @Builder.Default
+    @Column(nullable = true)
     private List<String> sponsor = new ArrayList<>(); // [외교부]
     // 후원/협찬
     @Column(nullable = true)

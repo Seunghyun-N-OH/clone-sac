@@ -22,4 +22,6 @@ public interface ShowS {
         String saveEditedEvent(EventD a, List<String> subject, List<Integer> price, MultipartFile poster_file,
                         List<MultipartFile> copyOf, String deletePoster, List<Long> deleteDetails);
 
+        String getShowIndex(Model m);
+
 }

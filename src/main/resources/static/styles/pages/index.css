@@ -1,0 +1,28 @@
+main * {
+  color: #555;
+}
+
+main {
+  background-color: #41414c;
+}
+
+.rotatingMain > .quickMenu {
+}
+
+.posterBox {
+  width: 475px;
+  height: 110px;
+  position: relative;
+  overflow: hidden;
+}
+
+.posterBox .rotateList {
+  position: relative;
+  width: 475px;
+}
+
+.posterBox .rotateList li img {
+  display: inline-block;
+  width: 95px;
+  height: 110px;
+}

@@ -75,7 +75,7 @@ public class EventD {
 
     // [일정] 행사가 회차별로 진행되는 경우 입력 #################################################
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private List<LocalDateTime> eventTime; // [2022-01-27 12:00]
+    private List<LocalDateTime> eventTime; // [2022-01-27'T'12:00]
     // 회차별 시작시간
     private int runningTime; // [90, 100, 180 ...]
     // 러닝타임
