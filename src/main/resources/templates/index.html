@@ -7,7 +7,8 @@
   <head>
     <th:block th:insert="/fragments/global::head-links" />
     <link rel="stylesheet" href="/styles/pages/index.css" />
-    <script as="script" src="/javascript/show/indexLoad.js"></script>
+    <script src="/javascript/show/indexLoad.js"></script>
+    
     <title>Document</title>
   </head>
   <body>
@@ -39,30 +40,34 @@
                 <button class="toDetailBtn" type="button">자세히보기</button>
               </div>
             </div>
-            <div class="flex">
-              <button type="button" class="rotateLeft"><-</button>
-              <div class="posterBox">
-                <ul th:if="${rotateList}" class="flex rotateList">
-                  <li th:each="a : ${rotateList}" class="eachImage">
-                    <img
-                      th:unless="${a.poster}"
-                      src="/imgsrc/noImage300x300.png"
-                      style="width: 75px; height: 110px; margin: 0 10px"
-                      alt="POSTER"
-                    />
-                    <img
-                      th:if="${a.poster}"
-                      th:src="${a.poster.filePath} + ${a.poster.fileName}"
-                      style="width: 75px; height: 110px; margin: 0 10px"
-                      alt="poster"
-                    />
-                  </li>
-                </ul>
-              </div>
-              <button type="button" class="rotateRight">-></button>
-            </div>
+
+            <button type="button" class="rotateRightBtn" onclick="toRight()">TO RIGHT</button>
+            <div class="gallery">
+              <ul class="clearfix">
+                <li>
+                  <img class="img" th:src="${rotateList[#lists.size(rotateList)-2].poster.filePath} + ${rotateList[#lists.size(rotateList)-2].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                </li>
+                <li>
+                  <img class="img" th:src="${rotateList[#lists.size(rotateList)-1].poster.filePath} + ${rotateList[#lists.size(rotateList)-1].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                </li>
+                <li th:each="a : ${rotateList}">
+                  <img class="img" th:src="${a.poster.filePath} + ${a.poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                </li>
+                <li>
+                  <img class="img" th:src="${rotateList[0].poster.filePath} + ${rotateList[0].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                </li>
+                <li>
+                  <img class="img" th:src="${rotateList[1].poster.filePath} + ${rotateList[1].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                </li>
+                <li>
+                  <img class="img" th:src="${rotateList[2].poster.filePath} + ${rotateList[2].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                </li>
+              </ul>
+             </div>
+             <button type="button" class="rotateLeftBtn" onclick="toLeft()">TO LEFT</button>
+            <script src="/javascript/show/indexRotatingArea.js"></script>
+
           </div>
-          <script src="/javascript/show/indexRotatingArea.js"></script>
           <div class="Poster"></div>
         </section>
         <section class="rotatingWithLecture">

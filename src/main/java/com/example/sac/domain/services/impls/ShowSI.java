@@ -261,8 +261,11 @@ public class ShowSI implements ShowS {
         }
 
         if (!raw.isEmpty()) {
-            List<EventD> allLists = raw.stream().map(a -> a.toDto()).collect(Collectors.toList());
-            m.addAttribute("rotateList", allLists);
+            List<EventD> pickedList = new ArrayList<>();
+            for (int i = 0; i < 7; i++) {
+                pickedList.add(raw.get(i).toDto());
+            }
+            m.addAttribute("rotateList", pickedList);
         }
         return "/index";
     }

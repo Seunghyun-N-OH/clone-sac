@@ -6,23 +6,56 @@ main {
   background-color: #41414c;
 }
 
-.rotatingMain > .quickMenu {
-}
+/* ############ */
 
-.posterBox {
-  width: 475px;
-  height: 110px;
-  position: relative;
+.gallery > .clearfix > li {
+  list-style: none;
+}
+.clearfix {
   overflow: hidden;
+  flex-wrap: nowrap;
+  height: 110px;
 }
-
-.posterBox .rotateList {
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.clear {
+  clear: both;
+}
+.gallery {
+  width: 380px;
+  margin: 20px auto;
+  overflow: hidden;
+  padding-left: 0;
+}
+.gallery ul {
+  width: 300%;
   position: relative;
-  width: 475px;
+  left: -0px;
 }
-
-.posterBox .rotateList li img {
-  display: inline-block;
+.gallery ul li {
+  float: left;
   width: 95px;
   height: 110px;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 110px;
+}
+
+button.rotateLeftBtn {
+  position: relative;
+  z-index: 999;
+  width: 100px;
+  left: -0;
+  top: -25%;
+}
+
+button.rotateRightBtn {
+  z-index: 999;
+  position: relative;
+  width: 100px;
+  left: 100%;
+  top: 25%;
 }
