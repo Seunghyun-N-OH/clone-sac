@@ -32,4 +32,6 @@ public interface NoticeS {
     void downService(long noticeNumber, long fileNumber, HttpServletResponse response)
             throws FileNotFoundException, IOException;
 
+    void getNoticeIndex(Model m);
+
 }

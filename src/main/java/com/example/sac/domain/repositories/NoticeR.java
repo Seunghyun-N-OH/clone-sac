@@ -23,4 +23,5 @@ public interface NoticeR extends JpaRepository<NoticeE, Long> {
     @EntityGraph(attributePaths = { "attachment" }, type = EntityGraph.EntityGraphType.LOAD)
     Optional<NoticeE> findWithAttachmentByNo(Long userId);
 
+    List<NoticeE> findTop8ByOrderByEffectiveDateBDesc();
 }

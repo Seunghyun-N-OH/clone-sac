@@ -7,75 +7,430 @@
   <head>
     <th:block th:insert="/fragments/global::head-links" />
     <link rel="stylesheet" href="/styles/pages/index.css" />
-    <script src="/javascript/show/indexLoad.js"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>;
     <title>Document</title>
   </head>
   <body>
     <th:block th:insert="~{/fragments/global::global(~{this::main})}">
       <main>
-        <section class="rotatingMain flex">
-          <div class="quickMenu flex-column">
-            <button type="button">오늘의 공연·전시</button>
-            <button type="button">전체일정(달력)</button>
-            <button type="button">이벤트</button>
+        <div class="box1 flex">
+          <div class="verticalQuickMenu flex-column">
+            <button type="button" class="todaysEvents">
+              <span><img src="/imgsrc/assets/main_quick-icon02_new.png" alt=""><br>오늘의<br>공연·전시</span>
+            </button>
+            <button type="button" class="eventCalender"><img src="/imgsrc/assets/main_quick-icon01_new.png" alt=""><br>전체일정<br>(달력)</button>
+            <button type="button" class="promotions"><img src="/imgsrc/assets/main_quick-icon04_new.png" alt=""><br>이벤트</button>
           </div>
-          <div class="flex-column">
-            <div class="briefInfo">
-              <div th:each="a : ${rotateList}">
-                <span class="eventCaption" th:if="${a.venue2}=='콘서트홀'"
-                  >음악</span
-                >
-                <span class="venue">[[${a.venue2}]]</span>
-                <span class="title">[[${a.eventTitle}]]</span>
-                <span class="eDate" th:if="${a.openDate}"
-                  >[[${a.openDate}]] ~ [[${a.finDate}]]</span
-                >
-                <span class="eDate" th:if="${#lists.size(a.eventTime) > 0}">
-                  <span th:each="b : ${a.eventTime}">
-                    [[${#strings.substring(b,0,10)}]]
-                    [[${#strings.substring(b,11,16)}]]
+          <div class="eventSlideBox flex-column">
+            <ul class="outerSlideBox flex">
+              <!-- ################# start of the outerSlideBox -->
+              <li th:if="${rotateList[#lists.size(rotateList)-2]}">
+                <div>
+                  <span class="eventCaption" th:if="${rotateList[#lists.size(rotateList)-2].venue1}=='음악당'"
+                    >음악</span
+                  >
+                  <span class="eventCaption" th:if="${rotateList[#lists.size(rotateList)-2].venue1}=='오페라하우스'"
+                    >공연</span
+                  >
+                  <span class="eventCaption" th:if="${rotateList[#lists.size(rotateList)-2].venue1}=='전시장'"
+                    >전시</span
+                  >
+                  <span class="venue">[[${rotateList[#lists.size(rotateList)-2].venue2}]]</span>
+                  <a th:href="@{|/show/${rotateList[#lists.size(rotateList)-2].id}|}" class="title">[[${rotateList[#lists.size(rotateList)-2].eventTitle}]]</a>
+                  <span class="eDate" th:if="${rotateList[#lists.size(rotateList)-2].openDate}"
+                    >[[${rotateList[#lists.size(rotateList)-2].openDate}]] ~ [[${rotateList[#lists.size(rotateList)-2].finDate}]]</span
+                  >
+                  <span class="eDate" th:if="${#lists.size(rotateList[#lists.size(rotateList)-2].eventTime) > 0}">
+                    <span class="periode" th:each="b : ${rotateList[#lists.size(rotateList)-2].eventTime}">
+                      [[${#strings.substring(b,0,10)}]]
+                      [[${#strings.substring(b,11,16)}]]
+                    </span>
                   </span>
+                  <button class="toDetailBtn" th:onclick="'location.href=\'show/'+ @{${rotateList[#lists.size(rotateList)-2].id}} + '\''" type="button">자세히보기</button>
+                </div>
+                <div class="poster">
+                  <img class="img" th:src="${rotateList[#lists.size(rotateList)-2].poster.filePath} + ${rotateList[#lists.size(rotateList)-2].poster.fileName}" alt="">
+                </div>
+              </li>
+              <li th:if="${rotateList[#lists.size(rotateList)-1]}">
+                <div>
+                  <span class="eventCaption" th:if="${rotateList[#lists.size(rotateList)-1].venue1}=='음악당'"
+                    >음악</span
+                  >
+                  <span class="eventCaption" th:if="${rotateList[#lists.size(rotateList)-1].venue1}=='오페라하우스'"
+                    >공연</span
+                  >
+                  <span class="eventCaption" th:if="${rotateList[#lists.size(rotateList)-1].venue1}=='전시장'"
+                    >전시</span
+                  >
+                  <span class="venue">[[${rotateList[#lists.size(rotateList)-1].venue2}]]</span>
+                  <a th:href="@{|/show/${rotateList[#lists.size(rotateList)-1].id}|}" class="title">[[${rotateList[#lists.size(rotateList)-1].eventTitle}]]</a>
+                  <span class="eDate" th:if="${rotateList[#lists.size(rotateList)-1].openDate}"
+                    >[[${rotateList[#lists.size(rotateList)-1].openDate}]] ~ [[${rotateList[#lists.size(rotateList)-1].finDate}]]</span
+                  >
+                  <span class="eDate" th:if="${#lists.size(rotateList[#lists.size(rotateList)-1].eventTime) > 0}">
+                    <span class="periode" th:each="b : ${rotateList[#lists.size(rotateList)-1].eventTime}">
+                      [[${#strings.substring(b,0,10)}]]
+                      [[${#strings.substring(b,11,16)}]]
+                    </span>
+                  </span>
+                  <button class="toDetailBtn" th:onclick="'location.href=\'show/'+ @{${rotateList[#lists.size(rotateList)-1].id}} + '\''" type="button">자세히보기</button>
+                </div>
+                <div class="poster">
+                  <img class="img" th:src="${rotateList[#lists.size(rotateList)-1].poster.filePath} + ${rotateList[#lists.size(rotateList)-1].poster.fileName}" alt="">
+                </div>
+              </li>
+              <li th:each="a : ${rotateList}">
+                <div>
+                  <span class="eventCaption" th:if="${a.venue1}=='음악당'"
+                    >음악</span
+                  >
+                  <span class="eventCaption" th:if="${a.venue1}=='오페라하우스'"
+                    >공연</span
+                  >
+                  <span class="eventCaption" th:if="${a.venue1}=='전시장'"
+                    >전시</span
+                  >
+                  <span class="venue">[[${a.venue2}]]</span>
+                  <a  th:href="@{|/show/${a.id}|}" class="title">[[${a.eventTitle}]]</a>
+                  <span class="eDate" th:if="${a.openDate}"
+                    >[[${a.openDate}]] ~ [[${a.finDate}]]</span
+                  >
+                  <span class="eDate" th:if="${#lists.size(a.eventTime) > 0}">
+                    <span class="periode" th:each="b : ${a.eventTime}">
+                      [[${#strings.substring(b,0,10)}]]
+                      [[${#strings.substring(b,11,16)}]]
+                    </span>
+                  </span>
+                  <button class="toDetailBtn" th:onclick="'location.href=\'show/'+ @{${a.id}} + '\''" type="button">자세히보기</button>
+                </div>
+                <div class="poster">
+                  <img class="img" th:src="${a.poster.filePath} + ${a.poster.fileName}" alt="">
+                </div>
+              </li>
+              <!-- ################# end of the outerSlideBox -->
+            </ul>
+
+            <div class="opacityBox">
+              <button type="button" class="toPrevBtn" onclick="toLeft()"></button>
+              <div class="smallPosterSlide">
+                <ul class="smallPosters">
+                  <li th:if="${rotateList[#lists.size(rotateList)-2].poster.filePath}">
+                    <img class="img" th:src="${rotateList[#lists.size(rotateList)-2].poster.filePath} + ${rotateList[#lists.size(rotateList)-2].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                  </li>
+                  <li th:if="${rotateList[#lists.size(rotateList)-1].poster.filePath}">
+                    <img class="img" th:src="${rotateList[#lists.size(rotateList)-1].poster.filePath} + ${rotateList[#lists.size(rotateList)-1].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                  </li>
+                  <li th:each="a : ${rotateList}">
+                    <img class="img" th:src="${a.poster.filePath} + ${a.poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                  </li>
+                  <li th:if="${rotateList[0].poster.filePath}">
+                    <img class="img" th:src="${rotateList[0].poster.filePath} + ${rotateList[0].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                  </li>
+                  <li th:if="${rotateList[1].poster.filePath}">
+                    <img class="img" th:src="${rotateList[1].poster.filePath} + ${rotateList[1].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                  </li>
+                  <li th:if="${rotateList[2].poster.filePath}">
+                    <img class="img" th:src="${rotateList[2].poster.filePath} + ${rotateList[2].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
+                  </li>
+                </ul>
+              </div>
+              <button type="button" class="toNextBtn" onclick="toRight()"></button>
+            </div>
+          </div>
+        </div>
+        
+      <!-- box 1 end #################################################### -->
+      <div class="box2 flex-column">
+        <div class="titleLine flex">
+          <h3 class="sectionTitle"><img src="/imgsrc/assets/main-floor2_icon.png" alt="">공연/음악/전시/강좌</h3>
+          <p id="lectureIndex">1</p><p class="lectureDenominator">/</p><span class="lectureDenominator">6</span>
+        </div>
+        <div class="slideBox">
+          <ul class="slides" th:if="${rotateList}"><!-- 강좌 entity 추가 후 강좌리스트 받아와 교체 -->
+            <li class="lectureObject flex-column">
+              <div class="lecturePosterBox">
+                <a th:href="@{|/show/${rotateList[#lists.size(rotateList)-2].id}|}"><img class="img" th:src="${rotateList[#lists.size(rotateList)-2].poster.filePath} + ${rotateList[#lists.size(rotateList)-2].poster.fileName}" alt=""></a>
+              </div>
+              <span class="lectureCaption" th:if="${rotateList[#lists.size(rotateList)-2].venue1}=='음악당'">음악</span>
+              <span class="lectureCaption" th:if="${rotateList[#lists.size(rotateList)-2].venue1}=='오페라하우스'">공연</span>
+              <span class="lectureCaption" th:if="${rotateList[#lists.size(rotateList)-2].venue1}=='전시장'">전시</span>
+              <span class="lectureCaption" th:if="${rotateList[#lists.size(rotateList)-2].venue1}=='온라인'">강좌</span>
+              <p class="lectureTitle">[[${rotateList[#lists.size(rotateList)-2].eventTitle}]]</p>
+              <span class="eDate" th:if="${rotateList[#lists.size(rotateList)-2].openDate}">
+                [[${rotateList[#lists.size(rotateList)-2].openDate}]] ~ [[${rotateList[#lists.size(rotateList)-2].finDate}]]
+              </span>
+              <span class="eDate" th:if="${#lists.size(rotateList[#lists.size(rotateList)-2].eventTime) > 0}">
+                <span class="periode" th:each="b : ${rotateList[#lists.size(rotateList)-2].eventTime}">
+                  [[${#strings.substring(b,0,10)}]]
+                  [[${#strings.substring(b,11,16)}]]
                 </span>
-                <button class="toDetailBtn" type="button">자세히보기</button>
+              </span>
+              <p class="lectureVenue">[[${rotateList[#lists.size(rotateList)-2].venue1}]]</p>
+            </li>
+            <li class="lectureObject flex-column">
+              <div class="lecturePosterBox">
+                <a th:href="@{|/show/${rotateList[#lists.size(rotateList)-1].id}|}"><img class="img" th:src="${rotateList[#lists.size(rotateList)-1].poster.filePath} + ${rotateList[#lists.size(rotateList)-1].poster.fileName}" alt=""></a>
+              </div>
+              <span class="lectureCaption" th:if="${rotateList[#lists.size(rotateList)-1].venue1}=='음악당'">음악</span>
+              <span class="lectureCaption" th:if="${rotateList[#lists.size(rotateList)-1].venue1}=='오페라하우스'">공연</span>
+              <span class="lectureCaption" th:if="${rotateList[#lists.size(rotateList)-1].venue1}=='전시장'">전시</span>
+              <span class="lectureCaption" th:if="${rotateList[#lists.size(rotateList)-1].venue1}=='온라인'">강좌</span>
+              <p class="lectureTitle">[[${rotateList[#lists.size(rotateList)-1].eventTitle}]]</p>
+              <span class="eDate" th:if="${rotateList[#lists.size(rotateList)-1].openDate}">
+                [[${rotateList[#lists.size(rotateList)-1].openDate}]] ~ [[${rotateList[#lists.size(rotateList)-1].finDate}]]
+              </span>
+              <span class="eDate" th:if="${#lists.size(rotateList[#lists.size(rotateList)-1].eventTime) > 0}">
+                <span class="periode" th:each="b : ${rotateList[#lists.size(rotateList)-1].eventTime}">
+                  [[${#strings.substring(b,0,10)}]]
+                  [[${#strings.substring(b,11,16)}]]
+                </span>
+              </span>
+              <p class="lectureVenue">[[${rotateList[#lists.size(rotateList)-1].venue1}]]</p>
+            </li>
+            <li class="lectureObject flex-column" th:each="a : ${rotateList}">
+              <div class="lecturePosterBox">
+                <a th:href="@{|/show/${a.id}|}"><img class="img" th:src="${a.poster.filePath} + ${a.poster.fileName}" alt=""></a>
+              </div>
+              <span class="lectureCaption" th:if="${a.venue1}=='음악당'">음악</span>
+              <span class="lectureCaption" th:if="${a.venue1}=='오페라하우스'">공연</span>
+              <span class="lectureCaption" th:if="${a.venue1}=='전시장'">전시</span>
+              <span class="lectureCaption" th:if="${a.venue1}=='온라인'">강좌</span>
+              <p class="lectureTitle">[[${a.eventTitle}]]</p>
+              <span class="eDate" th:if="${a.openDate}">
+                [[${a.openDate}]] ~ [[${a.finDate}]]
+              </span>
+              <span class="eDate" th:if="${#lists.size(a.eventTime) > 0}">
+                <span class="periode" th:each="b : ${a.eventTime}">
+                  [[${#strings.substring(b,0,10)}]]
+                  [[${#strings.substring(b,11,16)}]]
+                </span>
+              </span>
+              <p class="lectureVenue">[[${a.venue1}]]</p>
+            </li>
+            <li class="lectureObject flex-column">
+              <div class="lecturePosterBox">
+                <a th:href="@{|/show/${rotateList[0].id}|}"><img class="img" th:src="${rotateList[0].poster.filePath} + ${rotateList[0].poster.fileName}" alt=""></a>
+              </div>
+              <span class="lectureCaption" th:if="${rotateList[0].venue1}=='음악당'">음악</span>
+              <span class="lectureCaption" th:if="${rotateList[0].venue1}=='오페라하우스'">공연</span>
+              <span class="lectureCaption" th:if="${rotateList[0].venue1}=='전시장'">전시</span>
+              <span class="lectureCaption" th:if="${rotateList[0].venue1}=='온라인'">강좌</span>
+              <p class="lectureTitle">[[${rotateList[0].eventTitle}]]</p>
+              <span class="eDate" th:if="${rotateList[0].openDate}">
+                [[${rotateList[0].openDate}]] ~ [[${rotateList[0].finDate}]]
+              </span>
+              <span class="eDate" th:if="${#lists.size(rotateList[0].eventTime) > 0}">
+                <span class="periode" th:each="b : ${rotateList[0].eventTime}">
+                  [[${#strings.substring(b,0,10)}]]
+                  [[${#strings.substring(b,11,16)}]]
+                </span>
+              </span>
+              <p class="lectureVenue">[[${rotateList[0].venue1}]]</p>
+            </li>
+            <li class="lectureObject flex-column">
+              <div class="lecturePosterBox">
+                <a th:href="@{|/show/${rotateList[1].id}|}"><img class="img" th:src="${rotateList[1].poster.filePath} + ${rotateList[1].poster.fileName}" alt=""></a>
+              </div>
+              <span class="lectureCaption" th:if="${rotateList[1].venue1}=='음악당'">음악</span>
+              <span class="lectureCaption" th:if="${rotateList[1].venue1}=='오페라하우스'">공연</span>
+              <span class="lectureCaption" th:if="${rotateList[1].venue1}=='전시장'">전시</span>
+              <span class="lectureCaption" th:if="${rotateList[1].venue1}=='온라인'">강좌</span>
+              <p class="lectureTitle">[[${rotateList[1].eventTitle}]]</p>
+              <span class="eDate" th:if="${rotateList[1].openDate}">
+                [[${rotateList[1].openDate}]] ~ [[${rotateList[1].finDate}]]
+              </span>
+              <span class="eDate" th:if="${#lists.size(rotateList[1].eventTime) > 0}">
+                <span class="periode" th:each="b : ${rotateList[1].eventTime}">
+                  [[${#strings.substring(b,0,10)}]]
+                  [[${#strings.substring(b,11,16)}]]
+                </span>
+              </span>
+              <p class="lectureVenue">[[${rotateList[1].venue1}]]</p>
+            </li>
+            <li class="lectureObject flex-column">
+              <div class="lecturePosterBox">
+                <a th:href="@{|/show/${rotateList[2].id}|}"><img class="img" th:src="${rotateList[2].poster.filePath} + ${rotateList[2].poster.fileName}" alt=""></a>
+              </div>
+              <span class="lectureCaption" th:if="${rotateList[2].venue1}=='음악당'">음악</span>
+              <span class="lectureCaption" th:if="${rotateList[2].venue1}=='오페라하우스'">공연</span>
+              <span class="lectureCaption" th:if="${rotateList[2].venue1}=='전시장'">전시</span>
+              <span class="lectureCaption" th:if="${rotateList[2].venue1}=='온라인'">강좌</span>
+              <p class="lectureTitle">[[${rotateList[2].eventTitle}]]</p>
+              <span class="eDate" th:if="${rotateList[2].openDate}">
+                [[${rotateList[2].openDate}]] ~ [[${rotateList[2].finDate}]]
+              </span>
+              <span class="eDate" th:if="${#lists.size(rotateList[2].eventTime) > 0}">
+                <span class="periode" th:each="b : ${rotateList[2].eventTime}">
+                  [[${#strings.substring(b,0,10)}]]
+                  [[${#strings.substring(b,11,16)}]]
+                </span>
+              </span>
+              <p class="lectureVenue">[[${rotateList[2].venue1}]]</p>
+            </li>
+          </ul>
+        </div>
+        <button class="lecturePrev" type="button" onclick="lectureLeft()"><img src="/imgsrc/assets/slick-arrow_prev.png" alt=""></button>
+        <button class="lectureNext" type="button" onclick="lectureRight()"><img src="/imgsrc/assets/slick-arrow_next.png" alt=""></button>
+      </div>
+
+      <!-- box 2 end #################################################### -->
+      <div class="box3 flex">
+        <div class="NoticeAndTickets flex-column">
+          <div class="CategoryButtons">
+            <div class="flex">
+              <button type="button" class="sectionHead showNotice boosted"><img src="/imgsrc/assets/mf-l_icon.png" alt="">공지사항</button>
+              <button type="button" class="sectionHead showTicket"><img src="/imgsrc/assets/mf-rt-l_icon.png" alt="">티켓오픈</button>
+            </div>
+            <a href="/sacnews/notice" class="sectionHead moreNotice"><img src="/imgsrc/assets/btn_more.png" alt=""></a>
+            <a href="/unimplemented/moreTicket" class="sectionHead moreTicket hidden"><img src="/imgsrc/assets/btn_more.png" alt=""></a>
+          </div>
+          <div class="noticeList">
+            <ul th:if="${indexNotice}">
+              <li class="noticeLine between" th:each="a : ${indexNotice}">
+                <span class="mainNoticeTitle">[[${a.title}]]</span>
+                <span class="mainNoticeDate">[[${#strings.substring(a.cTime,0,4)}]].[[${#strings.substring(a.cTime,5,7)}]].[[${#strings.substring(a.cTime,8,10)}]]</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="RightSide flex-column">
+          <div class="WelcomeAndYoutube flex">
+            <div class="Welcome">
+              <h3><img src="/imgsrc/assets/mf-rt-alram.png" style="height : 33px" alt="">알림판</h3>
+              <div class="welcomeSlide">
+                <ul class="welcomeSlides">
+                  <li>
+                    <a href="https://www.sac.or.kr/site/main/board/sacnews/275950">
+                      <img src="/imgsrc/assets/welcome_slide_1.gif" alt="">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.sac.or.kr/site/main/board/sacnews/275741">
+                      <img src="/imgsrc/assets/welcome_slide_2.gif" alt="">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="http://www.thegoodtree.kr/">
+                      <img src="/imgsrc/assets/welcome_slide_3.gif" alt="">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="http://www.1101.co.kr/">
+                      <img src="/imgsrc/assets/welcome_slide_4.gif" alt="">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.sac.or.kr/cybertour/">
+                      <img src="/imgsrc/assets/welcome_slide_5.gif" alt="">
+                    </a>
+                  </li>
+                </ul>
+                <div class="indicators">
+                  <ul class="flex">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
               </div>
             </div>
-
-            <button type="button" class="rotateRightBtn" onclick="toRight()">TO RIGHT</button>
-            <div class="gallery">
-              <ul class="clearfix">
-                <li>
-                  <img class="img" th:src="${rotateList[#lists.size(rotateList)-2].poster.filePath} + ${rotateList[#lists.size(rotateList)-2].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
-                </li>
-                <li>
-                  <img class="img" th:src="${rotateList[#lists.size(rotateList)-1].poster.filePath} + ${rotateList[#lists.size(rotateList)-1].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
-                </li>
-                <li th:each="a : ${rotateList}">
-                  <img class="img" th:src="${a.poster.filePath} + ${a.poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
-                </li>
-                <li>
-                  <img class="img" th:src="${rotateList[0].poster.filePath} + ${rotateList[0].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
-                </li>
-                <li>
-                  <img class="img" th:src="${rotateList[1].poster.filePath} + ${rotateList[1].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
-                </li>
-                <li>
-                  <img class="img" th:src="${rotateList[2].poster.filePath} + ${rotateList[2].poster.fileName}" alt="" style="width:75px;height:110px;margin:0 10px">
-                </li>
-              </ul>
-             </div>
-             <button type="button" class="rotateLeftBtn" onclick="toLeft()">TO LEFT</button>
-            <script src="/javascript/show/indexRotatingArea.js"></script>
-
+            <div class="YoutubeBox">
+              <h3><img src="/imgsrc/assets/mf-rt-r_titicon.png" style="height : 33px" alt="">YouTube</h3>
+              <ul class="Youtube"></ul>
+            </div>
           </div>
-          <div class="Poster"></div>
-        </section>
-        <section class="rotatingWithLecture">
-          <h1>Rotating with Lecture Area</h1>
-        </section>
-        <section class="noticeAndTicketAndYoutube">
-          <h1>Notice/Ticket And Notice/Youtube</h1>
-        </section>
+          <div class="shortcuts flex">
+            <ul class="flex">
+              <li>
+                <a href="#">
+                  <span class="shortcutImg">
+                    <img class="icon" src="/imgsrc/assets/mf-rt-r_icon01.png" alt="">
+                  </span>
+                  <br>
+                  <span class="shortcutName">공연/전시</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="shortcutImg">
+                    <img src="/imgsrc/assets/mf-rt-r_icon02.png" alt="">
+                  </span>
+                  <br>
+                  <span class="shortcutName">공간안내</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="shortcutImg">
+                    <img src="/imgsrc/assets/mf-rt-r_icon03.png" alt="">
+                  </span>
+                  <br>
+                  <span class="shortcutName">교통/주차</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="shortcutImg">
+                    <img src="/imgsrc/assets/mf-rt-r_icon04.png" alt="">
+                  </span>
+                  <br>
+                  <span class="shortcutName">음악분수</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="shortcutImg">
+                    <img src="/imgsrc/assets/mf-rt-r_icon05.png" alt="">
+                  </span>
+                  <br>
+                  <span class="shortcutName">SAC on<br>Screen</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="shortcutImg">
+                    <img src="/imgsrc/assets/mf-rt-r_icon06.png" alt="">
+                  </span>
+                  <br>
+                  <span class="shortcutName">1:1문의</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="shortcutImg">
+                    <img src="/imgsrc/assets/mf-rt-r_icon07.png" alt="">
+                  </span>
+                  <br>
+                  <span class="shortcutName">이벤트</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="shortcutImg">
+                    <img src="/imgsrc/assets/mf-rt-r_icon09.png" alt="">
+                  </span>
+                  <br>
+                  <span class="shortcutName">예술기부</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="shortcutImg">
+                    <img src="/imgsrc/assets/mf-rt-r_icon08.png" alt="">
+                  </span>
+                  <br>
+                  <span class="shortcutName">마이페이지</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <script src="/javascript/show/indexSlideJS.js"></script>
       </main>
     </th:block>
   </body>

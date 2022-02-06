@@ -79,6 +79,11 @@
   flex-direction: column;
 }
 
+.between {
+  display: flex;
+  justify-content: space-between;
+}
+
 .vertical10pc {
   margin-top: 10%;
   margin-bottom: 10%;

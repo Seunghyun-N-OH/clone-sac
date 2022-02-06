@@ -251,4 +251,10 @@ public class NoticeSI implements NoticeS {
         return "redirect:/sacnews/notice";
     }
 
+    @Override
+    public void getNoticeIndex(Model m) {
+        m.addAttribute("indexNotice",
+                nr.findTop8ByOrderByEffectiveDateBDesc().stream().map(a -> a.toDto()).collect(Collectors.toList()));
+    }
+
 }
