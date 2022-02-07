@@ -1,14 +1,22 @@
 package com.example.sac.SecuritiyThings.service.impls;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
+import com.example.sac.SecuritiyThings.dtos.OrdersD;
 import com.example.sac.SecuritiyThings.dtos.SecureD;
 import com.example.sac.SecuritiyThings.entities.Membership;
+import com.example.sac.SecuritiyThings.entities.OrdersE;
 import com.example.sac.SecuritiyThings.repositories.MembershipR;
+import com.example.sac.SecuritiyThings.repositories.OrdersR;
 import com.example.sac.SecuritiyThings.service.MemberS;
 import com.example.sac.web.dtos.MembershipD;
 
@@ -29,13 +37,15 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Service
 public class MemberSI implements MemberS, UserDetailsService {
 
-    public MemberSI(MembershipR m, PasswordEncoder pe) {
+    public MemberSI(MembershipR m, PasswordEncoder pe, OrdersR or) {
         this.mr = m;
         this.pe = pe;
+        this.or = or;
     }
 
     private final PasswordEncoder pe;
     private final MembershipR mr;
+    private final OrdersR or;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -223,5 +233,53 @@ public class MemberSI implements MemberS, UserDetailsService {
         // 사유/코멘트 처리했다 치고...
         System.out.println(p.getName());
         mr.deleteById(p.getName());
+    }
+
+    @Override
+    public String getMembershipInfo(Model m, String userId) {
+        List<OrdersE> orderHistory = or.findByBuyerUserId(userId);
+        if (!orderHistory.isEmpty()) {
+            List<OrdersD> orderList = new ArrayList<>();
+            for (OrdersE a : orderHistory) {
+                orderList.add(a.toDto());
+            }
+            m.addAttribute("orderList", orderList);
+        }
+        LocalDate memberSince = mr.findById(userId).get().getJoinedDate();
+        m.addAttribute("joinedDate", memberSince);
+        return "membership/info/myMembership";
+    }
+
+    @Override
+    public String generateMUid(String memberClass, String product_id, String user) {
+        return OrdersE.generateUid(product_id, user);
+    }
+
+    @Override
+    @Transactional
+    public String addOrderHistory(OrdersD data, int period) {
+        data.setEffectiveDate(LocalDate.now());
+        data.setExpiryDate(LocalDate.now().plusDays(period));
+        or.save(data.toSaveEntity());
+
+        Membership target = mr.findById(data.getBuyerUserId()).get();
+        switch (data.getName()) {
+            default:
+                break;
+            case "Blue-Membership":
+                target.getRoles().add("ROLE_PAID");
+                target.getRoles().add("ROLE_BLUE");
+                break;
+            case "Green-Membership":
+                target.getRoles().add("ROLE_PAID");
+                target.getRoles().add("ROLE_GREEN");
+                break;
+            case "Gold-Membership":
+                target.getRoles().add("ROLE_PAID");
+                target.getRoles().add("ROLE_GOLD");
+                break;
+        }
+
+        return "/member/logout";
     }
 }

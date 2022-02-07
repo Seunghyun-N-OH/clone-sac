@@ -132,11 +132,13 @@
               <h3 class="microTitle" style="margin-bottom : 2%">개인정보관리</h3>
               <form th:action="@{/member/mypage/myinfoEdit}" id="joinBox" method="post">
                 <input type="hidden" name="_method" value="PUT"/>
-                <div class="dataLine tableTop">
+<!--                 
+                <div class="dataLine">
                     <span class="dataName">내외국인 구분<span class="red-font">*</span></span>
                     <span class="dataValue" >아니 당연히 한국인인줄 알았지.. column추가해야함..</span>
                 </div>
-                <div class="dataLine">
+                 -->
+                <div class="dataLine tableTop">
                   <span class="dataName">성명<span class="red-font">*</span></span>
                   <span class="dataValue" >[[${data.name}]]</span>
               </div>
@@ -209,7 +211,7 @@
                     <span class="dataName">이메일</span>
                     <span class="dataValue">
                       [[${data.email}]]
-                      <button id="changeEmail" class="joinBTN" type="button">
+                      <button style="margin-left : 1rem" id="changeEmail" class="joinBTN" type="button">
                         <img src="/imgsrc/assets/join/postal-no-btn.gif" alt="">
                         이메일 변경
                       </button>
@@ -253,17 +255,17 @@
                     <button class="red-border red-font" type="button" onclick="submitEdit()">변경</button>
                 </div>
 <!-- hidden inputs ############################# -->
-                <input th:each="a : ${data.roles}" type="text" th:value="${a}" name="roles">
-                <input type="text" th:value="${data.memberType}" name="memberType">
-                <input type="text" id="real-mail-yes" name="marketing_email">
-                <input type="text" id="real-sms-yes" name="marketing_sms">
-                <input type="text" name="centerTerm" th:value="${data.centerTerm}">
-                <input type="text" name="personalTerm" th:value="${data.personalTerm}">
-                <input type="text" name="email" th:value="${data.email}">
-                <input type="text" th:value="${data.userId}" name="userId">
-                <input type="text" th:value="${data.birthDate}" name="birthDate">
-                <input type="text" th:value="${data.name}" name="name">
-                <input type="text" th:value="${data.phone}" name="phone" id="phone">
+                <input th:each="a : ${data.roles}" type="text" th:value="${a}" name="roles" hidden>
+                <input type="text" th:value="${data.memberType}" name="memberType" hidden>
+                <input type="text" id="real-mail-yes" name="marketing_email" hidden>
+                <input type="text" id="real-sms-yes" name="marketing_sms" hidden>
+                <input type="text" name="centerTerm" th:value="${data.centerTerm}" hidden>
+                <input type="text" name="personalTerm" th:value="${data.personalTerm}" hidden>
+                <input type="text" name="email" th:value="${data.email}" hidden>
+                <input type="text" th:value="${data.userId}" name="userId" hidden>
+                <input type="text" th:value="${data.birthDate}" name="birthDate" hidden>
+                <input type="text" th:value="${data.name}" name="name" hidden>
+                <input type="text" th:value="${data.phone}" name="phone" id="phone" hidden>
             </form>
             </div>
             <!-- end of maincontents ############################################### -->

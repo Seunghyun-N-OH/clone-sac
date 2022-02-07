@@ -7,9 +7,13 @@ import java.util.HashSet;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +27,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "member_entity")
 public class Membership {
     @Column(nullable = false)
@@ -81,4 +86,7 @@ public class Membership {
     private char marketingTerm;
     // whether user agrees or not to recieve marketing messages and terms
     // 'y' or 'n'
+
+    @CreatedDate
+    private LocalDate joinedDate;
 }

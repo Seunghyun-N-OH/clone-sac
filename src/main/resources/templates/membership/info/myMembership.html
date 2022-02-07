@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/styles/pages/members/mypage.css"/>
     <link rel="stylesheet" href="/styles/pages/members/myMembership.css"/>
     <script src="/javascript/mypage/myMembership.js"></script>
+    <!-- iamport --><script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -108,15 +109,15 @@
                   <span>연회비 선택</span>
                   <div class="expirySelect green">
                     <div class="buttons">
-                      <button type="button">1년</button>
-                      <button style="font-size : 14px;" type="button">예술의전당 우리카드_환불불가</button>
+                      <button th:onclick="getMerchantId('Green-Membership', 100, '0001', [[${#authentication.principal.username}]], 365)" type="button">1년</button>
+                      <button th:onclick="getMerchantId('Green-Membership', 100, '0001', [[${#authentication.principal.username}]], 365)" style="font-size : 14px;" type="button">예술의전당 우리카드_환불불가</button>
                     </div>
                   </div>
                   <div class="expirySelect blue hidden">
                     <div class="buttons">
-                      <button type="button">1년</button>
-                      <button type="button">2년(15%할인)</button>
-                      <button type="button">3년(15%할인)</button>
+                      <button th:onclick="getMerchantId('Blue-Membership', 100, '0002', [[${#authentication.principal.username}]], 365)" type="button">1년</button>
+                      <button th:onclick="getMerchantId('Blue-Membership', 100, '0002', [[${#authentication.principal.username}]], 730)" type="button">2년(15%할인)</button>
+                      <button th:onclick="getMerchantId('Blue-Membership', 100, '0002', [[${#authentication.principal.username}]], 1095)" type="button">3년(15%할인)</button>
                     </div>
                     <span class="red-font">* 유니온페이 제휴회원 가입은 예술의전당 고객센터(02-580-1300)에서 가능합니다.
                       * 블루회원의 회원물품은 일반우편으로 발송되며 수령까지 1~2주가 소요됩니다.
@@ -124,9 +125,9 @@
                   </div>
                   <div class="expirySelect gold hidden">
                     <div class="buttons">
-                      <button type="button">1년</button>
-                      <button type="button">2년(15%할인)</button>
-                      <button type="button">3년(15%할인)</button>
+                      <button th:onclick="getMerchantId('Gold-Membership', 100, '0002', [[${#authentication.principal.username}]], 365)" type="button">1년</button>
+                      <button th:onclick="getMerchantId('Gold-Membership', 100, '0002', [[${#authentication.principal.username}]], 730)" type="button">2년(15%할인)</button>
+                      <button th:onclick="getMerchantId('Gold-Membership', 100, '0002', [[${#authentication.principal.username}]], 1095)" type="button">3년(15%할인)</button>
                     </div>
                     <span class="red-font">* 골드회원의 회원물품은 일반등기로 발송되며 수령까지 1~2주가 소요됩니다.
                       주소정보가 정확하지 않을 경우 반송되므로 주소를 정확히 입력해주세요.</span>
@@ -147,8 +148,14 @@
                     <tr>
                       <td>정상</td>
                       <td>무료회원</td>
-                      <td>[가입날] ~ 평생</td>
+                      <td>[[${joinedDate}]] ~ 평생</td>
                       <td>무료</td>
+                    </tr>
+                    <tr th:if="${orderList}" th:each="a : ${orderList}">
+                      <td>[[${a.isValid}]]</td>
+                      <td>[[${a.name}]]</td>
+                      <td>[[${a.effectiveDate}]] ~ [[${a.expiryDate}]]</td>
+                      <td>[[${a.paidAmount}]]원</td>
                     </tr>
                   </tbody>
                 </table>

@@ -3,6 +3,7 @@ package com.example.sac.web.controllers;
 import java.security.Principal;
 import java.util.Random;
 
+import com.example.sac.SecuritiyThings.dtos.OrdersD;
 import com.example.sac.SecuritiyThings.service.MemberS;
 import com.example.sac.web.dtos.MembershipD;
 
@@ -151,8 +152,8 @@ public class MembershipController {
     }
 
     @RequestMapping(value = "/member/mypage/myMembership", method = RequestMethod.GET)
-    public String toMyMembership() {
-        return "membership/info/myMembership";
+    public String toMyMembership(Model m, Principal p) {
+        return ms.getMembershipInfo(m, p.getName());
     }
 
     @RequestMapping(value = "/member/mypage/myDonation", method = RequestMethod.GET)
@@ -169,5 +170,17 @@ public class MembershipController {
     public String resign(Principal p, String reason, String comment) {
         ms.kickoutMember(p, reason, comment);
         return "redirect:/member/logout";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/member/premium/initPurchase", method = RequestMethod.POST)
+    public String generateMUid(String memberClass, String product_id, String user) {
+        return ms.generateMUid(memberClass, product_id, user);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/member/premium/success", method = RequestMethod.POST)
+    public String generateMUid(OrdersD data, int period) {
+        return ms.addOrderHistory(data, period);
     }
 }
