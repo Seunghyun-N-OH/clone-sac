@@ -119,3 +119,234 @@ thead > tr {
   border-radius: 15px;
   margin-left: 0.5rem;
 }
+
+.pageContents .maincontents .eventInfos .covidAlert {
+  border: 5px solid #f2f2f2;
+  padding: 30px 20px;
+  margin-bottom: 4%;
+}
+
+.pageContents .maincontents .eventInfos .covidAlert span,
+.pageContents .maincontents .eventInfos .covidAlert u {
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.pageContents .maincontents .eventInfos .infoSelectors {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2%;
+}
+
+.pageContents .maincontents .eventInfos .infoSelectors button {
+  width: 16.6667%;
+  height: 4rem;
+  color: #8b8b8b;
+  font-size: 15px;
+  border: 1px solid #e5e5e5;
+  background: unset;
+}
+
+.pageContents .maincontents .eventInfos .infoSelectors button.selected {
+  color: #222;
+  font-weight: bold;
+  border: 1px solid #222;
+}
+
+.pageContents .maincontents .eventInfos .selectedInfos {
+  width: 100%;
+  border: 20px solid #f2f2f2;
+  padding: 30px;
+}
+
+.pageContents .maincontents .eventInfos .selectedInfos div .infoName {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  padding-top: 10px;
+  border-top: 7px solid #f2f2f2;
+  line-height: 25px;
+  display: inline-block;
+  margin: 0 auto 1rem 0;
+}
+
+.pageContents .maincontents .eventInfos .selectedInfos div .eventNoticeBox {
+  border-radius: 17px;
+  border: 1px solid #e2e2e2;
+  background: #f8f8f8;
+  padding: 30px;
+}
+
+.backgroundBox {
+  background: #f8f8f8;
+  padding: 30px;
+}
+
+.upperBox .right .backgroundBox,
+.lowerBox .backgroundBox {
+  display: flex;
+}
+
+.divided::before {
+  position: relative;
+  left: 50%;
+  width: 1px;
+  height: calc(100%-60px);
+  background: #c7c7c7;
+  content: "";
+}
+
+.divided > div {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.divided > .left > div {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.upperBox .iconBox,
+.divided > .left > div .iconBox,
+.divided > .right .iconBox {
+  width: 72px;
+  height: 72px;
+  border-radius: 36px;
+  background: #fff;
+  display: inline-block;
+  line-height: 72px;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding-top: 7px;
+}
+
+.infoList {
+  margin-top: 1rem;
+  width: 80%;
+}
+
+.infoList li {
+  list-style: disc;
+  font-size: 13px;
+  color: #7d7d7d;
+  line-height: 18px;
+  padding-left: 10px;
+}
+
+.divided > .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.right .infoList {
+  margin-top: 1rem;
+  width: 90%;
+}
+
+.infoBox .upperBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoBox .upperBox > div {
+  width: 48%;
+}
+
+.infoBox .upperBox .left .first ul li {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.upperBox {
+  margin-bottom: 3%;
+}
+
+.upperBox > .left > div > .backgroundBox {
+  justify-content: space-between;
+}
+
+.upperBox > .left > div > .backgroundBox > div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.iconTitle {
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.iconText {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.upperBox > div > div {
+  margin-bottom: 5%;
+}
+
+.third .pre-notice {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0;
+}
+
+.third .small {
+  font-size: 13px;
+}
+
+.right table {
+  text-align: center;
+}
+
+.right table th,
+.right table td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #e2e2e2;
+  border-left: 1px solid #e2e2e2;
+}
+
+.right table th {
+  border-top: 1px solid #4c4c4c;
+}
+
+th.col3rd,
+td.col3rd {
+  border-right: 1px solid #e2e2e2;
+}
+
+.right .second .backgroundBox > div {
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.right .second .backgroundBox > div ul {
+  margin-top: 1rem;
+}
+
+.right .second .backgroundBox > div ul li {
+  font-size: 13px;
+}
+
+.right .second .backgroundBox .furtherRefundNotice {
+  background: #fff;
+  text-align: left;
+  padding: 1rem;
+}
+
+.right .second .backgroundBox .furtherRefundNotice li {
+  margin-left: 20px;
+  list-style: disc;
+}

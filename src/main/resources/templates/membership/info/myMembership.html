@@ -3,6 +3,8 @@
   <head>
     <th:block th:insert="/fragments/global::head-links"/>
     <link rel="stylesheet" href="/styles/pages/members/mypage.css"/>
+    <link rel="stylesheet" href="/styles/pages/members/myMembership.css"/>
+    <script src="/javascript/mypage/myMembership.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -73,9 +75,131 @@
             </div>
 
             <!-- mypage > myMembership Area ############################################ -->
-            <div class="contentArea"></div>
-
+            <div class="contentArea">
+              <div class="mtLine">
+                <h3 class="microTitle">나의 멤버십</h3>
+                <button type="button"><img src="/imgsrc/assets/mypage/book-icon-btn.gif" alt="">유료회원 연회비 신용카드자동이체 신청/해지</button>
+              </div>
+              <div class="membership-box1 flex">
+                <div class="status flex-column">
+                  <img src="/imgsrc/assets/mypage/membership-icon.gif" width="90px" alt="">
+                  <span><span class="blue-font">[[${#authentication.principal.username}]]</span>님의 회원등급정보</span>
+                  <div class="badges">
+                    <button class="free-tier" sec:authorize="!hasRole('PAID')" type="button">무료</button>
+                    <button class="paid-tier" sec:authorize="hasRole('PAID')" type="button">유료</button>
+                    <button class="green-class" sec:authorize="hasRole('GREEN')" type="button">그린</button>
+                    <button class="blue-class" sec:authorize="hasRole('BLUE')" type="button">블루</button>
+                    <button class="gold-class" sec:authorize="hasRole('GOLD')" type="button">골드</button>
+                    <button class="no-expiry" sec:authorize="!hasRole('PAID')" type="button">평생</button>
+                    <button class="yearly" type="button">연간</button>
+                    <!-- TODO need sec:authorize after -->
+                  </div>
+                </div>
+                <div class="chooseMembership flex-column">
+                  <div class="TitleAndRefundNotice">
+                    <span class="joinMembershipT">SAC 유료멤버십 갱신/가입</span>
+                    <button type="button" class="RefundNotice"><img src="/imgsrc/assets/mypage/black-book-btn.gif" alt=""> 연회비 환불안내</button>
+                  </div>
+                  <div class="classSelector">
+                    <button class="c" type="button">그린회원</button>
+                    <button type="button">블루회원</button>
+                    <button type="button">골드회원</button>
+                  </div>
+                  <span>연회비 선택</span>
+                  <div class="expirySelect green">
+                    <div class="buttons">
+                      <button type="button">1년</button>
+                      <button style="font-size : 14px;" type="button">예술의전당 우리카드_환불불가</button>
+                    </div>
+                  </div>
+                  <div class="expirySelect blue hidden">
+                    <div class="buttons">
+                      <button type="button">1년</button>
+                      <button type="button">2년(15%할인)</button>
+                      <button type="button">3년(15%할인)</button>
+                    </div>
+                    <span class="red-font">* 유니온페이 제휴회원 가입은 예술의전당 고객센터(02-580-1300)에서 가능합니다.
+                      * 블루회원의 회원물품은 일반우편으로 발송되며 수령까지 1~2주가 소요됩니다.
+                        주소정보가 정확하지 않을 경우 반송되므로 주소를 정확히 입력해주세요.</span>
+                  </div>
+                  <div class="expirySelect gold hidden">
+                    <div class="buttons">
+                      <button type="button">1년</button>
+                      <button type="button">2년(15%할인)</button>
+                      <button type="button">3년(15%할인)</button>
+                    </div>
+                    <span class="red-font">* 골드회원의 회원물품은 일반등기로 발송되며 수령까지 1~2주가 소요됩니다.
+                      주소정보가 정확하지 않을 경우 반송되므로 주소를 정확히 입력해주세요.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="membership-box2 flex-column">
+                <span class="boxTitle">멤버십 가입내역 조회</span>
+                <span class="boxDesc">최근 순으로 전체 멤버십 가입내역을 확인할 수 있습니다.</span>
+                <table>
+                  <colgroup>
+                    <col width="15%">
+                    <col width="35%">
+                    <col width="35%">
+                    <col width="15%">
+                  </colgroup>
+                  <tbody>
+                    <tr>
+                      <td>정상</td>
+                      <td>무료회원</td>
+                      <td>[가입날] ~ 평생</td>
+                      <td>무료</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="membership-box3">
+                <div class="boxTitleLine">
+                  <span class="microTitle">예술의전당 멤버십 혜택안내</span>
+                  <button type="button" onclick="location.href='/member/signup'" class="toJoinMembershipPage">
+                    <img src="/imgsrc/assets/mypage/book-icon-btn.gif" alt="" style="margin-right : 0.5rem;">
+                    멤버십 소개 바로가기
+                  </button>
+                </div>
+                <div class="innerBox box-1 flex">
+                  <div class="image flex"><img src="/imgsrc/assets/mypage/membership-list1.gif" alt=""></div>
+                  <div class="benefitDesc">
+                    <span class="listTitle">할인 혜택</span>
+                    <span class="listText">공연, 전시 티켓구매 할인, 아카데미 수강료 할인, 그밖에 다양한 추가 할인 혜택</span>
+                    <ul>
+                      <li>_ 유료멤버십(골드, 블루) 공연, 전시 티켓 상이 할인(골드 5~40% / 블루 5~30%)</li>
+                      <li>_ 유료멤버십 아카데미 수강료 5% 할인(미술, 서예, 음악감상 수강시)</li>
+                      <li>_ 그밖에 예술의전당이 엄선한 다양한 특별 할인 이벤트<br>&#160;&#160;(회원가입시 홍보이벤트 수신 설정)</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="innerBox box-2 flex">
+                  <div class="image flex"><img src="/imgsrc/assets/mypage/membership-list2.gif" alt=""></div>
+                  <div class="benefitDesc">
+                    <span class="listTitle">유료멤버십 서비스</span>
+                    <span class="listText">유료멤버십 골드, 블루회원을 위한 우대 혜택</span>
+                    <ul>
+                      <li>_ 선예매 서비스(일반회원보다 빠른 예매)</li>
+                      <li>_ 회원음악회 연1회 초청(선착순 2매)</li>
+                      <li>_ 제휴매장 할인 .우대서비스</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="innerBox box-3 flex">
+                  <div class="image flex"><img src="/imgsrc/assets/mypage/membership-list3.gif" alt=""></div>
+                  <div class="benefitDesc">
+                    <span class="listTitle">골드회원 특별 서비스</span>
+                    <span class="listText">골드멤버십 회원을 위한 스페셜 혜택</span>
+                    <ul>
+                      <li>_ 12시간 무료주차권 12장 증정</li>
+                      <li>_ 공연 프로그램북 교환권 12장 증정</li>
+                      <li>_ 입장원 예매시 등기발송 서비스(무료)<br>*예술의전당, 국립발레단, 국립합창단, 코리안심포니 기획공연에 한하여 사용 가능</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             <!-- end of maincontents ############################################### -->
+            </div>
           </div>
         </section>
       </main>

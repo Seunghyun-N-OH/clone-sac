@@ -1,0 +1,256 @@
+.contentArea h3.microTitle::after {
+  content: "";
+  display: inline-block;
+  height: 7px;
+  width: 40px;
+  background: #ed1839;
+  top: -25px;
+  left: -125px;
+  position: relative;
+}
+
+.contentArea h3.microTitle {
+  font-size: 24px;
+  color: #333333;
+  font-weight: 500;
+}
+
+.contentArea .mtLine {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentArea .mtLine button {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  background-color: #ed1839;
+  color: #fff;
+  border: none;
+}
+
+.contentArea .mtLine button img {
+  margin-right: 0.5rem;
+}
+
+.contentArea .membership-box1 {
+  border: 1px solid #000;
+  background-color: #f2f2f2;
+  margin: 2% 0;
+  height: 350px;
+}
+
+.contentArea .membership-box1 div.status {
+  border-right: 1px solid #000;
+  align-items: center;
+}
+
+.contentArea .membership-box1 > div {
+  width: 50%;
+  padding: 30px;
+}
+
+.contentArea .membership-box1 .badges button {
+  height: 40px;
+  min-width: 85px;
+  font-size: 15px;
+  padding: 10px;
+  line-height: 20px;
+  border-radius: 40px;
+  text-align: center;
+  margin: 5px;
+  border: 1px solid #000;
+}
+
+.contentArea .membership-box1 .badges button.free-tier {
+  color: #33a596;
+  border: 1px solid #33a596;
+}
+
+.contentArea .membership-box1 .badges button.free-tier::before {
+  content: "F";
+  background: #33a596;
+  color: #fff;
+  position: absolute;
+  border-radius: 22px;
+  height: 22px;
+  width: 22px;
+  left: 375px;
+}
+
+.contentArea .membership-box1 .badges button.paid-tier {
+  color: #ed1839;
+  border: 1px solid #ed1839;
+}
+
+.contentArea .membership-box1 .badges button.paid-tier::before {
+  content: "P";
+  background: #ed1839;
+  color: #fff;
+  position: absolute;
+  border-radius: 22px;
+  height: 22px;
+  width: 22px;
+  left: 375px;
+}
+
+.chooseMembership .TitleAndRefundNotice {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chooseMembership .TitleAndRefundNotice span.joinMembershipT {
+  font-weight: bold;
+}
+
+.chooseMembership .TitleAndRefundNotice button.RefundNotice {
+  padding: 0.25rem 1rem;
+  background: #fff;
+  border: 1px solid #222;
+}
+
+.chooseMembership .classSelector {
+  margin: 1% 0;
+  height: 50px;
+  display: flex;
+}
+
+.chooseMembership .expirySelect {
+  margin: 1% 0;
+  height: 50px;
+}
+
+.chooseMembership .classSelector button,
+.chooseMembership .expirySelect button {
+  background: #fff;
+  border: 1px solid #c2c2c2;
+  font-size: 15px;
+  color: #333;
+  cursor: pointer;
+  width: 120px;
+  height: 50px;
+  margin: 0 0.25rem;
+}
+
+.chooseMembership .expirySelect .buttons {
+  margin-bottom: 1rem;
+}
+
+.chooseMembership .expirySelect button.c,
+.chooseMembership .classSelector button.c {
+  background: #ed1839;
+  color: #fff;
+  border: 1px solid #ed1839;
+}
+
+.chooseMembership .expirySelect .buttons {
+  display: flex;
+}
+
+.membership-box2 {
+  margin: 2rem 0;
+  align-items: center;
+}
+
+.membership-box2 .boxTitle {
+  font-size: 24px;
+  color: #333333;
+  font-weight: 500;
+}
+
+.membership-box2 .boxDesc {
+  font-size: 14px;
+  color: #a4a4a4;
+}
+
+.membership-box2 .boxTitle::before {
+  content: "";
+  display: block;
+  height: 7px;
+  width: 50px;
+  background: #ed1839;
+  position: relative;
+  left: 40%;
+}
+
+.membership-box2 table {
+  margin-top: 2rem;
+  width: 100%;
+  border-top: 1px solid #333;
+  text-align: center;
+}
+
+.membership-box2 table tr td {
+  padding: 1rem 0;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.membership-box3 .boxTitleLine {
+  display: flex;
+  justify-content: space-between;
+}
+
+.membership-box3 .boxTitleLine .microTitle {
+  font-size: 24px;
+  color: #333333;
+  font-weight: 500;
+}
+
+.membership-box3 .boxTitleLine .microTitle::before {
+  content: "";
+  display: block;
+  height: 7px;
+  width: 50px;
+  background: #ed1839;
+  position: relative;
+  left: 0%;
+}
+
+.membership-box3 .boxTitleLine button {
+  padding: 1rem;
+  background: #ed1839;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+.membership-box3 .innerBox {
+  margin-top: 2rem;
+  width: 100%;
+  height: 230px;
+  background: #fafafa;
+  box-shadow: 5px 8px 0 #e4e3e3;
+}
+
+.membership-box3 .innerBox .image {
+  width: 310px;
+  justify-content: center;
+  align-items: center;
+}
+
+.membership-box3 .innerBox .benefitDesc {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 100px;
+}
+
+.membership-box3 .innerBox .benefitDesc .listTitle {
+  font-size: 20px;
+  color: #333333;
+  font-weight: 500;
+}
+
+.membership-box3 .innerBox .benefitDesc .listText {
+  margin-top: 0.5rem;
+  font-size: 15px;
+  color: #484848;
+}
+
+.membership-box3 .innerBox .benefitDesc ul {
+  font-size: 14px;
+  color: #444;
+  margin-top: 0.5rem;
+}
