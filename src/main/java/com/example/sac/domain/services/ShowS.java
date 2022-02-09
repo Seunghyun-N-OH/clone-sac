@@ -1,5 +1,7 @@
 package com.example.sac.domain.services;
 
+import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.sac.web.dtos.EventD;
@@ -23,5 +25,10 @@ public interface ShowS {
                         List<MultipartFile> copyOf, String deletePoster, List<Long> deleteDetails);
 
         String getShowIndex(Model m);
+
+        String purchaseTicketS(long eventId, Model m, EventD event, Principal p, String ticketClass, int ticketPrice,
+                        LocalDateTime showTime);
+
+        String toPurchaseS(long eventId, Model m);
 
 }

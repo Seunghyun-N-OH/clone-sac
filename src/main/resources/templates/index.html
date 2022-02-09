@@ -7,7 +7,7 @@
   <head>
     <th:block th:insert="/fragments/global::head-links" />
     <link rel="stylesheet" href="/styles/pages/index.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>;
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -41,9 +41,9 @@
                     >[[${rotateList[#lists.size(rotateList)-2].openDate}]] ~ [[${rotateList[#lists.size(rotateList)-2].finDate}]]</span
                   >
                   <span class="eDate" th:if="${#lists.size(rotateList[#lists.size(rotateList)-2].eventTime) > 0}">
-                    <span class="periode" th:each="b : ${rotateList[#lists.size(rotateList)-2].eventTime}">
-                      [[${#strings.substring(b,0,10)}]]
-                      [[${#strings.substring(b,11,16)}]]
+                    <span class="periode">
+                      [[${#strings.substring(rotateList[#lists.size(rotateList)-2].eventTime[0],0,10)}]]
+                      [[${#strings.substring(rotateList[#lists.size(rotateList)-2].eventTime[0],11,16)}]]
                     </span>
                   </span>
                   <button class="toDetailBtn" th:onclick="'location.href=\'show/'+ @{${rotateList[#lists.size(rotateList)-2].id}} + '\''" type="button">자세히보기</button>
@@ -69,9 +69,9 @@
                     >[[${rotateList[#lists.size(rotateList)-1].openDate}]] ~ [[${rotateList[#lists.size(rotateList)-1].finDate}]]</span
                   >
                   <span class="eDate" th:if="${#lists.size(rotateList[#lists.size(rotateList)-1].eventTime) > 0}">
-                    <span class="periode" th:each="b : ${rotateList[#lists.size(rotateList)-1].eventTime}">
-                      [[${#strings.substring(b,0,10)}]]
-                      [[${#strings.substring(b,11,16)}]]
+                    <span class="periode">
+                      [[${#strings.substring(rotateList[#lists.size(rotateList)-1].eventTime[0],0,10)}]]
+                      [[${#strings.substring(rotateList[#lists.size(rotateList)-1].eventTime[0],11,16)}]]
                     </span>
                   </span>
                   <button class="toDetailBtn" th:onclick="'location.href=\'show/'+ @{${rotateList[#lists.size(rotateList)-1].id}} + '\''" type="button">자세히보기</button>
@@ -97,9 +97,9 @@
                     >[[${a.openDate}]] ~ [[${a.finDate}]]</span
                   >
                   <span class="eDate" th:if="${#lists.size(a.eventTime) > 0}">
-                    <span class="periode" th:each="b : ${a.eventTime}">
-                      [[${#strings.substring(b,0,10)}]]
-                      [[${#strings.substring(b,11,16)}]]
+                    <span class="periode">
+                      [[${#strings.substring(a.eventTime[0],0,10)}]]
+                      [[${#strings.substring(a.eventTime[0],11,16)}]]
                     </span>
                   </span>
                   <button class="toDetailBtn" th:onclick="'location.href=\'show/'+ @{${a.id}} + '\''" type="button">자세히보기</button>
@@ -161,9 +161,9 @@
                 [[${rotateList[#lists.size(rotateList)-2].openDate}]] ~ [[${rotateList[#lists.size(rotateList)-2].finDate}]]
               </span>
               <span class="eDate" th:if="${#lists.size(rotateList[#lists.size(rotateList)-2].eventTime) > 0}">
-                <span class="periode" th:each="b : ${rotateList[#lists.size(rotateList)-2].eventTime}">
-                  [[${#strings.substring(b,0,10)}]]
-                  [[${#strings.substring(b,11,16)}]]
+                <span class="periode">
+                  [[${#strings.substring(rotateList[#lists.size(rotateList)-2].eventTime[0],0,10)}]]
+                  [[${#strings.substring(rotateList[#lists.size(rotateList)-2].eventTime[0],11,16)}]]
                 </span>
               </span>
               <p class="lectureVenue">[[${rotateList[#lists.size(rotateList)-2].venue1}]]</p>
@@ -181,9 +181,9 @@
                 [[${rotateList[#lists.size(rotateList)-1].openDate}]] ~ [[${rotateList[#lists.size(rotateList)-1].finDate}]]
               </span>
               <span class="eDate" th:if="${#lists.size(rotateList[#lists.size(rotateList)-1].eventTime) > 0}">
-                <span class="periode" th:each="b : ${rotateList[#lists.size(rotateList)-1].eventTime}">
-                  [[${#strings.substring(b,0,10)}]]
-                  [[${#strings.substring(b,11,16)}]]
+                <span class="periode">
+                  [[${#strings.substring(rotateList[#lists.size(rotateList)-1].eventTime[0],0,10)}]]
+                  [[${#strings.substring(rotateList[#lists.size(rotateList)-1].eventTime[0],11,16)}]]
                 </span>
               </span>
               <p class="lectureVenue">[[${rotateList[#lists.size(rotateList)-1].venue1}]]</p>
@@ -201,9 +201,9 @@
                 [[${a.openDate}]] ~ [[${a.finDate}]]
               </span>
               <span class="eDate" th:if="${#lists.size(a.eventTime) > 0}">
-                <span class="periode" th:each="b : ${a.eventTime}">
-                  [[${#strings.substring(b,0,10)}]]
-                  [[${#strings.substring(b,11,16)}]]
+                <span class="periode">
+                  [[${#strings.substring(a.eventTime[0],0,10)}]]
+                  [[${#strings.substring(a.eventTime[0],11,16)}]]
                 </span>
               </span>
               <p class="lectureVenue">[[${a.venue1}]]</p>
@@ -221,9 +221,9 @@
                 [[${rotateList[0].openDate}]] ~ [[${rotateList[0].finDate}]]
               </span>
               <span class="eDate" th:if="${#lists.size(rotateList[0].eventTime) > 0}">
-                <span class="periode" th:each="b : ${rotateList[0].eventTime}">
-                  [[${#strings.substring(b,0,10)}]]
-                  [[${#strings.substring(b,11,16)}]]
+                <span class="periode">
+                  [[${#strings.substring(rotateList[0].eventTime[0],0,10)}]]
+                  [[${#strings.substring(rotateList[0].eventTime[0],11,16)}]]
                 </span>
               </span>
               <p class="lectureVenue">[[${rotateList[0].venue1}]]</p>
@@ -241,9 +241,9 @@
                 [[${rotateList[1].openDate}]] ~ [[${rotateList[1].finDate}]]
               </span>
               <span class="eDate" th:if="${#lists.size(rotateList[1].eventTime) > 0}">
-                <span class="periode" th:each="b : ${rotateList[1].eventTime}">
-                  [[${#strings.substring(b,0,10)}]]
-                  [[${#strings.substring(b,11,16)}]]
+                <span class="periode">
+                  [[${#strings.substring(rotateList[1].eventTime[0],0,10)}]]
+                  [[${#strings.substring(rotateList[1].eventTime[0],11,16)}]]
                 </span>
               </span>
               <p class="lectureVenue">[[${rotateList[1].venue1}]]</p>
@@ -261,9 +261,9 @@
                 [[${rotateList[2].openDate}]] ~ [[${rotateList[2].finDate}]]
               </span>
               <span class="eDate" th:if="${#lists.size(rotateList[2].eventTime) > 0}">
-                <span class="periode" th:each="b : ${rotateList[2].eventTime}">
-                  [[${#strings.substring(b,0,10)}]]
-                  [[${#strings.substring(b,11,16)}]]
+                <span class="periode">
+                  [[${#strings.substring(rotateList[2].eventTime[0],0,10)}]]
+                  [[${#strings.substring(rotateList[2].eventTime[0],11,16)}]]
                 </span>
               </span>
               <p class="lectureVenue">[[${rotateList[2].venue1}]]</p>
@@ -429,7 +429,6 @@
           </div>
         </div>
       </div>
-
       <script src="/javascript/show/indexSlideJS.js"></script>
       </main>
     </th:block>

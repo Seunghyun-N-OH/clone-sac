@@ -79,4 +79,6 @@ public class EventD {
     // 회차별 시작시간
     private int runningTime; // [90, 100, 180 ...]
     // 러닝타임
+
+    private String eventNews;
 }

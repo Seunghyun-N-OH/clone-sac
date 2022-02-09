@@ -1,5 +1,7 @@
 package com.example.sac.domain.services.impls;
 
+import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,10 +13,12 @@ import com.example.sac.domain.entities.EventDetailImg;
 import com.example.sac.domain.entities.EventE;
 import com.example.sac.domain.entities.EventPoster;
 import com.example.sac.domain.entities.PricingPolicy;
+import com.example.sac.domain.entities.TicketHistory;
 import com.example.sac.domain.repositories.EventDetailImgR;
 import com.example.sac.domain.repositories.EventPosterR;
 import com.example.sac.domain.repositories.EventR;
 import com.example.sac.domain.repositories.PricingPolicyR;
+import com.example.sac.domain.repositories.TicketHistoryR;
 import com.example.sac.domain.services.ShowS;
 import com.example.sac.domain.services.functions.UpAndDownFile;
 import com.example.sac.web.dtos.EventD;
@@ -28,13 +32,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Service
 public class ShowSI implements ShowS {
 
-    public ShowSI(EventR er, PricingPolicyR ppr, EventPosterR epr, EventDetailImgR edir) {
+    public ShowSI(EventR er, PricingPolicyR ppr, EventPosterR epr, EventDetailImgR edir, TicketHistoryR thr) {
         this.er = er;
         this.ppr = ppr;
         this.epr = epr;
         this.edir = edir;
+        this.thr = thr;
     }
 
+    private final TicketHistoryR thr;
     private final EventR er;
     private final PricingPolicyR ppr;
     private final EventPosterR epr;
@@ -82,6 +88,7 @@ public class ShowSI implements ShowS {
                 .closeTime(a.getCloseTime())
                 .eventTime(a.getEventTime())
                 .runningTime(a.getRunningTime())
+                .eventNews(a.getEventNews())
                 .build();
         // 파일저장 - 상세페이지
         List<EventDetailImg> details = UpAndDownFile.upEventDetailImages(d);
@@ -200,6 +207,7 @@ public class ShowSI implements ShowS {
                         .closeTime(a.getCloseTime())
                         .eventTime(a.getEventTime())
                         .runningTime(a.getRunningTime())
+                        .eventNews(a.getEventNews())
                         .build();
             } else {
                 newData = EventE.builder()
@@ -225,6 +233,7 @@ public class ShowSI implements ShowS {
                         .closeTime(a.getCloseTime())
                         .eventTime(a.getEventTime())
                         .runningTime(a.getRunningTime())
+                        .eventNews(a.getEventNews())
                         .build();
             }
             List<EventDetailImg> newDetails = UpAndDownFile.upEventDetailImages(copyOf);
@@ -268,6 +277,32 @@ public class ShowSI implements ShowS {
             m.addAttribute("rotateList", pickedList);
         }
         return "/index";
+    }
+
+    @Override
+    public String purchaseTicketS(long eventId, Model m, EventD event, Principal p, String ticketClass, int ticketPrice,
+            LocalDateTime showTime) {
+        thr.save(new TicketHistory(event, p.getName(), ticketClass, ticketPrice, showTime));
+        return "redirect:/member/mypage/myTicket";
+    }
+
+    @Override
+    @Transactional
+    public String toPurchaseS(long eventId, Model m) {
+        Optional<EventE> raw = er.findById(eventId);
+        if (raw.isPresent()) {
+            EventE data = raw.get();
+            System.out.println(data.getDetail_img().stream().toString());
+            if (data.getPoster() != null)
+                System.out.println(data.getPoster().toString());
+            System.out.println(data.getPricingPolicy());
+            System.out.println(data.getEventTime());
+            System.out.println(data.toString());
+            m.addAttribute("event", data.toDto());
+            return "show/purchaseTicket";
+        } else {
+            return "redirect:/show/show_list";
+        }
     }
 
 }

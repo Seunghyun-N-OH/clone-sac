@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="/styles/pages/show/list.css" />
     <link rel="stylesheet" href="/styles/pages/show/register.css" />
     <script src="/javascript/show/edit.js"></script>
+    <script src="/javascript/show/register.js"></script>
+    <link rel="stylesheet" href="/styles/global/summernote-lite.css" />
+    <script src="/javascript/summernote/summernote-lite.js"></script>
+    <script src="/javascript/summernote/summernote-ko-KR.js"></script>
     <title>Document</title>
     <script th:inline="javascript">
     </script>
@@ -85,20 +89,20 @@
                             <option value="전시장">전시장</option>
                         </select>
                         <select name="venue2" id="venue2" th:field="${event.venue2}" th:value="${event.venue2}">
-                            <option value="" selected>===중분류===</option>
-                            <option value="콘서트홀">콘서트홀</option>
-                            <option value="IBK챔버홀">IBK챔버홀</option>
-                            <option value="리사이틀홀">리사이틀홀</option>
-                            <option value="인춘아트홀">인춘아트홀</option>
-                            <option value="오페라극장">오페라극장</option>
-                            <option value="CJ 토월극장">CJ 토월극장</option>
-                            <option value="자유소극장">자유소극장</option>
-                            <option value="신세계스퀘어 아외무대">신세계스퀘어 야외무대</option>
-                            <option value="한가람미술관">한가람미술관</option>
-                            <option value="한가람디자인미술관">한가람디자인미술관</option>
-                            <option value="서울서예박물관">서울서예박물관</option>
-                            <option value="비타민스테이션(한가람미술관 제7전시실)">비타민스테이션(제7전시실)</option>
-                        </select>
+                          <option value="" selected>===중분류===</option>
+                          <option value="콘서트홀">콘서트홀</option>
+                          <option value="IBK챔버홀">IBK챔버홀</option>
+                          <option value="리사이틀홀">리사이틀홀</option>
+                          <option value="인춘아트홀">인춘아트홀</option>
+                          <option value="오페라극장">오페라극장</option>
+                          <option value="CJ 토월극장">CJ 토월극장</option>
+                          <option value="자유소극장">자유소극장</option>
+                          <option value="신세계스퀘어 아외무대">신세계스퀘어 야외무대</option>
+                          <option value="한가람미술관">한가람미술관</option>
+                          <option value="한가람디자인미술관">한가람디자인미술관</option>
+                          <option value="서울서예박물관">서울서예박물관</option>
+                          <option value="비타민스테이션(한가람미술관 제7전시실)">비타민스테이션(제7전시실)</option>
+                      </select>
                         <select name="venue3" id="venue3" th:field="${event.venue3}" th:value="${event.venue3}">
                             <option value="" selected>===소분류===</option>
                             <option value="제1전시실, 제2전시실">1층</option>
@@ -324,6 +328,12 @@
                         <input type="number" id="rt" value="0" name="runningTime" th:value="${event.runningTime}" class="full-length" hidden>
                         <p class="red-font">* 회차제로 진행되는 행사에만 해당</p>
                     </td>
+                    <tr class="oneLine">
+                      <td class="nameBlock">안내사항<br>(행사정보 내 알립니다 에 보여집니다)</td>
+                      <td class="valueBlock">
+                        <textarea id="summernote" name="eventNews" th:text="${event.eventNews}"></textarea>
+                      </td>
+                    </tr>
                   </tr>
                 </tbody>
               </table>

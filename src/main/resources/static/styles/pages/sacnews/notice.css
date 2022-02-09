@@ -250,3 +250,8 @@ main > .themeArea {
   margin-bottom: 0.5rem;
   display: flex;
 }
+
+.searchLine .adminBtn {
+  background: none;
+  border: 1px solid blue;
+}

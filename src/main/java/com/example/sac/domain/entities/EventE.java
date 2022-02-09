@@ -124,6 +124,9 @@ public class EventE {
     private int runningTime; // [90, 100, 180 ...]
     // 러닝타임
 
+    @Column(nullable = true)
+    private String eventNews;
+
     public EventD toDto() {
         return EventD.builder()
                 .id(this.id)
@@ -149,6 +152,7 @@ public class EventE {
                 .closeTime(this.closeTime)
                 .eventTime(this.eventTime)
                 .runningTime(this.runningTime)
+                .eventNews(this.eventNews)
                 .build();
     }
 

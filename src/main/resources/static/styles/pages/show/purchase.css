@@ -1,0 +1,112 @@
+h3.microtitle {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h3.microtitle::after {
+  position: relative;
+  content: "";
+  background-color: #ed1839;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  left: -125px;
+  top: -25px;
+}
+
+form > .classSelect {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+form > .classSelect thead {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+form > .classSelect thead tr {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #7c7c7c;
+  align-items: center;
+}
+
+form > .classSelect thead .cols1 {
+  width: 30%;
+  border-right: 1px solid #7c7c7c;
+}
+form > .classSelect thead .cols2 {
+  width: 70%;
+}
+
+main select {
+  background: #aaaaaa;
+  color: rgb(0, 0, 0);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+}
+
+main select option {
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+}
+
+th .tableText {
+  display: inline-block;
+  width: 100%;
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid #919191;
+}
+
+.ticketSummary {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticketSummary table {
+  background: #d8d8d8;
+  width: 50%;
+}
+
+.ticketSummary table tr {
+  width: 100%;
+  padding: 1rem 10%;
+  line-height: 3rem;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.ticketSummary table tr .c1 {
+  width: 30%;
+}
+
+.ticketSummary table tr .c2 {
+  width: 60%;
+  font-weight: normal;
+}
+
+.ticketSummary table tr td {
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.summaryTitle {
+  margin-bottom: 2rem;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.purchaseBtn {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background: none;
+  border: 1px solid red;
+  border-radius: 50px;
+}

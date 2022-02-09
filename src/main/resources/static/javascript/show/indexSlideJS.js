@@ -154,6 +154,9 @@ $(function(){
     // TODO 공지사항 목록 hide + 티켓 목록 show 추가
 });
 
+  setInterval(toRight, 3000);
+  setInterval(lectureRight, 4000);
+
 });
 
 

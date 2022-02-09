@@ -139,6 +139,14 @@ public class NoticeSI implements NoticeS {
             System.out.println(data.getAttachment()); // Lazy 로딩 select 쿼리날리기
             // 이게 왜 되는거지...
             m.addAttribute("notice", raw.get().toDto());
+
+            Optional<NoticeE> next = nr.findById(notice + 1);
+            if (next.isPresent())
+                m.addAttribute("next", next.get().toListDto());
+            Optional<NoticeE> prev = nr.findById(notice - 1);
+            if (prev.isPresent())
+                m.addAttribute("previous", prev.get().toListDto());
+
             return "sacnews/detail";
         } else {
             return "redirect:/sacnews/notice";

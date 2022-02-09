@@ -117,7 +117,8 @@
               <!-- onsale여부, default poster, poster -->
               <img th:unless="${event.poster}" src="/imgsrc/noImage300x300.png" style="width:220px" alt="">
               <img th:if="${event.poster}" th:src="${event.poster.filePath} + ${event.poster.fileName}" style="width:220px" alt="">
-              <button type="button" style="cursor : unset" th:if="${event.onSale} eq o">예매</button>
+              <button type="button" th:onclick="location.href='/show/'+[[${event.id}]]+'/ticket'" style="cursor : unset" th:if="${event.onSale} eq o">예매</button>
+              <!-- TODO th:onclick -->
               <button type="button" style="cursor : unset" th:if="${event.onSale} eq s">현장예매</button>
               <button type="button" style="cursor : unset" th:if="${event.onSale} eq p">예정</button>
               <button type="button" style="cursor : unset" th:if="${event.onSale} eq c">종료</button>
@@ -157,26 +158,27 @@
                 </span>
               </div>
               <div class="infoSelectors">
-                <button type="button" class="selected">알립니다</button>
-                <button type="button">작품소개</button>
+                <button th:unless="${event.eventNews} eq null" type="button">알립니다</button>
+                <button  class="selected" type="button">작품소개</button>
+
                 <button type="button">할인정보</button>
                 <button type="button">장소안내</button>
                 <button type="button">관람평</button>
                 <button type="button">예매안내</button>
               </div>
               <div class="selectedInfos">
-                <div class="infoBox">
+                <div th:unless="${event.eventNews} eq null" class="infoBox hidden">
                   <span class="infoName">알립니다.</span>
                   <div class="eventNoticeBox">
-                    <!-- 알립니다 -->
+                    <span th:utext="${event.eventNews}"></span>
                   </div>
                 </div>
-                <div class="infoBox hidden" th:if="${event.detail_img}">
-                    <div class="eventNoticeBox">
-                      <!-- 작품소개 -->
-                      <img th:each="a : ${event.detail_img}" th:src="${a.filePath} + ${a.fileName}" style="width : 100%" alt="">
-                    </div>
-                </div>
+                <div class="infoBox" th:if="${event.detail_img}">
+                  <div class="eventNoticeBox">
+                    <!-- 작품소개 -->
+                    <img th:each="a : ${event.detail_img}" th:src="${a.filePath} + ${a.fileName}" style="width : 100%" alt="">
+                  </div>
+              </div>
                 <div class="infoBox hidden">
                   <div class="eventNoticeBox">
                     <!-- 할인정보 -->

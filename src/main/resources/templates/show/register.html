@@ -8,6 +8,9 @@
     <th:block th:insert="/fragments/global::head-links" />
     <link rel="stylesheet" href="/styles/pages/show/list.css" />
     <link rel="stylesheet" href="/styles/pages/show/register.css" />
+    <link rel="stylesheet" href="/styles/global/summernote-lite.css" />
+    <script src="/javascript/summernote/summernote-lite.js"></script>
+    <script src="/javascript/summernote/summernote-ko-KR.js"></script>
     <script src="/javascript/show/register.js"></script>
     <title>Document</title>
   </head>
@@ -131,7 +134,6 @@
                   </tr>
                   <tr class="oneLine">
                     <td class="nameBlock">
-                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
                       주관사
                     </td>
                     <td class="valueBlock" id="hostLine"> <!-- TODO 입력방식 바꿀 지 이후 결정 -->
@@ -151,7 +153,6 @@
                   </tr>
                   <tr class="oneLine">
                     <td class="nameBlock">
-                      <span class="red-font" style="font-size: 12px;vertical-align: text-top;">*필수 </span>
                       후원/협찬/협력사
                     </td>
                     <td class="valueBlock" id="sponsorLine">
@@ -295,6 +296,12 @@
                         <span>분</span>
                         <input type="number" id="rt" value="0" name="runningTime" class="full-length">
                         <p class="red-font">* 회차제로 진행되는 행사에만 해당</p>
+                    </td>
+                  </tr>
+                  <tr class="oneLine">
+                    <td class="nameBlock">안내사항<br>(행사정보 내 알립니다 에 보여집니다)</td>
+                    <td class="valueBlock">
+                      <textarea id="summernote" name="eventNews"></textarea>
                     </td>
                   </tr>
                 </tbody>

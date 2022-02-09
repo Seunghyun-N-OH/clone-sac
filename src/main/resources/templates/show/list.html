@@ -81,9 +81,9 @@
                       [[${a.openDate}]] ~ [[${a.finDate}]]
                     </td>
                     <td th:if="${#lists.size(a.eventTime) > 0}" class="column2">
-                      <p th:each="b : ${a.eventTime}">
-                        [[${#strings.substring(b,0,10)}]]
-                        [[${#strings.substring(b,11,16)}]]
+                      <p>
+                        [[${#strings.substring(a.eventTime[0],0,10)}]]
+                        [[${#strings.substring(a.eventTime[0],11,16)}]]
                       </p>
                       <!-- 공연일 때 ######################### -->
                     </td>

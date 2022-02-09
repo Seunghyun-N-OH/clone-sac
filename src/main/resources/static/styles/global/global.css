@@ -314,6 +314,7 @@ footer {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding: 0 auto;
 }
 
 footer > nav.top {
@@ -331,7 +332,7 @@ footer > nav.floor {
 }
 
 .footer-top {
-  padding: 2% 3%;
+  padding: 2rem 3rem;
   display: flex;
   width: 100%;
   margin: 0 3%;
@@ -363,7 +364,7 @@ footer > nav.floor {
   display: flex;
   width: 100%;
   margin: 0 3%;
-  padding: 2% 3%;
+  padding: 2rem 3rem;
   text-align: left;
   align-items: center;
   justify-content: space-between;
@@ -553,4 +554,14 @@ h3.sectiontitle::after {
   top: -25px;
   left: -95px;
   position: relative;
+}
+
+#to-Top-Btn {
+  position: fixed;
+  top: 90%;
+  left: 95%;
+  background-color: unset;
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
 }

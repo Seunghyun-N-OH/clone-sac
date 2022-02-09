@@ -55,6 +55,12 @@ public class AdminController {
         return "show/register";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/admin/show/eventNewsImage", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+    public String eventNewsImageUpload(@RequestParam("file") MultipartFile f) {
+        return UpAndDownFile.uploadFile_summernote(f);
+    } // 게시글 제목 누르면 상세페이지로 들어가기
+
     @RequestMapping(value = "/admin/show/register", method = RequestMethod.POST)
     public String submitRegister(EventD a, @RequestParam List<String> subject, @RequestParam List<Integer> price,
             MultipartFile poster_file, MultipartHttpServletRequest htsr) {
