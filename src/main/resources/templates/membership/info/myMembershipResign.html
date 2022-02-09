@@ -3,6 +3,8 @@
   <head>
     <th:block th:insert="/fragments/global::head-links"/>
     <link rel="stylesheet" href="/styles/pages/members/mypage.css"/>
+    <link rel="stylesheet" href="/styles/pages/members/resignation.css"/>
+    <script src="/javascript/mypage/resignation.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -73,13 +75,39 @@
             </div>
 
             <!-- mypage > myMembershipResign Area ############################################ -->
-            <div class="contentArea"> <!--TODO 이거 이쁘게 css 해라....-->
-              <form action="/member/mypage/myMembershipResign" method="post">
-                <input type="hidden" name="_method" value="DELETE"/>
-                <input type="text" name="reason">
-                <input type="text" name="comment">
-                <button type="submit">내보내줘</button>
-                <!-- TODO 이거그래도 회원탈퇴인데 한번더 비번확인정도는 해야할듯 -->
+            <div class="contentArea">
+              <div class="sectiontitle">
+                <h3 class="microTitle">회원 탈퇴</h3>
+              </div>
+              <form action="/member/mypage/myMembershipResign" id="resignForm" method="post">
+                <div class="reasonSelect">
+                  <input type="hidden" name="_method" value="DELETE"/>
+                  <h3>회원탈퇴 사유를 선택해주세요.</h3>
+                  <ul>
+                    <li>
+                      <input type="radio" name="reason" value="회원서비스 불만" id="membershipservice" class="customRadio"><label for="membershipservice" class="customRadioLabel">회원서비스 불만</label>
+                      <input type="radio" name="reason" value="공연 전시관련 불만" id="showservice" class="customRadio"><label for="showservice" class="customRadioLabel">공연 전시관련 불만</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="reason" value="개인적인사정" id="personal" class="customRadio"><label for="personal" class="customRadioLabel">개인적인사정</label>
+                      <input type="radio" name="reason" value="환불로 인한 자동탈퇴" id="refund" class="customRadio"><label for="refund" class="customRadioLabel">환불로인한 자동탈퇴</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="reason" value="기타" id="etc" class="customRadio"><label for="etc" class="customRadioLabel" style="width:593px">기타</label>
+                    </li>
+                  </ul>
+                </div>
+                <div class="othercomment">
+                  <h3>예술의전당 서비스를 이용하면서 불편한 사항이 있으셧나요?</h3>
+                  <span class="excuse">고객님께서 남기신 의견을 수렴하여 보다 나은 서비스를 제공하기 위해 더욱 노력하겠습니다.</span>
+                  <textarea name="comment"></textarea>  
+                  <div class="counts">
+                    <span id="chars" class="charCounts">0</span>
+                    <span class="charCount">/200</span>
+                  </div>
+                  <button /*onclick="confirmResignation()"*/ onclick="doublecheck()" type="button"><img src="/imgsrc/assets/radio-btn.gif" style="margin-right : 1rem;" alt="">회원탈퇴하기</button>
+                </div>
+                  <!-- TODO 이거그래도 회원탈퇴인데 한번더 비번확인정도는 해야할듯 -->
               </form>
             </div>
 

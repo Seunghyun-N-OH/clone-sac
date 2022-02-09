@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <th:block th:insert="/fragments/global::head-links"/>
+    <link rel="stylesheet" href="/styles/pages/members/login.css" />
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <title>Document</title>
+    <script type="text/javascript">
+    // Naver callback
+    var naver_id_login = new naver_id_login("YOUR_CLIENT_ID", "YOUR_CALLBACK_URL");
+    // 접근 토큰 값 출력
+    alert(naver_id_login.oauthParams.access_token);
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+        alert(naver_id_login.getProfileData('email'));
+        alert(naver_id_login.getProfileData('nickname'));
+        alert(naver_id_login.getProfileData('age'));
+    }
+    </script>
+  </head>
+  <body>
+    <th:block th:insert="~{/fragments/global::global(~{this::main})}">
+      <main>
+        <th:block th:if="${error}">
+          <input type="text" id="ermsg" th:value="${exception}" hidden>
+        </th:block>
+        <section class="themeArea">
+          <h4>&nbsp;</h4>
+          <h3>회원서비스</h3>
+        </section>
+        <section class="navigator">
+          <div class="navsizebox">
+            <div class="navigate">
+              <a class="navHome" href="/"
+                ><img src="/imgsrc/assets/cwac-menu_icon01.png" alt=""
+              /></a>
+              <a class="navSelect" href="#">회원서비스</a>
+              <a class="navSelect" href="#">로그인</a>
+            </div>
+            <div class="actions">
+              <a class="printicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon03.png" alt=""
+              /></a>
+              <a class="shareicon" href="#"
+                ><img src="/imgsrc/assets/cwac-menu_icon04.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </section>
+        <section class="pageContents">
+          <div class="pageTitle">
+            <p>SNS 로그인 : 네이버</p>
+          </div>
+          <div class="maincontents">
+          </div>
+        </section>
+      </main>
+    </th:block>
+  </body>
+</html>

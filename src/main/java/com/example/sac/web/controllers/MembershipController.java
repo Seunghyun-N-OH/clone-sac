@@ -183,4 +183,14 @@ public class MembershipController {
     public String generateMUid(OrdersD data, int period) {
         return ms.addOrderHistory(data, period);
     }
+
+    @RequestMapping(value = "/member/signin/naver", method = RequestMethod.GET)
+    public String naverCallback() {
+        return "membership/sns/naver-callback";
+    }
+
+    @RequestMapping(value = "/member/mypage/resignation", method = RequestMethod.GET)
+    public String resignationConfirmWindow(Principal p) {
+        return "membership/info/resignation-confirm";
+    }
 }

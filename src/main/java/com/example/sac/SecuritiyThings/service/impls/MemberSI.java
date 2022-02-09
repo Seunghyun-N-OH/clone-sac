@@ -18,6 +18,8 @@ import com.example.sac.SecuritiyThings.entities.OrdersE;
 import com.example.sac.SecuritiyThings.repositories.MembershipR;
 import com.example.sac.SecuritiyThings.repositories.OrdersR;
 import com.example.sac.SecuritiyThings.service.MemberS;
+import com.example.sac.domain.entities.Complaints;
+import com.example.sac.domain.repositories.ComplaintsR;
 import com.example.sac.web.dtos.MembershipD;
 
 import org.json.simple.JSONObject;
@@ -37,12 +39,14 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Service
 public class MemberSI implements MemberS, UserDetailsService {
 
-    public MemberSI(MembershipR m, PasswordEncoder pe, OrdersR or) {
+    public MemberSI(MembershipR m, PasswordEncoder pe, OrdersR or, ComplaintsR cr) {
         this.mr = m;
         this.pe = pe;
         this.or = or;
+        this.cr = cr;
     }
 
+    private final ComplaintsR cr;
     private final PasswordEncoder pe;
     private final MembershipR mr;
     private final OrdersR or;
@@ -229,9 +233,9 @@ public class MemberSI implements MemberS, UserDetailsService {
     // 회원이 탈퇴요청, 사유(옵션선택)와 코멘트(직접작성)을 함께 넘겨받음
     @Override
     public void kickoutMember(Principal p, String reason, String comment) {
-        // TODO 사유/코멘트 따로 저장할 entity가 필요할것같다
-        // 사유/코멘트 처리했다 치고...
-        System.out.println(p.getName());
+        if (!reason.isBlank() && !comment.isBlank()) {
+            cr.save(Complaints.builder().userId(p.getName()).reason(reason).comment(comment).build());
+        }
         mr.deleteById(p.getName());
     }
 

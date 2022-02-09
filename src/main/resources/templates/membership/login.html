@@ -4,6 +4,7 @@
     <th:block th:insert="/fragments/global::head-links"/>
     <link rel="stylesheet" href="/styles/pages/members/login.css" />
     <title>Document</title>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
     <script type="text/javascript">
       $(function(){
       if($("#ermsg").val() != null){
@@ -100,7 +101,7 @@
               <div class="socialLogins" style="width : 44%">
                 <span class="topText">SNS 계정을 통해</span>
                 <span class="secondText">로그인하실 수 있습니다.</span>
-                <a href="#" class="naverLogin"><img src="/imgsrc/assets/login/naver-icon.gif" alt="">네이버 계정 로그인</a>
+                <a href="/member/signin/naver" class="naverLogin"><img src="/imgsrc/assets/login/naver-icon.gif" alt="">네이버 계정 로그인</a>
                 <a href="#" class="kakaoLogin"><img src="/imgsrc/assets/login/talk-icon.gif" alt="">카카오톡 계정 로그인</a>
                 <a href="#" class="fbLogin"><img src="/imgsrc/assets/login/face-book-icon.gif" alt="">페이스북 계정 로그인</a>
                 <ul class="otherActions">

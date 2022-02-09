@@ -38,3 +38,4 @@ out/
 
 ### shaun ###
 .history/**
+application-oauth.properties

@@ -25,13 +25,13 @@ function getMerchantId(mClass, fee, product_id, userId, period){
         "user" : userId,
       },
       success : function(a) {
-        payMembershipFee_card(mClass, fee, product_id, a, userId, period);
+        payMembershipFee_card(mClass, fee, a, userId, period);
       }
     });
 
   };
 
-  function payMembershipFee_card(mClass, fee, product_id, mId, userId, period){
+  function payMembershipFee_card(mClass, fee, mId, userId, period){
 
     var IMP = window.IMP; // 생략 가능
     IMP.init("imp23270551"); // 예: imp00000000
