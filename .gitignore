@@ -37,6 +37,6 @@ out/
 .vscode/
 
 ### shaun ###
-.history/**
+.history/
 application-oauth.properties
 application.yml
