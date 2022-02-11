@@ -14,10 +14,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SecureD extends User {
-    // ID / PW / ROLES : included by inheriting User class
+    // ID / PW / ROLES : inherited from User class
     private String memberType;
     private String name;
-    // required to check faster when redirecting pages
 
     public SecureD(Membership a) {
         super(a.getUserId(),

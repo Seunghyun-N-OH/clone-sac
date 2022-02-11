@@ -24,8 +24,8 @@ public class TicketHistory {
     private long id;
 
     private long eventId;
-    private String eventName;
-    private String ticketClass;
+    private String eventName; // 행사/강좌 이름
+    private String ticketClass; // 권종 : 성인, 청소년, 어린이, 멤버십할인 등등..
     private int ticketPrice;
     private String isUsage; // 사용완료, 미사용, 환불, 취소
     private String isExpired; // 만료, 사용가능, 사용불가

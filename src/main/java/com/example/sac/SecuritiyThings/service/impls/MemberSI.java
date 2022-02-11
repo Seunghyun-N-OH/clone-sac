@@ -77,6 +77,7 @@ public class MemberSI implements MemberS, UserDetailsService {
     // 회원가입 중 인증번호 문자발송을 위한 api [coolSMS]
     public void certifiedPhoneNumber(String phoneNumber, String cerNum) {
 
+        // 이거 api_ky, api_secret 어디 안전한데로 옮겨야할듯
         String api_key = "NCSY6EP4UOPTSDLW";
         String api_secret = "JQAERQHL9VYLHIAKBTA4USNF0PDWG29F";
         Message coolsms = new Message(api_key, api_secret);
@@ -106,7 +107,7 @@ public class MemberSI implements MemberS, UserDetailsService {
         // 그냥 들어있는 비밀번호를 encoding 된 값으로 바꿔주고
         md.setUserPw(pe.encode(md.getUserPw()));
         // membertype에 따라 그에 맞는 역할들 입력
-        // TODO enum클래스 활용할지 이후 결정
+        // TODO 그냥 String 되나 해봤는데 되네.. enum클래스 만들어서 활용할지 이후 결정
         Set<String> tmpRole = new HashSet<>();
         tmpRole.add("ROLE_USER");
         switch (md.getMemberType()) {
@@ -172,6 +173,7 @@ public class MemberSI implements MemberS, UserDetailsService {
         }
         // 일치하지 않으면 다시 이전페이지인 myinfoEnter로 리디렉트하며 에러메시지 전달
         ra.addFlashAttribute("error", "비밀번호가 일치하지 않습니다.");
+        // TODO 자세히 알아봐바 | redirectattribute 이거 항상 작동하지는 않는거같은디.?
         return "redirect:/member/mypage/myinfoEnter";
     }
 

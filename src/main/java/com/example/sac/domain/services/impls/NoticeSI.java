@@ -137,7 +137,7 @@ public class NoticeSI implements NoticeS {
         if (raw.isPresent()) {
             NoticeE data = raw.get();
             System.out.println(data.getAttachment()); // Lazy 로딩 select 쿼리날리기
-            // 이게 왜 되는거지...
+            // TODO 이게 왜 되는거지... 이거랑 findWith~ 쿼리메소드 차이 좀 알아봐바
             m.addAttribute("notice", raw.get().toDto());
 
             Optional<NoticeE> next = nr.findById(notice + 1);

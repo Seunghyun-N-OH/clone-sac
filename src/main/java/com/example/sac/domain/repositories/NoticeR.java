@@ -22,6 +22,8 @@ public interface NoticeR extends JpaRepository<NoticeE, Long> {
 
     @EntityGraph(attributePaths = { "attachment" }, type = EntityGraph.EntityGraphType.LOAD)
     Optional<NoticeE> findWithAttachmentByNo(Long userId);
+    // Lazy한 첨부파일친구도 같이 가져가기
 
     List<NoticeE> findTop8ByOrderByEffectiveDateBDesc();
+    // 효력시작일 채-신 8개만 가져가자
 }

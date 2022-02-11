@@ -29,6 +29,7 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
         }
 
         setDefaultFailureUrl("/member/signin?error=true&exception=" + URLEncoder.encode(msg, "UTF-8"));
+        // TODO 이 방식 다른데서도 알림줄때 쓸만하겠다
 
         super.onAuthenticationFailure(request, response, exception);
     }

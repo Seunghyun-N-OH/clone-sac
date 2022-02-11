@@ -20,7 +20,7 @@ import org.springframework.core.io.ClassPathResource; //  TODO Local
 import org.springframework.web.multipart.MultipartFile;
 
 // 주석 업데이트 220126
-// 파일 관련된 작업해주는 함수 모아둔 클래스 : 서비스가 너무 길어져 보기싫어서..
+// 파일 관련된 작업해주는 함수 모아둔 클래스 : 서비스가 너무 길어져 보기싫어서 만들긴 했는데 여기가 길어지네
 
 public class UpAndDownFile {
 
