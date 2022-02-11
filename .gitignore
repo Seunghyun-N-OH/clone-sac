@@ -39,3 +39,4 @@ out/
 ### shaun ###
 .history/**
 application-oauth.properties
+application.yml
