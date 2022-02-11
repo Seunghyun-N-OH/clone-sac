@@ -15,7 +15,6 @@ var pnRule = /^(?=.*[0-9]).{11}$/;    // 전화번호 rule : 11자리, 숫자만
 
       function smscheck(){
         var phoneNumber = $('#pno').val();
-
         if (pnRule.test(phoneNumber) && !emptyCheck.test(phoneNumber)){} else {
           alert("공백, (-) 없이 번호만 입력해주세요.")
           return false;
@@ -25,14 +24,13 @@ var pnRule = /^(?=.*[0-9]).{11}$/;    // 전화번호 rule : 11자리, 숫자만
           url: "/member/signup/verification",
           data: {
           phoneNumber : phoneNumber,
-      },
-      success: function(res){
-        alert("인증번호가 발송되었습니다.");
-        phoneNumberInput.disabled=true;
-        document.getElementById("tmpVN").value=res;
-      },
-  });
-        
+        },
+        success: function(res){
+          alert("인증번호가 발송되었습니다.");
+          document.getElementById("tmpVN").value=res;
+          $("#pno").attr("disabled",true);
+        },
+        });
       }
 
       function verifyCheck(){

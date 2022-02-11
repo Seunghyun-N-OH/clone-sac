@@ -25,7 +25,7 @@ public class TicketHistory {
 
     private long eventId;
     private String eventName;
-    private String ticketClass;
+    private String ticketClass; // 성인, 청소년, 어린이 그런거
     private int ticketPrice;
     private String isUsage; // 사용완료, 미사용, 환불, 취소
     private String isExpired; // 만료, 사용가능, 사용불가

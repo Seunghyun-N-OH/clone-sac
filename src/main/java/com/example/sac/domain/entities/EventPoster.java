@@ -21,7 +21,7 @@ public class EventPoster {
     @Id
     @GeneratedValue
     @Column(name = "image_id")
-    private long imageId; // 이미지파일 id
+    private long imageId; // (이미지)파일 id
 
     @Column(nullable = false)
     private String fileName; // 파일이름

@@ -83,11 +83,11 @@ public class MemberSI implements MemberS, UserDetailsService {
 
         // 4 params(to, from, type, text) are mandatory. must be filled
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("to", phoneNumber); // phone number of the user(visitor) that needs to receive a code
-        params.put("from", "01055162461"); // sender : registration required before using
+        params.put("to", phoneNumber); // client's phone number
+        params.put("from", "01055162461"); // sender
         params.put("type", "SMS");
         params.put("text", "(본인인증대체)휴대폰인증 테스트 : 인증번호 " + "[" + cerNum + "]");
-        params.put("app_version", "test app 1.2"); // application name and version
+        params.put("app_version", "test app 1.2");
 
         try {
             JSONObject obj = (JSONObject) coolsms.send(params);

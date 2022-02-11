@@ -79,19 +79,19 @@ public class EventE {
     // 입장권 판매상태 (s)ite, (o)nline, (p)lanned, (c)losed, (i)nvitational
 
     @OneToMany(mappedBy = "event")
-    @Builder.Default // 양방향 1:N
+    @Builder.Default // 1:N
     private List<PricingPolicy> pricingPolicy = new ArrayList<>(); // [성인-15000, 청소년-12000 ...]
     // 가격정책
 
     @OneToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "poster_id") // 단방향 1:1 [포스터는 1개만 등록받을 것]
-    private EventPoster poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+    private EventPoster poster; // TODO 파일 받을 때 이미지파일 맞는지 타입체크기능 추가 필요
     // 포스터
 
     @OneToMany // 단방향 1:N [상세페이지는 여러개가 될 수 있음]
     @JoinColumn(name = "event_id")
     @Builder.Default
-    private List<EventDetailImg> detail_img = new ArrayList<>(); // TODO 파일 받을 때 이미지파일 맞는지 타입체크 필요
+    private List<EventDetailImg> detail_img = new ArrayList<>(); // TODO 파일 받을 때 이미지파일 맞는지 타입체크기능 추가 필요
     // 상세페이지
 
     @Column(nullable = false)
