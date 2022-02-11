@@ -1,5 +1,7 @@
 package com.example.sac.web.controllers;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.Random;
 
@@ -75,9 +77,10 @@ public class MembershipController {
     }
 
     @RequestMapping(value = "/member/signup/step4", method = RequestMethod.POST)
-    public String joined(Model m, MembershipD md, String phone1, String phone2, String phone3) {
-        m.addAttribute("joined", ms.joinMember(md, phone1 + phone2 + phone3));
-        return "membership/join-4";
+    public String joined(Model m, MembershipD md, String phone1, String phone2, String phone3, RedirectAttributes ra) throws UnsupportedEncodingException {
+        m.addAttribute("joined", ms.joinMember(md, phone1 + phone2 + phone3, ra));
+        // return "membership/join-4";
+        return "redirect:/member/signin?error=true&exception=" + URLEncoder.encode("회원가입 성공", "UTF-8");
     }
 
     @RequestMapping(value = "/member/signin", method = RequestMethod.GET)

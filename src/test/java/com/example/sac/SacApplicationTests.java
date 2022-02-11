@@ -38,7 +38,7 @@ class SacApplicationTests {
 				.marketing_email('y')
 				.marketing_sms('y')
 				.build();
-		System.out.println(ms.joinMember(data, "55544446666"));
+		// System.out.println(ms.joinMember(data, "55544446666"));
 	}
 
 }

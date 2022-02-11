@@ -159,9 +159,6 @@ $(function(){
 
 });
 
-
-
-
 // Youtube API
 var playlist = 'lOLvuGV-88o';
 {/* //https://www.youtube.com/watch?v=유튜브 영상 고유번호

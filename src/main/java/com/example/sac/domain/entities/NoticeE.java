@@ -56,7 +56,7 @@ public class NoticeE {
     @Column(nullable = false)
     private String title;
     @Column(nullable = false)
-    private String content; // 공지 내용, summernote사용 : long text
+    private String content; // 공지 내용, summernote사용
 
     @Column(nullable = true)
     private LocalDate effectiveDateB; // 이 공지가 언제부터 적용되는 공지인지

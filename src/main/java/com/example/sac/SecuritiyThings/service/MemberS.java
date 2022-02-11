@@ -12,7 +12,7 @@ public interface MemberS {
 
     void certifiedPhoneNumber(String phone, String numStr);
 
-    MembershipD joinMember(MembershipD md, String phone);
+    MembershipD joinMember(MembershipD md, String phone, RedirectAttributes ra);
 
     boolean checkID(String tempID);
 

@@ -100,7 +100,7 @@ public class MemberSI implements MemberS, UserDetailsService {
 
     // 회원가입 단계 중 정보입력단계로 넘어가면
     @Override
-    public MembershipD joinMember(MembershipD md, String phone) {
+    public MembershipD joinMember(MembershipD md, String phone, RedirectAttributes ra) {
         // 010/1234/5678 세개로 나눠서 입력받아, 컨트롤러에서 합쳐둔걸 dto에 넣고
         md.setPhone(phone);
         // 그냥 들어있는 비밀번호를 encoding 된 값으로 바꿔주고
@@ -145,6 +145,8 @@ public class MemberSI implements MemberS, UserDetailsService {
                 tmpRole.add("ROLE_GOLD");
         }
         md.setRoles(tmpRole);
+        ra.addFlashAttribute("error", "joined");
+        ra.addFlashAttribute("exception", "회원가입 완료");
         // 이제 값이 다 저장된 entity를 save하고, 성공 시 리턴받는 entity를 dto로 바꿔서 가져감
         return new MembershipD(mr.save(md.toEntityForJoin()));
     }

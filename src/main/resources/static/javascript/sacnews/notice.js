@@ -2,7 +2,11 @@ $(function() {
     initList();
 });
 
-function getTargetedList(a){
+function getTargetedList(a, n){
+    
+    $("button.filterCategory").removeClass("selected");
+    $("button.filterCategory").eq(parseInt(n)-1).addClass("selected");
+
     $.ajax({
         type : "GET",
         url : "/sacnews/notice/target/"+a,
@@ -13,6 +17,8 @@ function getTargetedList(a){
 }
 
 function initList() {
+    $("button.filterCategory").removeClass("selected");
+    $("button.filterCategory").eq(0).addClass("selected");
 
     $.ajax({
         url : "/sacnews/notice/init",

@@ -116,7 +116,7 @@ body {
 }
 
 body,
-select {
+.site select{
   background-color: #41414c;
 }
 

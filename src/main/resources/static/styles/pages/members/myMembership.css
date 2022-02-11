@@ -68,7 +68,6 @@
 }
 
 .contentArea .membership-box1 .badges button.free-tier::before {
-  content: "F";
   background: #33a596;
   color: #fff;
   position: absolute;
@@ -84,7 +83,6 @@
 }
 
 .contentArea .membership-box1 .badges button.paid-tier::before {
-  content: "P";
   background: #ed1839;
   color: #fff;
   position: absolute;

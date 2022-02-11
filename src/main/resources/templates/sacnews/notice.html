@@ -43,13 +43,13 @@
           </div>
           <div class="maincontents">
             <div class="noticeCategories">
-              <button id="findAll" onclick="initList()" type="button" class="selected">전체</button>
-              <button id="guideList" onclick="getTargetedList('안내')" type="button">안내</button>
-              <button id="membershipList" onclick="getTargetedList('회원')" type="button">회원</button>
-              <button id="rentList" onclick="getTargetedList('대관')" type="button">대관</button>
-              <button id="academyList" onclick="getTargetedList('아카데미')" type="button">아카데미</button>
-              <button id="recruitList" onclick="getTargetedList('모집')" type="button">모집</button>
-              <button id="announcementList" onclick="getTargetedList('발표')" type="button">발표</button>
+              <button class="filterCategory selected" id="findAll" onclick="initList()" type="button">전체</button>
+              <button class="filterCategory" id="guideList" onclick="getTargetedList('안내', '2')" type="button">안내</button>
+              <button class="filterCategory" id="membershipList" onclick="getTargetedList('회원', '3')" type="button">회원</button>
+              <button class="filterCategory" id="rentList" onclick="getTargetedList('대관', '4')" type="button">대관</button>
+              <button class="filterCategory" id="academyList" onclick="getTargetedList('아카데미', '5')" type="button">아카데미</button>
+              <button class="filterCategory" id="recruitList" onclick="getTargetedList('모집', '6')" type="button">모집</button>
+              <button class="filterCategory" id="announcementList" onclick="getTargetedList('발표', '7')" type="button">발표</button>
             </div>
             
             <div id="noticeLists">

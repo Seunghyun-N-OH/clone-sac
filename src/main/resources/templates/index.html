@@ -13,7 +13,7 @@
   <body>
     <th:block th:insert="~{/fragments/global::global(~{this::main})}">
       <main>
-        <div class="box1 flex">
+        <div class="box1 flex" id="box1">
           <div class="verticalQuickMenu flex-column">
             <button type="button" class="todaysEvents">
               <span><img src="/imgsrc/assets/main_quick-icon02_new.png" alt=""><br>오늘의<br>공연·전시</span>
@@ -21,7 +21,7 @@
             <button type="button" class="eventCalender"><img src="/imgsrc/assets/main_quick-icon01_new.png" alt=""><br>전체일정<br>(달력)</button>
             <button type="button" class="promotions"><img src="/imgsrc/assets/main_quick-icon04_new.png" alt=""><br>이벤트</button>
           </div>
-          <div class="eventSlideBox flex-column">
+          <div class="eventSlideBox flex-column" id="esbox">
             <ul class="outerSlideBox flex">
               <!-- ################# start of the outerSlideBox -->
               <li th:if="${rotateList[#lists.size(rotateList)-2]}">
